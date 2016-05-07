@@ -25,9 +25,18 @@ angular
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
+      .state('posting', {
+        url: '/posting/:id',
+        controller: 'PostingController',
+        templateUrl: 'views/posting.html'
+      })
+      .state('faq', {
+        url: '/faq',
+        templateUrl: 'views/faq.html'
+      })
       .state('main', {
         url: '/',
         controller: 'MainCtrl',
-        templateUrl: 'views/main.html'
+        templateUrl: 'views/home.html'
       });
   });

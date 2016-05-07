@@ -1,0 +1,23 @@
+/********************
+	TEMPORARY HOME CSS OVERRIDE
+********************/
+
+.fa-car{
+	color: #fff;
+}
+
+.fa-american-sign-language-interpreting{
+	color:#fff;
+}
+
+#services .noglyph {
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 60px;
+  height: 140px;
+  line-height: 140px;
+  text-align: center;
+  vertical-align: middle;
+  width: 140px;
+}

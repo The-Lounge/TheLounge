@@ -1,7 +1,3 @@
-/**
- * Place main colors here :'(
- */
-
 body {
     width: 100%;
     height: 100%;
@@ -989,6 +985,10 @@ img{
   width: 140px;
 }
 
+hr {
+    display: none;
+}
+
 /*Footer*/
 .footer-basic-centered{
 	background-color: #292c2f;
@@ -1050,153 +1050,4 @@ img{
 	.footer-basic-centered .footer-links a{
 		line-height: 1.8;
 	}
-}
-
-/****************
-    FAQ PAGE STYLES
-****************/
-.fa{
-    color: #e74c3c;
-}
-.fa-thumbs-up{
-    color: #27ae60;
-}
-.fa-check-circle-o, .fa-arrow-circle-down{
-    color: #2ecc71;
-}
-
-.fa-lock{
-    color: #8e44ad;
-}
-
-.fa-car{
-    color: #2980b9;
-}
-.fa-wrench{
-    color: #95a5a6;
-}
-.fa-home{
-    color: #006442; 
-}
-.fa-envelope{
-    color: #ff9a49;
-}
-.fa-pencil{
-    padding-right: 2%;
-    color: #5f3810;
-}
-
-.faqHeader{
-    color: #2c3e50;
-    font-weight: bold;
-    margin: 1% 0 1% 0;
-}
-
-.faqImg{
-    width: 50%;
-}
-
-.moveDown{
-    margin-top: 100px;
-}
-
-.aysHeader{
-    width: 50%;
-}
-
-@media screen and (max-width: 480px) {
-    .aysHeader {
-        width: 50%;
-    }
-}
-
-@media screen and (min-width: 600px){
-    .aysHeader{
-        width: 30%;
-    }
-}
-
-.servicex{
-    margin-top: 2%;
-}
-
-.gettingStarted{
-}
-
-/*****************
-    Styles
-*****************/
-*{
-    margin: 0;
-    padding: 0;
-}
-
-body{
-    background-color: #fff;
-}
-
-.container{
-    width: 100%;
-}
-
-p{
-    font-size: 1.2em;
-}
-
-.rowHeader{
-    background-color: #ff9a49;
-}
-.navIcon{
-    text-align: center;
-}
-
-.posting{
-    border-bottom: 1px solid grey;
-    padding: 1%;
-}
-
-.category, .seller, .price{
-    font-weight: bold;
-}
-
-.category{
-    color: orange;
-}
-
-.glyphicon-star, glyphicon-star-empty{
-    color: #E5E500;
-}
-
-a{
-    color: brown;
-}
-
-a:hover{
-    color: brown;
-}
-
-/***************
-    POSTING HTML
-***************/
-.postImage{
-    width: 100%;
-    height: 200px;
-    padding: 1%;
-}
-
-.titleColors{
-    color: #EE7600;
-}
-
-.review{
-    background-color: #ffbe8a;
-    color: #6f4218;
-    width: 90%;
-    padding: 4%;
-    font-weight:bold;
-    display: block;
-    margin: auto;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    border-radius: 10px;
 }

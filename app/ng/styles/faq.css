@@ -1,0 +1,71 @@
+/*****************
+    FAQ CSS STYLES
+******************/
+
+.fa{
+    color: #e74c3c;
+}
+.fa-thumbs-up{
+    color: #27ae60;
+}
+.fa-check-circle-o, .fa-arrow-circle-down{
+    color: #2ecc71;
+}
+
+.fa-lock{
+    color: #8e44ad;
+}
+
+.fa-car{
+    color: #2980b9;
+}
+.fa-wrench{
+    color: #95a5a6;
+}
+.fa-home{
+    color: #006442; 
+}
+.fa-envelope{
+    color: #ff9a49;
+}
+.fa-pencil{
+    padding-right: 2%;
+    color: #5f3810;
+}
+
+.faqHeader{
+    color: #2c3e50;
+    font-weight: bold;
+    margin: 1% 0 1% 0;
+}
+
+.faqImg{
+    width: 50%;
+}
+
+.moveDown{
+    margin-top: 100px;
+}
+
+.aysHeader{
+    width: 50%;
+}
+
+@media screen and (max-width: 480px) {
+    .aysHeader {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 600px){
+    .aysHeader{
+        width: 30%;
+    }
+}
+
+.servicex{
+    margin-top: 2%;
+}
+
+.gettingStarted{
+}

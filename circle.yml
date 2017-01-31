@@ -1,0 +1,11 @@
+machine:
+  node:
+    version: 5.5.0
+dependencies:
+  cache_directories:
+    - /opt/circleci/nodejs/v5.5.0/bin
+    - /opt/circleci/nodejs/v5.5.0/lib/node_modules
+  pre:
+    - sh ./scripts/global_modules.sh
+  override:
+    - npm install

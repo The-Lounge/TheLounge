@@ -28,7 +28,8 @@
   },
   "scripts": {
     "debug": "node debug app/app.js",
-    "start": "node app/app.js"
+    "start": "node app/app.js",
+    "test": "./node_modules/.bin/mocha --reporter spec test/api-spec/**/*.js"
   },
   "main": "app/app.js",
   "repository": {
@@ -48,6 +49,7 @@
     "grunt-postcss": "^0.8.0",
     "grunt-wiredep": "^3.0.0",
     "jshint-stylish": "^2.1.0",
+    "mocha": "^3.2.0",
     "serve-static": "^1.10.2"
   }
 }

@@ -1,11 +1,19 @@
 machine:
   node:
-    version: 5.5.0
+    version: 7.4.0
 dependencies:
   cache_directories:
-    - /opt/circleci/nodejs/v5.5.0/bin
-    - /opt/circleci/nodejs/v5.5.0/lib/node_modules
+    - /opt/circleci/nodejs/v7.4.0/bin
+    - /opt/circleci/nodejs/v7.4.0/lib/node_modules
   pre:
     - sh ./scripts/global_modules.sh
+    - sudo pip install awsebcli
   override:
     - npm install
+# EB Deploy with CircleCI directions:
+# https://gist.github.com/RobertoSchneiders/9e0e73e836a80d53a21e
+deployment:
+  production:
+    branch: master
+    commands:
+      - eb deploy --profile default

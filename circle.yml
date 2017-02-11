@@ -7,8 +7,8 @@ dependencies:
     - /opt/circleci/nodejs/v7.4.0/lib/node_modules
   pre:
     - sudo apt-get install python-dev
-    - sh ./scripts/global_modules.sh
     - pip install awsebcli
+    - sh ./scripts/global_modules.sh
   override:
     - npm install
 # EB Deploy with CircleCI directions:

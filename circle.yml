@@ -6,6 +6,7 @@ dependencies:
     - /opt/circleci/nodejs/v7.4.0/bin
     - /opt/circleci/nodejs/v7.4.0/lib/node_modules
   pre:
+    - sudo apt-get install python-dev
     - sh ./scripts/global_modules.sh
     - sudo pip install 'awsebcli==3.9.1' --force-reinstall
   override:

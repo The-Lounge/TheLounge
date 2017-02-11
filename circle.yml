@@ -7,7 +7,7 @@ dependencies:
     - /opt/circleci/nodejs/v7.4.0/lib/node_modules
   pre:
     - sh ./scripts/global_modules.sh
-    - sudo pip install awsebcli
+    - sudo pip install 'awsebcli==3.9.1' --force-reinstall
   override:
     - npm install
 # EB Deploy with CircleCI directions:

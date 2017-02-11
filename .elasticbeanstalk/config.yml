@@ -1,0 +1,8 @@
+branch-defualts:
+  master:
+    environment: atyourservice-env
+global:
+  application_name: AtYourService
+  default_ec2_keyname: ays-env
+  region: us-east-1
+  sc: git

@@ -19,4 +19,5 @@ deployment:
   production:
     branch: master
     commands:
+      - sh ./scripts/deploy.sh
       - eb deploy --profile default

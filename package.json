@@ -28,6 +28,7 @@
   },
   "scripts": {
     "debug": "node debug app/app.js",
+    "prestart": "bower install",
     "start": "node app/app.js",
     "test": "./node_modules/.bin/mocha --reporter spec test/api-spec/**/*.js"
   },

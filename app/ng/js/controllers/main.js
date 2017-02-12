@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the appApp
  */
-angular.module('ays')
+require('angular').module('ays')
   .controller('MainCtrl', function () {
     console.log("MainCtrl");
     this.awesomeThings = [

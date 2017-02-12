@@ -29,18 +29,13 @@ module.exports = function(grunt) {
         src: [
           '*.{ico,png,txt}',
           '*.html',
-          'scripts/{,*/}*',
           'styles/{,*/}*',
           'views/{,*/}*',
           'images/{,*/}*',
+          'dist/{,*/}*',
           'styles/fonts/{,*/}*.*'
         ],
         dest: '<%= yeoman.dist %>'
-      },{
-        expand: true,
-        cwd: 'app/bower_components',
-        src: ['**/*'],
-        dest: '<%= yeoman.dist %>/bower_components'
       }]
     },
     // build: {
@@ -61,6 +56,7 @@ module.exports = function(grunt) {
           '*.{ico,png,txt}',
           '*.html',
           '../index.html',
+          'dist/{,*/}*',
           'images/{,*/}*.{webp}',
           'styles/fonts/{,*/}*.*'
         ]
@@ -69,11 +65,6 @@ module.exports = function(grunt) {
         cwd: '.tmp/images',
         dest: '<%= yeoman.dist %>/images',
         src: ['generated/*']
-      }, {
-        expand: true,
-        cwd: '.',
-        src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
-        dest: '<%= yeoman.dist %>'
       }]
     },
     styles: {

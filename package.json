@@ -29,7 +29,8 @@
   "scripts": {
     "debug": "node debug app/app.js",
     "start": "node app/app.js",
-    "test": "./node_modules/.bin/mocha --reporter spec test/api-spec/**/*.js"
+    "test": "./node_modules/.bin/mocha --reporter spec test/api-spec/**/*.js",
+    "build": "grunt build"
   },
   "main": "app/app.js",
   "repository": {
@@ -39,8 +40,20 @@
   "author": "Greg Rozmarynowycz",
   "license": "",
   "devDependencies": {
+    "angular": "1.6.2",
+    "angular-animate": "^1.6.2",
+    "angular-cookies": "^1.6.2",
+    "angular-mocks": "^1.6.2",
+    "angular-resource": "^1.6.2",
+    "angular-route": "^1.6.2",
+    "angular-sanitize": "^1.6.2",
+    "angular-touch": "^1.6.2",
+    "angular-ui-router": "^0.4.2",
     "autoprefixer": "^6.3.6",
+    "bootstrap-sass": "^3.3.7",
+    "browserify": "^14.0.0",
     "compass": "^0.1.1",
+    "grunt-browserify": "^5.0.0",
     "grunt-concurrent": "^2.3.0",
     "grunt-contrib-compass": "^1.1.1",
     "grunt-contrib-connect": "^1.0.1",
@@ -48,8 +61,10 @@
     "grunt-newer": "^1.1.2",
     "grunt-postcss": "^0.8.0",
     "grunt-wiredep": "^3.0.0",
+    "jquery": "^3.1.1",
     "jshint-stylish": "^2.1.0",
     "mocha": "^3.2.0",
-    "serve-static": "^1.11.2"
+    "serve-static": "^1.11.2",
+    "socket.io-client": "^1.7.2"
   }
 }

@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     'clean:build',
     //From Yeoman
     'clean:dist',
-    'wiredep',
+    'browserify:dev',
     //'useminPrepare',
     //'concurrent:dist',
     //'postcss',

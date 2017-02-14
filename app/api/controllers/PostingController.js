@@ -2,18 +2,18 @@
 /**
  * Created by Greg on 4/15/2016.
  */
-var postings = require('../../mocks/posting.json');
+const postings = require('../../mocks/posting.json');
 
 module.exports = {
   findOne(req, res, next){
     try {
-      var id = req.allParams()['id'];
+      const id = req.allParams()['id'];
       console.log("retrieve posting " + id);
 
-      var posting = postings.filter(function(posting){
+      const posting = postings.filter(function(posting){
         return posting.id == id;
       }).pop();
-      
+
       if(posting){
         res.ok(posting);
       }

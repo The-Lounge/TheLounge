@@ -4,26 +4,51 @@
  */
 const postings = require('../../mocks/posting.json');
 
+function findPostingById(id) {
+  return new Promise(function(resolve, reject){
+    Posting.findOne(id).exec(function(error, postingResult){
+      if(error) {
+        return reject(error);
+      }
+
+      if(!postingResult){
+        resolve(postings.filter(function(posting){
+          return posting.id == id;
+        }).pop());
+      }
+
+      resolve(postingResult);
+    });
+  });
+}
+
 module.exports = {
   findOne(req, res, next){
-    try {
-      const id = req.allParams()['id'];
-      console.log("retrieve posting " + id);
 
-      const posting = postings.filter(function(posting){
-        return posting.id == id;
-      }).pop();
+    const id = req.allParams()['id'];
+    let posting = null;
+    console.log("retrieve posting " + id);
 
+    return findPostingById(id).then(function(posting){
       if(posting){
-        res.ok(posting);
+
+        Category.findOne(posting.category_id).exec(function(error, category){
+          if(error) {
+            res.serverError(error);
+          }
+
+          posting.category = category;
+          res.ok(posting);
+        });
+
+
       }
       else {
         res.notFound();
       }
-
-    } catch (e) {
-      next(e);
-    }
+    }, function(err) {
+      res.serverError(err);
+    });
   },
 
   find(req, res, next){

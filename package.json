@@ -23,6 +23,7 @@
     "rc": "^1.1.6",
     "sails": "0.12.11",
     "sails-disk": "0.10.10",
+    "sails-mongo": "^0.12.2",
     "skipper": "^0.5.9"
   },
   "scripts": {

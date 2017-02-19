@@ -2,7 +2,7 @@
 
 ##Dev Environment
 
- - [Node v4.3](https://nodejs.org/dist/v4.3.1/node-v4.3.1-x64.msi) (this is the maxiumn version supported by Elastic Beanstalk)
+ - [Node v6.9](https://nodejs.org/dist/v6.9.5/node-v6.9.5-x64.msi) (this is the maximum version supported by Elastic Beanstalk)
  - Cmder (for windows)
  - recommended: JetBrains WebStorm (its free for students until we commercialize)
 
@@ -24,10 +24,11 @@ is used by [Bootstrap](http://getbootstrap.com/) (awesome UI framework by twitte
 
 Unless otherwise noted, you should run commands from the root directory of the project.
 
-Every time `package.json` changes, you will need to run `npm i`. This command installs all *local* NPM modules defined for the project.
-This also applies to `bower.json`, which handles browser dependencies through [Bower](http://bower.io/). For the Bower components, run `bower i`.
+Every time `package.json` changes, you will need to run `npm i`. This command installs all *local* NPM modules defined for the project. 
+Both Node JS (server) and browser dependencies are installed through npm, and included through Browserify.
+Server dependencies should be installed with `npm i [name] --save` and browser dependencies with `npm i [name] --save-dev`
 
-To start the Sails server, you need to run ~~`sails lift`.~~ `npm start`. This command points to a script defined in `package.json` that runs the server.
+To start the Sails server, you need to run `npm start`. This command points to a script defined in `package.json` that runs the server.
 When the sails server is running, you can view the app at `http://localhost:1337`. (I don't have PM2 working with sails yet, so don't worry about it)
 You will see message in your browser console similar to `Now connected to Sails`.
 

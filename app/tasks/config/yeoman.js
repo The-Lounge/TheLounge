@@ -1,5 +1,5 @@
 var appConfig = {
-  app: require('./../../../bower.json').appPath || 'app',
+  app: 'app/ng',
   dist: 'app/.tmp/public'
 };
 

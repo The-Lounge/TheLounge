@@ -20,10 +20,6 @@ module.exports = function(grunt){
           return [
             serveStatic('.tmp'),
             connect().use(
-              '/app/bower_components',
-              serveStatic('./app/bower_components')
-            ),
-            connect().use(
               '/app/styles',
               serveStatic('./app/styles')
             ),
@@ -39,10 +35,6 @@ module.exports = function(grunt){
           return [
             serveStatic('.tmp'),
             serveStatic('test'),
-            connect().use(
-              '/app/bower_components',
-              serveStatic('.app/bower_components')
-            ),
             serveStatic(yeoman.app.app)
           ];
         }

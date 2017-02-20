@@ -1,8 +1,12 @@
-branch-defualts:
+branch-defaults:
   master:
     environment: atyourservice-env
 global:
   application_name: AtYourService
+  default_platform: Node.js
   default_ec2_keyname: ays-env
-  region: us-east-1
+  default_region: us-east-1
+  profile: eb-cli
   sc: git
+deploy:
+  artifact: dist.zip

@@ -25,10 +25,6 @@ module.exports = function(grunt) {
       // When assets are changed:
       tasks: ['syncAssets' , 'linkAssets' ]
     },
-    bower: {
-      files: ['bower.json'],
-      tasks: ['wiredep']
-    },
     js: {
       files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
       tasks: ['newer:jshint:all','build','syncAssets'/*, 'newer:jscs:all'*/],

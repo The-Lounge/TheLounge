@@ -6,14 +6,19 @@ dependencies:
     - /opt/circleci/nodejs/v7.4.0/bin
     - /opt/circleci/nodejs/v7.4.0/lib/node_modules
   pre:
+    - sudo apt-get install python-dev
+    - pip install awsebcli
     - sh ./scripts/global_modules.sh
     - sudo pip install awsebcli
   override:
     - npm install
+  post:
+    - npm run build
 # EB Deploy with CircleCI directions:
 # https://gist.github.com/RobertoSchneiders/9e0e73e836a80d53a21e
 deployment:
   production:
     branch: master
     commands:
-      - eb deploy --profile default
+      - sh ./scripts/deploy.sh
+      - eb deploy --profile default --staged

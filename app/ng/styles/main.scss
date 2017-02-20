@@ -1,7 +1,7 @@
-$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
-// bower:scss
-@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
-// endbower
+$icon-font-path: "../../node_nodules/bootstrap-sass/assets/fonts/bootstrap/";
+// npm:scss
+@import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endnpm
 
 .browsehappy {
   margin: 0.2em 0;

@@ -9,7 +9,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
       'build',
       'concurrent:server',
       'postcss:server',

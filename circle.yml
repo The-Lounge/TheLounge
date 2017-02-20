@@ -9,6 +9,7 @@ dependencies:
     - sudo apt-get install python-dev
     - pip install awsebcli
     - sh ./scripts/global_modules.sh
+    - sudo pip install awsebcli
   override:
     - npm install
   post:

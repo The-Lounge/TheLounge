@@ -4,48 +4,55 @@
     "shortname":"rides",
     "name":"Ride Sharing",
     "description":"Ride Sharing for when you need to get around, but can't get a car.",
-    "active":"true"
+    "active": true
   },
   {
     "id":"2",
     "shortname":"beauty",
     "name":"Beauty",
     "description":"Nails. Makeup. All Cosmetics.",
-    "active":"true"
+    "active": true
   },
   {
     "id":"3",
     "shortname":"tutor",
     "name":"Tutor",
     "description":"Homework hard. Find homework help here.",
-    "active":"true"
+    "active": true
   },
   {
     "id":"4",
     "shortname":"house",
     "name":"Housings",
     "description":"Need a place. Post here.",
-    "active":"true"
+    "active": true
   },
   {
     "id":"5",
     "shortname":"other",
     "name":"Other",
     "description":"A place to post when categories don't seem to fit.",
-    "active":"true"
+    "active": true
   },
   {
     "id":"6",
     "shortname":"fix",
     "name":"FixIt",
     "description":"Helping others fix thier things.",
-    "active":"true"
+    "active": true
   },
   {
     "id":"6",
     "shortname":"test",
     "name":"Test",
     "description":"For Testing",
-    "active":"false"
+    "active": false
+  },
+  {
+    "id":"7",
+    "shortname":"Hand Made",
+    "name":"Hand Made Items",
+    "description":"Things that you've drawn, built, or created",
+    "active": true
   }
 ]

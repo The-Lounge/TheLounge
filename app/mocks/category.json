@@ -50,7 +50,7 @@
   },
   {
     "id":"7",
-    "shortname":"Hand Made",
+    "shortname":"handmade",
     "name":"Hand Made Items",
     "description":"Things that you've drawn, built, or created",
     "active": true

@@ -35,7 +35,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/thunder033/ays.git"
+    "url": "git://github.com/The-Lounge/TheLounge.git"
   },
   "author": "Greg Rozmarynowycz",
   "license": "",
@@ -61,7 +61,7 @@
     "grunt-newer": "^1.1.2",
     "grunt-postcss": "^0.8.0",
     "grunt-wiredep": "^3.0.0",
-    "jquery": "^3.1.1",
+    "jquery": "^2.2.4",
     "jshint-stylish": "^2.1.0",
     "mocha": "^3.2.0",
     "sails-hook-autoreload": "^0.13.2",

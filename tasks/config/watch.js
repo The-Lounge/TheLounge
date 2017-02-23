@@ -26,7 +26,7 @@ module.exports = function(grunt) {
       files: ['ng/**/*', 'index.html', 'tasks/pipeline.js', '!**/node_modules/**'],
 
       // When assets are changed:
-      tasks: ['syncAssets' , 'linkAssets' ]
+      tasks: ['build', 'syncAssets' , 'linkAssets' ]
     },
     js: {
       files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],

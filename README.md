@@ -32,7 +32,7 @@ To start the Sails server, you need to run `npm start`. This command points to a
 When the sails server is running, you can view the app at `http://localhost:1337`. (I don't have PM2 working with sails yet, so don't worry about it)
 You will see message in your browser console similar to `Now connected to Sails`.
 
-When you're developing, you'll want to run `grunt serve` (in a new terminal tab).
+When you're developing, you'll want to run `grunt watch` (in a new terminal tab).
 When you load the Angular app in your browser, it should connect with the `live-reload` server (if it can't you'll get an error in your browser).
 This will reload your page when you make changes to the app in your IDE and run tools like JS Hint automatically.
 

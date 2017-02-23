@@ -27,12 +27,12 @@
     "skipper": "^0.5.9"
   },
   "scripts": {
-    "debug": "node debug app/app.js",
-    "start": "node app/app.js",
+    "debug": "node debug app.js",
+    "start": "node app.js",
     "test": "./node_modules/.bin/mocha --reporter spec test/api-spec/**/*.js",
     "build": "grunt build"
   },
-  "main": "app/app.js",
+  "main": "app.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/thunder033/ays.git"
@@ -64,6 +64,7 @@
     "jquery": "^3.1.1",
     "jshint-stylish": "^2.1.0",
     "mocha": "^3.2.0",
+    "sails-hook-autoreload": "^0.13.2",
     "serve-static": "^1.11.2",
     "socket.io-client": "^1.7.2"
   }

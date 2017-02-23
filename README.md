@@ -52,25 +52,27 @@ Other tasks are run when different files are changed:
  ```
  AYS
 ├─ .elasticbeanstalk - configuration for Amazon server
-├─ app/ - holds application code
-│  ├─ (.tmp/) - contains the compiled distribution of our UI app
-│  ├─ api/ - Sails app logic
-│  ├─ assets/ - assets used by Sails (not much will be here)
-│  ├─ config/ - Sails configuration
-│  ├─ mocks/ - hardcoded test data
-│  ├─ ng/ - Angular application code
-│  │  ├─ js/ - JS that will run in the browser
-│  │  ├─ styles/ - CSS/SCSS
-│  │  ├─ views/ - angular templates/views
-│  │  ├─ images/ - image assets
-│  │  └─ index.html - starting point for the Angular app
-│  ├─ tasks/ - configuration for Grunt build tasks
-│  ├─ views/ Sails view (were not using these)
-│  └─ app.js - She sails app launcher
+├─ (.tmp/) - contains the compiled distribution of our UI app
+├─ api/ - Sails app logic
+├─ assets/ - assets used by Sails (not much will be here)
+├─ config/ - Sails configuration
+├─ mocks/ - hardcoded test data
+├─ ng/ - Angular application code
+│  ├─ js/ - JS that will run in the browser
+│  ├─ styles/ - CSS/SCSS
+│  ├─ views/ - angular templates/views
+│  ├─ images/ - image assets
+│  └─ index.html - starting point for the Angular app
+├─ tasks/ - configuration for Grunt build tasks
+├─ views/ Sails view (were not using these)
 ├─ (node_modules/) - install directory for local node modules
 ├─ scripts - utility/build scripts
 ├─ test/ - contains tests
+│  ├─ api-spec - Unit tests for the API
+│  └─ ui-spec - UI unit test
 ├─ .jshintrc - JS Hint config
+├─ .sailsrc - Sails.js config
+├─ app.js - The sails app launcher
 ├─ circle.yml - configuration for Cirlce CI builds
 ├─ Gruntfile.js - Sails generated task config
 └─ package.json - node and browser app definition and dependencies

@@ -1,0 +1,156 @@
+[
+	{
+		"id" : "-1",
+		"user_name" : "bfj5889",
+		"pass_hash" : "mock-1",
+		"email" : "bfj5889@g.rit.edu",
+		"name" : {
+			"first_name" : "Brianna",
+			"last_name" : "Jones"
+		},
+		"Role" : "admin",
+		"Skills" : [],
+		"Status" : "active",
+		"Tags" : []
+	},
+	{
+		"id" : "-2",
+		"user_name" : "dts5425",
+		"pass_hash" : "mock-2",
+		"email" : "dts5425@g.rit.edu",
+		"name" : {
+			"first_name" : "Dustin",
+			"last_name" : "Spitz"
+		},
+		"Role" : "admin",
+		"Skills" : [],
+		"Status" : "active",
+		"Tags" : []
+	},
+	{
+		"id" : "-3",
+		"user_name" : "gjr8050",
+		"pass_hash" : "mock-3",
+		"email" : "gjr8050@g.rit.edu",
+		"name" : {
+			"first_name" : "Gregory",
+			"last_name" : "Rozmarynowycz"
+		},
+		"Role" : "admin",
+		"Skills" : [],
+		"Status" : "active",
+		"Tags" : []
+	},
+		{
+		"id" : "-4",
+		"user_name" : "cam2304",
+		"pass_hash" : "mock-4",
+		"email" : "cam2304@g.rit.edu",
+		"name" : {
+			"first_name" : "Catherine",
+			"last_name" : "Mazza"
+		},
+		"Role" : "admin",
+		"Skills" : [],
+		"Status" : "active",
+		"Tags" : []
+	},
+		{
+		"id" : "-5",
+		"user_name" : "mak9384",
+		"pass_hash" : "mock-5",
+		"email" : "mak9384@g.rit.edu",
+		"name" : {
+			"first_name" : "Mark",
+			"last_name" : "Koellmann"
+		},
+		"Role" : "admin",
+		"Skills" : [],
+		"Status" : "active",
+		"Tags" : []
+	},
+		{
+		"id" : "-6",
+		"user_name" : "rxm4978",
+		"pass_hash" : "mock-6",
+		"email" : "rxm4978@g.rit.edu",
+		"name" : {
+			"first_name" : "Radha",
+			"last_name" : "Mendapra"
+		},
+		"Role" : "student",
+		"Skills" : ["Nails"],
+		"Status" : "active",
+		"Tags" : []
+	},
+	{
+		"id" : "-7",
+		"user_name" : "prp2986",
+		"pass_hash" : "mock-7",
+		"email" : "prp2986@g.rit.edu",
+		"name" : {
+			"first_name" : "Patrick",
+			"last_name" : "Putnum"
+		},
+		"Role" : "moderator",
+		"Skills" : ["Web Development", "Cooking", "Calculus I"],
+		"Status" : "active",
+		"Tags" : []
+	},
+	{
+		"id" : "-8",
+		"user_name" : "km2029",
+		"pass_hash" : "mock-8",
+		"email" : "km2029@g.rit.edu",
+		"name" : {
+			"first_name" : "Kristen",
+			"last_name" : "Merritt"
+		},
+		"Role" : "student",
+		"Skills" : ["Knitting", "Frontend Development",],
+		"Status" : "inactive",
+		"Tags" : []
+	},
+	{
+		"id" : "-9",
+		"user_name" : "mxs4321",
+		"pass_hash" : "mock-9",
+		"email" : "mxs4321@g.rit.edu",
+		"name" : {
+			"first_name" : "Mohammed",
+			"last_name" : "Suhail"
+		},
+		"Role" : "student",
+		"Skills" : ["Driver", "Taxes"],
+		"Status" : "under_review",
+		"Tags" : []
+	},
+	{
+		"id" : "-10",
+		"user_name" : "krp7018",
+		"pass_hash" : "mock-10",
+		"email" : "krp7018@g.rit.edu",
+		"name" : {
+			"first_name" : "Kayle",
+			"last_name" : "Pitts"
+		},
+		"Role" : "student",
+		"Skills" : ["Housekeeping"],
+		"Status" : "active",
+		"Tags" : []
+	},
+	{
+		"id" : "-11",
+		"user_name" : "hnr6514",
+		"pass_hash" : "mock-11",
+		"email" : "hnr6514@g.rit.edu",
+		"name" : {
+			"first_name" : "Haley",
+			"last_name" : "Robinson"
+		},
+		"Role" : "student",
+		"Skills" : [],
+		"Status" : "active",
+		"Tags" : []
+	}
+]

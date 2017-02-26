@@ -4,7 +4,7 @@
         "id" : "-1",
         "title" : "$5 Nail Painting",
         "category_id" : "2",
-        "image" : null
+        "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
         "date" : "4/11/16",
         "tags" : [],
@@ -22,8 +22,8 @@
         "tags" : [],
         "skills" : "Housekeeping",
         "active" : true
-    },  
-    {                  
+    },
+    {
         "seller_id" : "-7",
         "id" : "-3",
         "title" : "Free Web Developerment",
@@ -40,7 +40,7 @@
         "id" : "-4",
         "title" : "Scarves and Hats",
         "category_id" : "7",
-        "image" : null
+        "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
         "date" : "4/16/16",
         "tags" : [],

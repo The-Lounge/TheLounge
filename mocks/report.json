@@ -1,0 +1,24 @@
+[
+	{
+		"id" : "-1",
+		"seller_id" : "-8",
+		"buyer_id" : "-10",
+		"posting_id" : "-3",
+		"description" : "When I brought up that she used the wrong colors on my scarf she ran me over with a FMS cart.",
+		"title" : "Rude Service",
+		"date" : "1/19/2017",
+		"resolution" : "Account is now inactive.",
+		"status" : "complete"
+	},
+	{
+		"id" : "-2",
+		"seller_id" : "-9",
+		"buyer_id" : "-6",
+		"posting_id" : "-2",
+		"description" : "He said he averaged a $200 refund but said I would only get $100",
+		"title" : "Eh Job",
+		"date" : 11/16/2016"",
+		"resolution" : "",
+		"status" : "under_review"
+	}
+]

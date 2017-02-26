@@ -30,7 +30,10 @@
     "debug": "node debug app.js",
     "start": "node app.js",
     "test": "./node_modules/.bin/mocha --reporter spec test/api-spec/**/*.js",
-    "build": "grunt build"
+    "build": "grunt build",
+    "preversion": "npm test",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags"
   },
   "main": "app.js",
   "repository": {

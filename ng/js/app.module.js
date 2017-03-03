@@ -9,10 +9,12 @@
 
 // Include JQuery and BootStrap
 window.$ = window.jQuery = require('jquery');
-var boostrapjs = require('bootstrap-sass');
+window.boostrapjs = require('bootstrap-sass');
+window.angular = require('angular');
+require('angular-sails');
 
 // Start the sails client
-var io = require('./dependencies/sails.io')(require('socket.io-client'));
+window.io = require('./dependencies/sails.io')(require('socket.io-client'));
 
 /**
  * @ngdoc overview
@@ -22,14 +24,15 @@ var io = require('./dependencies/sails.io')(require('socket.io-client'));
  *
  * Main module of the application.
  */
-var app = require('angular').module('ays', [
+var app = angular.module('ays', [
     require('angular-animate'),
     require('angular-cookies'),
     require('angular-resource'),
     require('angular-route'),
     require('angular-sanitize'),
     require('angular-touch'),
-    require('angular-ui-router')
+    require('angular-ui-router'),
+    'ngSails'
   ])
   .config(function ($urlRouterProvider, $stateProvider) {
     console.log("I'm running! wadup");

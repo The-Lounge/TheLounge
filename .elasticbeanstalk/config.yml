@@ -1,12 +1,12 @@
 branch-defaults:
   master:
     environment: atyourservice-env
+deploy:
+  artifact: dist.zip
 global:
   application_name: AtYourService
-  default_platform: Node.js
   default_ec2_keyname: ays-env
+  default_platform: Node.js
   default_region: us-east-1
   profile: eb-cli
   sc: git
-deploy:
-  artifact: dist.zip

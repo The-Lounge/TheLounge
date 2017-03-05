@@ -107,7 +107,7 @@
 			"last_name" : "Merritt"
 		},
 		"Role" : "student",
-		"Skills" : ["Knitting", "Frontend Development",],
+		"Skills" : ["Knitting", "Frontend Development"],
 		"Status" : "inactive",
 		"Tags" : []
 	},

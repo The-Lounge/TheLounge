@@ -42,14 +42,14 @@
     "active": true
   },
   {
-    "id":"6",
+    "id":"7",
     "shortname":"test",
     "name":"Test",
     "description":"For Testing",
     "active": false
   },
   {
-    "id":"7",
+    "id":"8",
     "shortname":"handmade",
     "name":"Hand Made Items",
     "description":"Things that you've drawn, built, or created",

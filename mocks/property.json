@@ -1,0 +1,14 @@
+[
+	{	
+		"id" : "-1",
+		"type" : "systemConfig",
+		"key" : "RITColor1",
+		"value" : "#F36E21"
+	},
+	{	
+		"id" : "-1",
+		"type" : "systemConfig",
+		"key" : "RITColor2",
+		"value" : "#513127"
+	}
+]

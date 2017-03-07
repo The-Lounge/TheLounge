@@ -24,7 +24,7 @@ function findPostingById(id) {
 
 module.exports = {
   findOne(req, res, next){
-    
+
     const id = req.allParams()['id'];
     let posting = null;
     console.log("retrieve posting " + id);
@@ -32,15 +32,27 @@ module.exports = {
     return findPostingById(id).then(function(posting){
       if(posting){
 
+        if(posting.category) {
+          return res.ok(posting);
+        }
+
         Category.findOne(posting.category_id).exec(function(error, category){
           if(error) {
             res.serverError(error);
           }
 
           posting.category = category;
+
+          delete posting.image;
+          delete posting.skills;
+          delete posting.category_id;
+          delete posting.tags;
+          delete posting.date;
+
+          delete posting.category.description;
+
           res.ok(posting);
         });
-
 
       }
       else {

@@ -3,6 +3,7 @@
  * Created by Greg on 4/15/2016.
  */
 const postings = require('../../mocks/posting.json');
+const Q = require('q');
 
 function findPostingById(id) {
   return new Promise(function(resolve, reject){
@@ -22,6 +23,38 @@ function findPostingById(id) {
   });
 }
 
+function getCategory(id) {
+  return Q.Promise((resolve, reject) => {
+    Category.findOne(id).exec((e, category) => {
+      if(e) {
+        reject(e);
+      } else {
+        resolve(category);
+      }
+    })
+  });
+}
+
+function processPosting(posting) {
+  if(posting.category) {
+    return Q.when(posting);
+  }
+
+  return getCategory(posting.category_id).then(category => {
+    posting.category = category;
+
+    delete posting.image;
+    delete posting.skills;
+    delete posting.category_id;
+    delete posting.tags;
+    delete posting.date;
+
+    delete posting.category.description;
+
+    return posting;
+  });
+}
+
 module.exports = {
   findOne(req, res, next){
 
@@ -31,36 +64,12 @@ module.exports = {
 
     return findPostingById(id).then(function(posting){
       if(posting){
-
-        if(posting.category) {
-          return res.ok(posting);
-        }
-
-        Category.findOne(posting.category_id).exec(function(error, category){
-          if(error) {
-            res.serverError(error);
-          }
-
-          posting.category = category;
-
-          delete posting.image;
-          delete posting.skills;
-          delete posting.category_id;
-          delete posting.tags;
-          delete posting.date;
-
-          delete posting.category.description;
-
-          res.ok(posting);
-        });
-
+        return processPosting(posting).then(res.ok);
       }
       else {
         res.notFound();
       }
-    }, function(err) {
-      res.serverError(err);
-    });
+    }).catch(res.serverError);
   },
 
   find(req, res, next){
@@ -74,13 +83,21 @@ module.exports = {
   },
 
   create(req, res, next){
-    try {
-      //TODO: return mock data
-      console.log("create posting");
-      res.set('Content-Type','application/json');
-      res.ok({});
-    } catch (e) {
-      next(e);
+
+    console.log(req.body);
+
+    if(!req.body || Object.keys(req.body).length === 0) {
+      return res.badRequest('400 Bad Request: Posting must include body');
     }
+
+    Posting.create(req.body).exec(function(error, posting){
+      if(error) {
+        return res.serverError(error);
+      }
+
+      return processPosting(posting)
+        .then(res.created)
+        .catch(res.serverError);
+    })
   }
 };

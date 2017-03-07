@@ -14,23 +14,28 @@ module.exports = {
     title: {
       type: 'string',
       size: '50',
-      defaultsTo: ''
+      required: true,
     },
 
     description: {
       type: 'mediumtext',
-      defaultsTo: ''
+      required: true,
     },
 
-    datePosted: {
-      type: 'integer',
-      defaultsTo: 0
+    seller_id: {
+      type: 'string',
+      required: true
     },
 
-    tags: {
-      type: 'array',
-      defaultsTo: []
-    },
+    // datePosted: {
+    //   type: 'integer',
+    //   defaultsTo: 0
+    // },
+
+    // tags: {
+    //   type: 'array',
+    //   defaultsTo: []
+    // },
 
     // user: {
     //   model: 'User'
@@ -38,10 +43,6 @@ module.exports = {
 
     // skills: {
     //   collection: 'Property'
-    // }
-
-    // category: {
-    //   model: 'Category'
     // }
 
     active: {

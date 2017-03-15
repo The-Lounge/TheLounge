@@ -78,10 +78,10 @@
 			"first_name" : "Radha",
 			"last_name" : "Mendapra"
 		},
-		"Role" : "student",
-		"Skills" : ["Nails"],
-		"Status" : "active",
-		"Tags" : []
+		"role" : "student",
+		"skills" : ["Nails"],
+		"status" : "active",
+		"tags" : []
 	},
 	{
 		"id" : "-7",

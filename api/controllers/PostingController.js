@@ -2,6 +2,8 @@
 /**
  * Created by Greg on 4/15/2016.
  */
+
+/** @type Array */
 const postings = require('../../mocks/posting.json');
 const Q = require('q');
 
@@ -14,7 +16,7 @@ function findPostingById(id) {
 
       if(!postingResult){
         resolve(postings.filter(function(posting){
-          return posting.id == id;
+          return posting.id === id;
         }).pop());
       }
 
@@ -35,14 +37,24 @@ function getCategory(id) {
   });
 }
 
+/**
+ * Resolves entities on a posting response and removes extra fields
+ * @param posting
+ * @returns {Promise<Posting>}
+ */
 function processPosting(posting) {
   if(posting.category) {
     return Q.when(posting);
   }
 
-  return getCategory(posting.category_id).then(category => {
+  return Q.all([
+    getCategory(posting.category_id),
+    User.getById(posting.seller_id)
+  ]).spread((category, seller) => {
     posting.category = category;
+    posting.seller = seller;
 
+    delete posting.seller_id;
     delete posting.image;
     delete posting.skills;
     delete posting.category_id;
@@ -50,6 +62,10 @@ function processPosting(posting) {
     delete posting.date;
 
     delete posting.category.description;
+
+    delete posting.seller.pass_hash;
+    delete posting.seller.skills;
+    delete posting.seller.tags;
 
     return posting;
   });

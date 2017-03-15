@@ -3,6 +3,8 @@
  * @author Greg Rozmarynowycz <greg@thunderlab.net>
  */
 
+const users = require('../../mocks/user.json');
+
 module.exports = {
   attributes: {
 
@@ -25,6 +27,33 @@ module.exports = {
       type: 'boolean',
       enum: ['active', 'inactive', 'under_review', 'banned']
     }
+  },
+
+  getById(id) {
+    return new Promise(function(resolve, reject){
+      User.findOne(id).exec(function(error, userResult){
+        if(error) {
+          return reject(error);
+        }
+
+        if(!userResult){
+          userResult = users.filter(function(posting){
+            return posting.id == id;
+          }).pop();
+        }
+
+        if (!userResult) {
+          return reject(`User with ID ${id} not found`);
+        }
+
+        delete userResult.role;
+        delete userResult.skills;
+        delete userResult.tags;
+        delete userResult.pass_hash;
+
+        resolve(userResult);
+      });
+    });
   },
 
   beforeValidate: function (values, cb) {

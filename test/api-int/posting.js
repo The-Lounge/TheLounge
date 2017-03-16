@@ -22,7 +22,6 @@ const testData = {
 
 const expected = {
   getPosting: {
-    seller_id: '-6',
     id: '-1',
     title: '$5 Nail Painting',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl',
@@ -32,10 +31,19 @@ const expected = {
       name: 'Beauty',
       active: true,
       id: 2
+    },
+    seller: {
+      id: '-6',
+      email: 'rxm4978@g.rit.edu',
+      name: {
+        first_name: 'Radha',
+        last_name: 'Mendapra',
+      },
+      status: 'active',
+      user_name: 'rxm4978',
     }
   },
   postPosting: {
-    seller_id: '-5',
     id: null, //determined in test
     title: 'This is a test posting',
     description:  'some posting description text',
@@ -45,7 +53,18 @@ const expected = {
       shortname: 'tutor',
       name: 'Tutor',
       active: true,
+    },
+    seller: {
+      id: '-5',
+      email: 'mak9384@g.rit.edu',
+      name: {
+        first_name: 'Mark',
+        last_name: 'Koellmann'
+      },
+      status: 'active',
+      user_name: 'mak9384',
     }
+
   }
 };
 

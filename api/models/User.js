@@ -2,8 +2,19 @@
 /**
  * @author Greg Rozmarynowycz <greg@thunderlab.net>
  */
-
+const bcrypt = require('bcrypt');
 const users = require('../../mocks/user.json');
+const HttpError = require('standard-http-error');
+
+function processUser(user) {
+  delete user.role;
+  delete user.skills;
+  delete user.tags;
+  delete user.pass_hash;
+  delete user.salt;
+
+  return user;
+}
 
 module.exports = {
   attributes: {
@@ -23,10 +34,41 @@ module.exports = {
       required: true
     },
 
+    pass_hash: {
+      type: 'string',
+      require: true,
+    },
+
     status: {
-      type: 'boolean',
-      enum: ['active', 'inactive', 'under_review', 'banned']
+      type: 'string',
+      enum: ['active', 'inactive', 'under_review', 'banned'],
+      defaultsTo: 'active'
     }
+  },
+
+  /**
+   * Checks credentials against the DB and returns a user if valid
+   * @param credentials {{userName, password}}
+   * @returns {Promise}
+   */
+  authenticate(credentials) {
+    const invalidCredError = new HttpError(422, 'Invalid Username or Password provided');
+    return new Promise((resolve, reject) => {
+      User.findOne({user_name: credentials.userName}).exec((error, userResult) => {
+        if (error) { return reject(error); }
+        if (!userResult) { return reject(invalidCredError); }
+
+        resolve(userResult);
+      });
+    }).then(userResult => {
+        return bcrypt.compare(credentials.password, userResult.pass_hash).then((res) => {
+          if(res === true) {
+            return processUser(userResult);
+          } else {
+            throw invalidCredError;
+          }
+        });
+      });
   },
 
   getById(id) {
@@ -46,12 +88,7 @@ module.exports = {
           return reject(`User with ID ${id} not found`);
         }
 
-        delete userResult.role;
-        delete userResult.skills;
-        delete userResult.tags;
-        delete userResult.pass_hash;
-
-        resolve(userResult);
+        resolve(processUser(userResult));
       });
     });
   },
@@ -60,6 +97,7 @@ module.exports = {
     if (values.name) {
       const firstName = values.name.first_name;
       const lastName = values.name.last_name;
+      const password = values.password;
 
       if(!(typeof firstName === 'string' && firstName.length > 0)) {
         return cb('Invalid first_name ' + firstName);
@@ -69,7 +107,20 @@ module.exports = {
         return cb('Invalid last_name ' + lastName);
       }
 
+      if (!(typeof password === 'string' && password.length > 0)) {
+        return cb('Invalid password ' + password);
+      }
+
       cb();
     }
+  },
+
+  afterValidate(values, cb) {
+    // hash the user's selected password
+    bcrypt.hash(values.password, 10).then((hash) => {
+      values.pass_hash = hash;
+      delete values.password;
+      cb();
+    });
   }
 };

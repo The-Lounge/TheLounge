@@ -30,7 +30,7 @@
 	{
 		"id" : "-3",
 		"user_name" : "gjr8050",
-		"pass_hash" : "mock-3",
+		"pass_hash" : "$2a$10$KvSi2urLrKTtPa/0y6pjc.t9vQ83twFIn6ZH5sogLPsaErXOvUtoK",
 		"email" : "gjr8050@g.rit.edu",
 		"name" : {
 			"first_name" : "Gregory",
@@ -64,10 +64,10 @@
 			"first_name" : "Mark",
 			"last_name" : "Koellmann"
 		},
-		"Role" : "admin",
-		"Skills" : [],
-		"Status" : "active",
-		"Tags" : []
+		"role" : "admin",
+		"skills" : [],
+		"status" : "active",
+		"tags" : []
 	},
 		{
 		"id" : "-6",

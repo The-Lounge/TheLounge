@@ -44,6 +44,10 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  // Client Controller
   'POST /login': 'ClientController.authenticate',
   'GET /logout': 'ClientController.logout',
+
+  // Category
+  'GET /category': 'CategoryController.find',
   };

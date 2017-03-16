@@ -25,18 +25,6 @@ function findPostingById(id) {
   });
 }
 
-function getCategory(id) {
-  return Q.Promise((resolve, reject) => {
-    Category.findOne(id).exec((e, category) => {
-      if(e) {
-        reject(e);
-      } else {
-        resolve(category);
-      }
-    })
-  });
-}
-
 /**
  * Resolves entities on a posting response and removes extra fields
  * @param posting
@@ -48,7 +36,7 @@ function processPosting(posting) {
   }
 
   return Q.all([
-    getCategory(posting.category_id),
+    Category.getById(posting.category_id),
     User.getById(posting.seller_id)
   ]).spread((category, seller) => {
     posting.category = category;

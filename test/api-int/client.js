@@ -10,13 +10,13 @@ chai.use(require('chai-as-promised'));
 const expect = chai.expect;
 const API_PATH = 'http://localhost:1337/api/';
 const endpoint = {
-  LOGIN: '/login',
+  CATEGORY_LIST: '/login',
   LOGOUT: '/logout',
 };
 const Q = require('q');
 
 const loginOptions = {
-  url: url.resolve(API_PATH, endpoint.LOGIN),
+  url: url.resolve(API_PATH, endpoint.CATEGORY_LIST),
   json: true,
   headers: {'Content-Type': 'application/json'},
 };

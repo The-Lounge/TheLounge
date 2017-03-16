@@ -6,38 +6,36 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-const categories = require('../../mocks/category.json');
+const mockCategories = require('../../mocks/category.json');
+
+function getMockCategory(id) {
+  const category = mockCategories.filter(function(category){
+    return category.id === id;
+  }).pop();
+}
 
 module.exports = {
   findOne(req, res, next) {
-    try {
-      const id = req.allParams()['id'];
-      console.log("retrieve category " + id);
+    const id = req.allParams()['id'];
 
-      const category = categories.filter(function(category){
-        return category.id === id;
-      }).pop();
-
-      if(category){
-        res.ok(category);
-      }
-      else {
-        res.notFound();
+    Category.getById(id).then((category) => {
+      if(!category) {
+        category = getMockCategory(id);
+        if(!category) {
+          res.notFound();
+        }
       }
 
-    } catch (e) {
-      next(e);
-    }
+      res.ok(category);
+    }).catch(res.serverError);
   },
 
-  find(req, res, next){
-    try {
-      console.log("retrieve postings");
-      res.set('Content-Type','application/json');
-      res.ok(categories ? categories : []);
-    } catch (e) {
-      next(e);
-    }
-  }
+  find(req, res, next) {
+    const includeInactive = req.allParams()['inactive'] === '1';
+    Category.getAll(includeInactive)
+      .then(res.ok)
+      .catch(res.serverError);
+  },
+
 };
 

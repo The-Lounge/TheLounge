@@ -39,5 +39,9 @@ module.exports = {
     req.session.authenticated = false;
     delete req.session.user;
     res.ok();
+  },
+
+  ping(req, res, next) {
+    res.ok('pong');
   }
 }

@@ -1,7 +1,7 @@
 require('any-promise/register/q');
 const request = require('request-promise-any');
 
-const timeout = 16000;
+const timeout = 30000;
 const interval = 1000;
 let elpased = 0;
 const pingEndpoint = 'http://localhost:1337/ping';

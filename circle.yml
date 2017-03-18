@@ -15,7 +15,7 @@ dependencies:
     - npm run build
 test:
   post:
-    - npm run gruntTest
+    - npm run intTest
 # EB Deploy with CircleCI directions:
 # https://gist.github.com/RobertoSchneiders/9e0e73e836a80d53a21e
 deployment:

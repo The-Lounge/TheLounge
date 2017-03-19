@@ -28,8 +28,10 @@ const logoutOptions = {
 
 const testData = {
   validLogin: {
-    userName: 'gjr8050',
-    password: 'testPw'
+    // These must be valid, real RIT SSO credentials
+    // To setup, put them in your config/local.js file, according to the template
+    userName: process.env.TEST_UID || global.TEST_UID,
+    password: process.env.TEST_PWD || global.TEST_PWD
   },
   invalidLogin_pw: {
     userName: 'gjr8050',

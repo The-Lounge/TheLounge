@@ -28,8 +28,12 @@ Every time `package.json` changes, you will need to run `npm i`. This command in
 Both Node JS (server) and browser dependencies are installed through npm, and included through Browserify.
 Server dependencies should be installed with `npm i [name] --save` and browser dependencies with `npm i [name] --save-dev`
 
+Before you run the app for the first time, you will need to setup or local configuration.
+To do so, follow the instructions in `config/local_template.js`. 
+You will also need to execute a build of the app, by running `npm run build` prior to starting the app.
+
 To start the Sails server, you need to run `npm start`. This command points to a script defined in `package.json` that runs the server.
-When the sails server is running, you can view the app at `http://localhost:1337`. (I don't have PM2 working with sails yet, so don't worry about it)
+When the sails server is running, you can view the app at `http://localhost:1337`. 
 You will see message in your browser console similar to `Now connected to Sails`.
 
 When you're developing, you'll want to run `grunt watch` (in a new terminal tab).

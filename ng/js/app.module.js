@@ -11,6 +11,7 @@
 window.$ = window.jQuery = require('jquery');
 window.boostrapjs = require('bootstrap-sass');
 window.angular = require('angular');
+window._ = require('lodash');
 require('angular-sails');
 
 // Start the sails client
@@ -34,6 +35,7 @@ var app = angular.module('ays', [
     require('angular-ui-router'),
     'ngSails'
   ])
+  .constant('_', require('lodash'))
   .config(function ($urlRouterProvider, $stateProvider) {
     console.log("I'm running! wadup");
     console.log("eh More things!");

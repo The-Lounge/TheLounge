@@ -2,12 +2,12 @@
 /**
  * Created by Greg on 5/7/2016.
  */
-require('angular').module('ays').controller('PostingController', function($sails, $scope){
+require('angular').module('ays').controller('PostingController', function($sails, $scope, $stateParams, _){
 
   console.log("Posting ctrl");
-  $scope.posting = {title: 'Test title'};
-  $sails.get('/categories').then(function(categories){
-    console.log(categories);
+  $sails.get('/api/posting/' +  $stateParams.id).then(function(posting){
+    console.log(posting);
+	$scope.posting = posting.data;
   }, function(err) {
     console.log(err);
   });

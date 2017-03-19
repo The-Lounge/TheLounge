@@ -1,12 +1,12 @@
 # The Lounge
 
-##Dev Environment
+## Dev Environment
 
  - [Node v6.9](https://nodejs.org/dist/v6.9.5/node-v6.9.5-x64.msi) (this is the maximum version supported by Elastic Beanstalk)
  - Cmder (for windows)
  - recommended: JetBrains WebStorm (its free for students until we commercialize)
 
-##Global npm packages
+## Global npm packages
 
  - sails@0.12.1
  - grunt
@@ -15,12 +15,12 @@
  - karma
  - pm2
 
-##Compass
+## Compass
 
 [Compass](http://compass-style.org/install/) is a CSS preprocessor (build in ruby) that already is integrated into our build scripts. It
 is used by [Bootstrap](http://getbootstrap.com/) (awesome UI framework by twitter).
 
-##Setup and Running the App
+## Setup and Running the App
 
 Unless otherwise noted, you should run commands from the root directory of the project.
 
@@ -45,7 +45,7 @@ Other tasks are run when different files are changed:
  - *(In progress)* When CSS/SCSS files are changed they will be recompiled and loaded into the browser (no refresh needed).
 
 
-##Project Structure
+## Project Structure
 
 `(directory/)` = directory ignored in git
 
@@ -83,22 +83,22 @@ Other tasks are run when different files are changed:
  When the project runs this code is copied to the `.tmp` directory, which is where Sails load the UI from.
 
 
-##Targeted Platforms
+## Targeted Platforms
 
 The responsive web app will officially target the following browsers/platforms:
 
-####Windows
+#### Windows
  - Chrome*
  - Firefox*
  - Edge
  - IE 11
  
-###MacOS/iOS
+### MacOS/iOS
  - Safari 8+
  - Chrome*
  - Firefox*
  
-###Android
+### Android
  - Chrome*
  
  (*) indicates support for latest version and previous 2 versions

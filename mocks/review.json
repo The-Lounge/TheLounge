@@ -1,73 +1,65 @@
-[
-	{
-		"id" : "-1",
-		"seller_id" : "-6",
-		"buyer_id" : "-8",
-		"posting_id" : "-1",
-		"title" : "Great Design!",
-		"description" : "Radha did a great job with her custom design on my nails.",
-		"active" : "live"
-	},
-	{
-		"id" : "-2",
-		"seller_id" : "-6",
-		"buyer_id" : "-9",
-		"posting_id" : "-1",
-		"title" : "Decent Work",
-		"description" : "Could be better, she stopped a lot to eat pizza but the end work is clean.",
-		"active" : "hidden"
-	},
-	{
-		"id" : "-3",
-		"seller_id" : "-9",
-		"buyer_id" : "-6",
-		"posting_id" : "-2",
-		"title" : "Eh",
-		"description" : "He did my taxes but I didn't get as much as I would like back.",
-		"active" : "live"
-	},
-	{
-		"id" : "-4",
-		"seller_id" : "-8",
-		"buyer_id" : "-6",
-		"posting_id" : "-3",
-		"title" : "Super Fast",
-		"description" : "Kristen knitted me an entire viking hat in days days and it fits perfect!",
-		"active" : "live"
-	},
-	{
-		"id" : "-5",
-		"seller_id" : "-6",
-		"buyer_id" : "-10",
-		"posting_id" : "-1",
-		"title" : "Great Stuff!",
-		"description" : "Great Work. My nails looks awesome! Check it out at www.facebook.com",
-		"active" : "live"
-	},
-	{
-		"id" : "-6",
-		"seller_id" : "-10",
-		"buyer_id" : "-11",
-		"posting_id" : "-4",
-		"title" : "Fast and through.",
-		"description" : "She cleaned up my entire Perkins apartment in 30 minutes after I had a huge party.",
-		"active" : "live"
-	},
-	{
-		"id" : "-7",
-		"seller_id" : "-6",
-		"buyer_id" : "-10",
-		"posting_id" : "-1",
-		"title" : "Bruh these nails tho!",
-		"description" : "All the glitters",
-		"active" : "live"
-	},
-		"id" : "-8",
-		"seller_id" : "-10",
-		"buyer_id" : "-6",
-		"posting_id" : "-4",
-		"title" : "My house look great",
-		"description" : "All the glitter is gone now.",
-		"active" : "live"
-	}
-]
+[{
+	"id": "-1",
+	"sellerId": "-6",
+	"buyerId": "-8",
+	"postingId": "-1",
+	"title": "Great Design!",
+	"description": "Radha did a great job with her custom design on my nails.",
+	"active": "live"
+}, {
+	"id": "-2",
+	"sellerId": "-6",
+	"buyerId": "-9",
+	"postingId": "-1",
+	"title": "Decent Work",
+	"description": "Could be better, she stopped a lot to eat pizza but the end work is clean.",
+	"active": "hidden"
+}, {
+	"id": "-3",
+	"sellerId": "-9",
+	"buyerId": "-6",
+	"postingId": "-2",
+	"title": "Eh",
+	"description": "He did my taxes but I didn't get as much as I would like back.",
+	"active": "live"
+}, {
+	"id": "-4",
+	"sellerId": "-8",
+	"buyerId": "-6",
+	"postingId": "-3",
+	"title": "Super Fast",
+	"description": "Kristen knitted me an entire viking hat in days days and it fits perfect!",
+	"active": "live"
+}, {
+	"id": "-5",
+	"sellerId": "-6",
+	"buyerId": "-10",
+	"postingId": "-1",
+	"title": "Great Stuff!",
+	"description": "Great Work. My nails looks awesome! Check it out at www.facebook.com",
+	"active": "live"
+}, {
+	"id": "-6",
+	"sellerId": "-10",
+	"buyerId": "-11",
+	"postingId": "-4",
+	"title": "Fast and through.",
+	"description": "She cleaned up my entire Perkins apartment in 30 minutes after I had a huge party.",
+	"active": "live"
+}, {
+	"id": "-7",
+	"sellerId": "-6",
+	"buyerId": "-10",
+	"postingId": "-1",
+	"title": "Bruh these nails tho!",
+	"description": "All the glitters",
+	"active": "live"
+}, {
+	"id": "-8",
+	"sellerId": "-10",
+	"buyerId": "-6",
+	"postingId": "-4",
+	"title": "My house look great",
+	"description": "All the glitter is gone now.",
+	"active": "live"
+}]

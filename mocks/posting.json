@@ -1,9 +1,9 @@
 [
     {
-        "seller_id" : "-6",
+        "sellerId" : "-6",
         "id" : "-1",
         "title" : "$5 Nail Painting",
-        "category_id" : "2",
+        "categoryId" : "2",
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
         "date" : "4/11/16",
@@ -12,10 +12,10 @@
         "active" : true
     },
     {
-        "seller_id" : "-10",
+        "sellerId" : "-10",
         "id" : "-2",
         "title" : "House cleaning services",
-        "category_id" : "5",
+        "categoryId" : "5",
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
         "date" : "8/20/16",
@@ -24,10 +24,10 @@
         "active" : true
     },
     {
-        "seller_id" : "-7",
+        "sellerId" : "-7",
         "id" : "-3",
         "title" : "Free Web Developerment",
-        "category_id" : "6",
+        "categoryId" : "6",
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
         "date" : "1/12/17",
@@ -36,10 +36,10 @@
         "active" : true
     },
 	{
-		"seller_id" : "-8",
+		"sellerId" : "-8",
         "id" : "-4",
         "title" : "Scarves and Hats",
-        "category_id" : "7",
+        "categoryId" : "7",
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
         "date" : "4/16/16",
@@ -48,10 +48,10 @@
         "active" : false
 	},
 	{
-		"seller_id" : "-7",
+		"sellerId" : "-7",
         "id" : "-5",
         "title" : "Calculus Tutoe",
-        "category_id" : "3",
+        "categoryId" : "3",
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
         "date" : "7/5/16",

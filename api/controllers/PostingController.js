@@ -36,22 +36,21 @@ function processPosting(posting) {
   }
 
   return Q.all([
-    Category.getById(posting.category_id),
-    User.getById(posting.seller_id)
+    Category.getById(posting.categoryId),
+    User.getById(posting.sellerId)
   ]).spread((category, seller) => {
     posting.category = category;
     posting.seller = seller;
 
-    delete posting.seller_id;
+    delete posting.sellerId;
     delete posting.image;
     delete posting.skills;
-    delete posting.category_id;
+    delete posting.categoryId;
     delete posting.tags;
     delete posting.date;
 
     delete posting.category.description;
 
-    delete posting.seller.pass_hash;
     delete posting.seller.skills;
     delete posting.seller.tags;
 

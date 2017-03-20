@@ -16,7 +16,7 @@ function getMockCategory(id) {
 
 module.exports = {
   findOne(req, res, next) {
-    const id = req.allParams()['id'];
+    const id = req.allParams().id;
 
     Category.getById(id).then((category) => {
       if(!category) {
@@ -31,7 +31,7 @@ module.exports = {
   },
 
   find(req, res, next) {
-    const includeInactive = req.allParams()['inactive'] === '1';
+    const includeInactive = req.allParams().inactive === '1';
     Category.getAll(includeInactive)
       .then(res.ok)
       .catch(res.serverError);

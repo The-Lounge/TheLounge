@@ -2,7 +2,6 @@
 	{
 		"id" : "-1",
 		"userName" : "bfj5889",
-		"passHash" : "mock-1",
 		"email" : "bfj5889@g.rit.edu",
 		"name" : {
 			"firstName" : "Brianna",
@@ -16,7 +15,6 @@
 	{
 		"id" : "-2",
 		"userName" : "dts5425",
-		"passHash" : "mock-2",
 		"email" : "dts5425@g.rit.edu",
 		"name" : {
 			"firstName" : "Dustin",
@@ -30,7 +28,6 @@
 	{
 		"id" : "-3",
 		"userName" : "gjr8050",
-		"passHash" : "$2a$10$KvSi2urLrKTtPa/0y6pjc.t9vQ83twFIn6ZH5sogLPsaErXOvUtoK",
 		"email" : "gjr8050@g.rit.edu",
 		"name" : {
 			"firstName" : "Gregory",
@@ -44,7 +41,6 @@
 		{
 		"id" : "-4",
 		"userName" : "cam2304",
-		"passHash" : "mock-4",
 		"email" : "cam2304@g.rit.edu",
 		"name" : {
 			"firstName" : "Catherine",
@@ -58,7 +54,6 @@
 		{
 		"id" : "-5",
 		"userName" : "mak9384",
-		"passHash" : "mock-5",
 		"email" : "mak9384@g.rit.edu",
 		"name" : {
 			"firstName" : "Mark",
@@ -72,7 +67,6 @@
 		{
 		"id" : "-6",
 		"userName" : "rxm4978",
-		"passHash" : "mock-6",
 		"email" : "rzm4978@g.rit.edu",
 		"name" : {
 			"firstName" : "Radha",
@@ -86,7 +80,6 @@
 	{
 		"id" : "-7",
 		"userName" : "prp2986",
-		"passHash" : "mock-7",
 		"email" : "pzp2986@g.rit.edu",
 		"name" : {
 			"firstName" : "Patrick",
@@ -100,7 +93,6 @@
 	{
 		"id" : "-8",
 		"userName" : "km2029",
-		"passHash" : "mock-8",
 		"email" : "kz2029@g.rit.edu",
 		"name" : {
 			"firstName" : "Kristen",
@@ -114,7 +106,6 @@
 	{
 		"id" : "-9",
 		"userName" : "mxs4321",
-		"passHash" : "mock-9",
 		"email" : "mzs4321@g.rit.edu",
 		"name" : {
 			"firstName" : "Mohammed",
@@ -128,7 +119,6 @@
 	{
 		"id" : "-10",
 		"userName" : "krp7018",
-		"passHash" : "mock-10",
 		"email" : "kzp7018@g.rit.edu",
 		"name" : {
 			"firstName" : "Kayle",
@@ -142,7 +132,6 @@
 	{
 		"id" : "-11",
 		"userName" : "hnr6514",
-		"passHash" : "mock-11",
 		"email" : "hzr6514@g.rit.edu",
 		"name" : {
 			"firstName" : "Haley",

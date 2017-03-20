@@ -13,7 +13,6 @@ const endpoint = {
   CATEGORY_LIST: '/category',
   CATEGORY_LIST_ALL: '/category?inactive=1',
 };
-const Q = require('q');
 
 const reqOptions = {
   url: url.resolve(API_PATH, endpoint.CATEGORY_LIST),

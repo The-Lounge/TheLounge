@@ -29,7 +29,7 @@ module.exports = {
       required: true,
     },
 
-    seller_id: {
+    sellerId: {
       type: 'string',
       required: true
     },

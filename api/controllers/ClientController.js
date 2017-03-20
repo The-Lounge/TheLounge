@@ -35,7 +35,7 @@ module.exports = {
       .catch(err => mapError(err, res));
   },
 
-  logout(req, res, next) {
+  logout(req, res) {
     req.session.authenticated = false;
     delete req.session.user;
     res.ok();

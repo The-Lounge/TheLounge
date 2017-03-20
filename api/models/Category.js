@@ -26,6 +26,11 @@ module.exports = {
     description: {
       type: 'mediumtext',
       defaultsTo: ''
+    },
+
+    iconUrl: {
+      type: 'string',
+      defaultsTo: ''
     }
   },
 
@@ -44,7 +49,7 @@ module.exports = {
         resolve(categoryList
           .filter(category => category.active === true || includeInactive)
           .map(category => {
-            category.icon_url = '';
+            category.iconUrl = '';
             return category;
           }));
       });
@@ -54,7 +59,7 @@ module.exports = {
   /**
    * Get a category by id (or other query)
    * @param id
-   * @returns {Promise<T>}
+   * @returns {Promise<Object>}
    */
   getById(id) {
     return Q.Promise((resolve, reject) => {

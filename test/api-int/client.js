@@ -49,10 +49,10 @@ const testData = {
 const expected = {
   user: {
     name: {
-      first_name: 'Gregory',
-      last_name: 'Rozmarynowycz',
+      firstName: 'Gregory',
+      lastName: 'Rozmarynowycz',
     },
-    user_name: 'gjr8050',
+    userName: 'gjr8050',
     id: '58bc780ff36d2837b81078e0',
     email: 'gjr8050@g.rit.edu',
     status: 'active'

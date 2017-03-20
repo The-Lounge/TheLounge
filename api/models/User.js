@@ -22,8 +22,6 @@ function processUser(user) {
   delete user.role;
   delete user.skills;
   delete user.tags;
-  delete user.pass_hash;
-  delete user.salt;
 
   return user;
 }
@@ -36,7 +34,7 @@ module.exports = {
       required: true
     },
 
-    user_name: {
+    userName: {
       type: 'string',
       required: true
     },
@@ -63,7 +61,7 @@ module.exports = {
     const client = ldap.createClient({url: ldapParams.server});
 
     return new Promise((resolve, reject) => {
-      User.findOne({user_name: credentials.userName}).exec((error, userResult) => {
+      User.findOne({userName: credentials.userName}).exec((error, userResult) => {
         if (error) { return reject(error); }
         if (!userResult) { return reject(invalidCredError); }
 
@@ -72,7 +70,7 @@ module.exports = {
     }).then(userResult => {
       return Q.nfcall(
         client.bind.bind(client),
-        ldapParams.getDn(userResult.user_name),
+        ldapParams.getDn(userResult.userName),
         credentials.password)
 
         .then(() => {return processUser(userResult);})
@@ -95,7 +93,7 @@ module.exports = {
 
         if(!userResult){
           userResult = users.filter(function(posting){
-            return posting.id == id;
+            return posting.id === id;
           }).pop();
         }
 
@@ -110,8 +108,8 @@ module.exports = {
 
   beforeValidate: function (values, cb) {
     if (values.name) {
-      const firstName = values.name.first_name;
-      const lastName = values.name.last_name;
+      const firstName = values.name.firstName;
+      const lastName = values.name.lastName;
       const password = values.password;
 
       if(!(typeof firstName === 'string' && firstName.length > 0)) {

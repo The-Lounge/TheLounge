@@ -4,9 +4,8 @@
  */
 
 module.exports = {
-  findOne(req, res, next) {
-    const id = req.allParams()['id'];
-    console.log("retrieve user " + id);
+  findOne(req, res) {
+    const id = req.allParams().id;
 
     return User.getById(id).then(user => {
       if (user) {
@@ -14,9 +13,7 @@ module.exports = {
       } else {
         res.notFound();
       }
-    }, (err) => {
-      res.serverError(err);
-    })
+    }).catch(res.serverError)
   },
 
   find(req, res, next){

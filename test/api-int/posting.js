@@ -13,10 +13,10 @@ const API_PATH = 'http://localhost:1337/api/';
 
 const testData = {
   createPosting: {
-    seller_id: '-5',
+    sellerId: '-5',
     title: 'This is a test posting',
     description: 'some posting description text',
-    category_id: 3,
+    categoryId: 3,
   }
 };
 
@@ -34,13 +34,13 @@ const expected = {
     },
     seller: {
       id: '-6',
-      email: 'rxm4978@g.rit.edu',
+      email: 'rzm4978@g.rit.edu',
       name: {
-        first_name: 'Radha',
-        last_name: 'Mendapra',
+        firstName: 'Radha',
+        lastName: 'Mendapra',
       },
       status: 'active',
-      user_name: 'rxm4978',
+      userName: 'rxm4978',
     }
   },
   postPosting: {
@@ -58,11 +58,11 @@ const expected = {
       id: '-5',
       email: 'mak9384@g.rit.edu',
       name: {
-        first_name: 'Mark',
-        last_name: 'Koellmann'
+        firstName: 'Mark',
+        lastName: 'Koellmann'
       },
       status: 'active',
-      user_name: 'mak9384',
+      userName: 'mak9384',
     }
 
   }

@@ -12,7 +12,7 @@
  * ```
  */
 
-module.exports = function forbidden (data, options) {
+module.exports = function unauthorized (data, options) {
 
   // Get access to `req`, `res`, & `sails`
   var req = this.req;

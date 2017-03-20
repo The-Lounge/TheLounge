@@ -15,7 +15,7 @@ function mapError(err, res) {
 }
 
 module.exports = {
-  authenticate(req, res, next) {
+  authenticate(req, res) {
     const credentials = req.body;
 
     if(req.session.user) {
@@ -44,4 +44,4 @@ module.exports = {
   ping(req, res, next) {
     res.ok('pong');
   }
-}
+};

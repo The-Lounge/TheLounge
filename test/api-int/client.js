@@ -7,6 +7,9 @@ const url = require('url');
 const chai = require('chai');
 chai.use(require('chai-as-promised'));
 
+// include local config if it's present
+try { require('../../config/local'); } catch (e) { console.log ('no local config'); }
+
 const expect = chai.expect;
 const API_PATH = 'http://localhost:1337/api/';
 const endpoint = {

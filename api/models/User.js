@@ -2,9 +2,21 @@
 /**
  * @author Greg Rozmarynowycz <greg@thunderlab.net>
  */
-const bcrypt = require('bcrypt');
 const users = require('../../mocks/user.json');
 const HttpError = require('standard-http-error');
+const Q = require('q');
+const ldap = require('ldapjs');
+
+const ldapParams = {
+  server: 'ldaps://ldap.rit.edu:636',
+  baseDN: 'ou=people,dc=rit,dc=edu',
+  getDn(username) {
+    return `uid=${username},${this.baseDN}`;
+  },
+  getFilter(username) {
+    return `(uid=${username})`;
+  },
+};
 
 function processUser(user) {
   delete user.role;
@@ -34,11 +46,6 @@ module.exports = {
       required: true
     },
 
-    pass_hash: {
-      type: 'string',
-      require: true,
-    },
-
     status: {
       type: 'string',
       enum: ['active', 'inactive', 'under_review', 'banned'],
@@ -53,6 +60,8 @@ module.exports = {
    */
   authenticate(credentials) {
     const invalidCredError = new HttpError(422, 'Invalid Username or Password provided');
+    const client = ldap.createClient({url: ldapParams.server});
+
     return new Promise((resolve, reject) => {
       User.findOne({user_name: credentials.userName}).exec((error, userResult) => {
         if (error) { return reject(error); }
@@ -61,14 +70,20 @@ module.exports = {
         resolve(userResult);
       });
     }).then(userResult => {
-        return bcrypt.compare(credentials.password, userResult.pass_hash).then((res) => {
-          if(res === true) {
-            return processUser(userResult);
-          } else {
-            throw invalidCredError;
-          }
+      return Q.nfcall(
+        client.bind.bind(client),
+        ldapParams.getDn(userResult.user_name),
+        credentials.password)
+
+        .then(() => {return processUser(userResult);})
+        .catch((err) => {
+        if(err.message && err.message.indexOf('Invalid Credentials') > -1) {
+          return Q.reject(invalidCredError);
+        } else {
+          return Q.reject(err);
+        }
         });
-      });
+    });
   },
 
   getById(id) {
@@ -114,13 +129,4 @@ module.exports = {
       cb();
     }
   },
-
-  afterValidate(values, cb) {
-    // hash the user's selected password
-    bcrypt.hash(values.password, 10).then((hash) => {
-      values.pass_hash = hash;
-      delete values.password;
-      cb();
-    });
-  }
 };

@@ -60,17 +60,12 @@ function processPosting(posting) {
 }
 
 module.exports = {
-  findOne(req, res, next){
-
-    const id = req.allParams()['id'];
-    let posting = null;
-    console.log("retrieve posting " + id);
-
+  findOne(req, res){
+    const id = req.allParams().id;
     return findPostingById(id).then(function(posting){
       if(posting){
         return processPosting(posting).then(res.ok);
-      }
-      else {
+      } else {
         res.notFound();
       }
     }).catch(res.serverError);
@@ -86,10 +81,7 @@ module.exports = {
     }
   },
 
-  create(req, res, next){
-
-    console.log(req.body);
-
+  create(req, res){
     if(!req.body || Object.keys(req.body).length === 0) {
       return res.badRequest('400 Bad Request: Posting must include body');
     }
@@ -103,5 +95,5 @@ module.exports = {
         .then(res.created)
         .catch(res.serverError);
     })
-  }
+  },
 };

@@ -5,6 +5,7 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "angular": "^1.6.3",
     "captains-log": "^1.0.2",
     "ejs": "^2.5.5",
     "grunt": "^1.0.1",
@@ -48,8 +49,8 @@
   "license": "",
   "devDependencies": {
     "angular": "1.6.2",
-    "angular-animate": "^1.6.2",
-    "angular-cookies": "^1.6.2",
+    "angular-animate": "1.6.2",
+    "angular-cookies": "1.6.2",
     "angular-mocks": "^1.6.2",
     "angular-resource": "^1.6.2",
     "angular-route": "^1.6.2",

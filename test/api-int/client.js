@@ -5,6 +5,7 @@ require('any-promise/register/q');
 const request = require('request-promise-any');
 const url = require('url');
 const chai = require('chai');
+const atob = require('atob');
 chai.use(require('chai-as-promised'));
 
 // include local config if it's present
@@ -33,8 +34,9 @@ const testData = {
   validLogin: {
     // These must be valid, real RIT SSO credentials
     // To setup, put them in your config/local.js file, according to the template
-    userName: process.env.TEST_UID || global.TEST_UID,
-    password: process.env.TEST_PWD || global.TEST_PWD
+    // just so the credentials don't have to be stored in completely plain text, encode them
+    userName: atob(process.env.TEST_UID || global.TEST_UID),
+    password: atob(process.env.TEST_PWD || global.TEST_PWD),
   },
   invalidLogin_pw: {
     userName: 'gjr8050',

@@ -58,6 +58,7 @@
     "angular-sanitize": "^1.6.2",
     "angular-touch": "^1.6.2",
     "angular-ui-router": "^0.4.2",
+    "atob": "^2.0.3",
     "autoprefixer": "^6.3.6",
     "bootstrap-sass": "^3.3.7",
     "browserify": "^14.0.0",

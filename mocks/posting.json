@@ -9,7 +9,7 @@
         "price" : {
             "minimum" : "5",
             "maximum" : "15"
-        }
+        },
         "date" : "4/11/16",
         "tags" : [],
         "skills" : "Nails",

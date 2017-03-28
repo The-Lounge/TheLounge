@@ -6,7 +6,10 @@
         "categoryId" : "2",
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
-        "price" : "5",
+        "price" : {
+            "minimum" : "5",
+            "maximum" : "15"
+        }
         "date" : "4/11/16",
         "tags" : [],
         "skills" : "Nails",
@@ -19,7 +22,10 @@
         "categoryId" : "5",
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
-        "price" : "87",
+        "price" : {
+            "minimum" : "5",
+            "maximum" : "10"
+        },
         "date" : "8/20/16",
         "tags" : [],
         "skills" : "Housekeeping",
@@ -32,7 +38,10 @@
         "categoryId" : "6",
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
-        "price" : "54",
+        "price" : {
+            "minimum" : "99",
+            "maximum" : "250"
+        },
         "date" : "1/12/17",
         "tags" : [],
         "skills" : "Web Development",
@@ -45,7 +54,10 @@
         "categoryId" : "7",
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
-        "price" : "50",
+        "price" : {
+            "minimum" : "50",
+            "maximum" : "150"
+        },
         "date" : "4/16/16",
         "tags" : [],
         "skills" : "Knitting",
@@ -58,7 +70,10 @@
         "categoryId" : "3",
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
-        "price" : "12",
+        "price" : {
+            "minimum" : "1",
+            "maximum" : "20"
+        },
         "date" : "7/5/16",
         "tags" : [],
         "skills" : "Calculus I",

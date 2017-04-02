@@ -6,6 +6,7 @@ const users = require('../../mocks/user.json');
 const HttpError = require('standard-http-error');
 const Q = require('q');
 const ldap = require('ldapjs');
+const modelUtil = require('../lib/modelUtils');
 
 const ldapParams = {
   server: 'ldaps://ldap.rit.edu:636',
@@ -26,9 +27,8 @@ function processUser(user) {
   return user;
 }
 
-module.exports = {
+const modelSettings = {
   attributes: {
-
     name: {
       type: 'json',
       required: true
@@ -110,7 +110,6 @@ module.exports = {
     if (values.name) {
       const firstName = values.name.firstName;
       const lastName = values.name.lastName;
-      const password = values.password;
 
       if(!(typeof firstName === 'string' && firstName.length > 0)) {
         return cb('Invalid first_name ' + firstName);
@@ -120,11 +119,11 @@ module.exports = {
         return cb('Invalid last_name ' + lastName);
       }
 
-      if (!(typeof password === 'string' && password.length > 0)) {
-        return cb('Invalid password ' + password);
-      }
-
       cb();
     }
   },
 };
+
+modelUtil.applyMockId(modelSettings);
+
+module.exports = modelSettings;

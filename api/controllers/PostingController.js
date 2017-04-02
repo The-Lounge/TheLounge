@@ -3,81 +3,17 @@
  * Created by Greg on 4/15/2016.
  */
 
-/** @type Array */
-const postings = require('../../mocks/posting.json');
-const Q = require('q');
-
-function findPostingById(id) {
-  return new Promise(function(resolve, reject){
-    Posting.findOne(id).exec(function(error, postingResult){
-      if(error) {
-        return reject(error);
-      }
-
-      if(!postingResult){
-        resolve(postings.filter(function(posting){
-          return posting.id === id;
-        }).pop());
-      }
-
-      resolve(postingResult);
-    });
-  });
-}
-
-/**
- * Resolves entities on a posting response and removes extra fields
- * @param posting
- * @returns {Promise<Posting>}
- */
-function processPosting(posting) {
-  if(posting.category) {
-    return Q.when(posting);
-  }
-
-  return Q.all([
-    Category.getById(posting.categoryId),
-    User.getById(posting.sellerId)
-  ]).spread((category, seller) => {
-    posting.category = category;
-    posting.seller = seller;
-
-    delete posting.sellerId;
-    delete posting.image;
-    delete posting.skills;
-    delete posting.categoryId;
-    delete posting.tags;
-    delete posting.date;
-
-    delete posting.category.description;
-
-    delete posting.seller.skills;
-    delete posting.seller.tags;
-
-    return posting;
-  });
-}
-
 module.exports = {
   findOne(req, res){
     const id = req.allParams().id;
-    return findPostingById(id).then(function(posting){
+    return Posting.getById(id).then(function(posting){
       if(posting){
-        return processPosting(posting).then(res.ok);
+        return res.ok(posting);
+        // return processPosting(posting).then(res.ok);
       } else {
         res.notFound();
       }
     }).catch(res.serverError);
-  },
-
-  find(req, res, next){
-    try {
-      console.log("retrieve postings");
-      res.set('Content-Type','application/json');
-      res.ok(postings ? postings : []);
-    } catch (e) {
-      next(e);
-    }
   },
 
   create(req, res){
@@ -90,9 +26,10 @@ module.exports = {
         return res.serverError(error);
       }
 
-      return processPosting(posting)
+      console.log(posting);
+      return Posting.getById(posting.id)
         .then(res.created)
         .catch(res.serverError);
-    })
+    });
   },
 };

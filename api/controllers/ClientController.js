@@ -1,7 +1,9 @@
+'use strict';
 /**
  * Created by Greg on 3/15/2017.
  */
 
+/** @type HttpError */
 const HttpError = require('standard-http-error');
 
 function mapError(err, res) {

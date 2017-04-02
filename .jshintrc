@@ -11,6 +11,10 @@
   "undef": true,
   "unused": true,
   "globals": {
-    "angular": false
+    "angular": false,
+    "Posting": false,
+    "Category": false,
+    "User": false,
+    "sails": false
   }
 }

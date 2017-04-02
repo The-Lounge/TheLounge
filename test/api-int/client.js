@@ -12,6 +12,7 @@ chai.use(require('chai-as-promised'));
 try { require('../../config/local'); } catch (e) { console.log ('no local config'); }
 
 const expect = chai.expect;
+const util = require('./util');
 const API_PATH = 'http://localhost:1337/api/';
 const endpoint = {
   CATEGORY_LIST: '/login',
@@ -55,7 +56,7 @@ const expected = {
       lastName: 'Rozmarynowycz',
     },
     userName: 'gjr8050',
-    id: '58bc780ff36d2837b81078e0',
+    id: '-3',
     email: 'gjr8050@g.rit.edu',
     status: 'active'
   }
@@ -68,7 +69,8 @@ describe('/login', () => {
   });
 
   it('responds with user details (200) when provided with valid credentials', () => {
-    const loginReq = request.post(Object.assign({body: testData.validLogin}, loginOptions));
+    const loginReq = request.post(Object.assign({body: testData.validLogin}, loginOptions))
+      .then(util.stripMetaDates);
     return expect(loginReq).to.eventually.deep.equal(expected.user);
   });
 

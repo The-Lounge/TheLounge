@@ -8,6 +8,7 @@ const chai = require('chai');
 chai.use(require('chai-as-promised'));
 
 const expect = chai.expect;
+const util = require('./util');
 
 const API_PATH = 'http://localhost:1337/api/';
 
@@ -26,6 +27,10 @@ const expected = {
     title: '$5 Nail Painting',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl',
     active: true,
+    price: {
+      maximum: "15",
+      minimum: "5",
+    },
     category: {
       shortname: 'beauty',
       name: 'Beauty',
@@ -34,13 +39,10 @@ const expected = {
     },
     seller: {
       id: '-6',
-      email: 'rzm4978@g.rit.edu',
       name: {
         firstName: 'Radha',
         lastName: 'Mendapra',
       },
-      status: 'active',
-      userName: 'rxm4978',
     }
   },
   postPosting: {
@@ -54,24 +56,26 @@ const expected = {
       name: 'Tutor',
       active: true,
     },
+    price:  {
+      minimum: null,
+      maximum: null,
+    },
     seller: {
       id: '-5',
-      email: 'mak9384@g.rit.edu',
       name: {
         firstName: 'Mark',
         lastName: 'Koellmann'
       },
-      status: 'active',
-      userName: 'mak9384',
     }
-
   }
 };
 
 describe('/posting', () => {
   it('GET /posting/:id', () => {
     const postingId = '-1';
-    const posting = request.get(`${API_PATH}posting/${postingId}`).then(JSON.parse);
+    const posting = request.get(`${API_PATH}posting/${postingId}`)
+      .then(JSON.parse)
+      .then(util.stripMetaDates);
     return expect(posting).to.eventually.deep.equal(expected.getPosting);
   });
 

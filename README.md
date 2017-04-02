@@ -36,6 +36,10 @@ To start the Sails server, you need to run `npm start`. This command points to a
 When the sails server is running, you can view the app at `http://localhost:1337`. 
 You will see message in your browser console similar to `Now connected to Sails`.
 
+To use mock data, the app must be run in **mock** mode. 
+Running the app to connect to the test DB will not provide access to mock data, nor visa-versa. 
+To run the app in mock mode, run `npm run mockServer`. 
+
 When you're developing, you'll want to run `grunt watch` (in a new terminal tab).
 When you load the Angular app in your browser, it should connect with the `live-reload` server (if it can't you'll get an error in your browser).
 This will reload your page when you make changes to the app in your IDE and run tools like JS Hint automatically.

@@ -31,6 +31,7 @@
     "standard-http-error": "^2.0.0"
   },
   "scripts": {
+    "mockStart": "set NODE_ENV=mock&&node app.js",
     "debug": "node debug app.js",
     "start": "node app.js",
     "intTest": "grunt test",

@@ -57,6 +57,11 @@ var app = angular.module('ays', [
         controller: 'MainCtrl',
         templateUrl: 'views/home.html'
       });
+	  .state('category', {
+		url: '/category',
+		controller: 'CategoryController',
+		templateUrl: 'views/category.html'
+	  });
   });
 
 //Pull in the controllers, this should be done through modules eventually

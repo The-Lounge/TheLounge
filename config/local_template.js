@@ -21,6 +21,10 @@
  * credentials, so they need to configured locally. If you need to run the   *
  * tests, fill in these values.                                              *
  *                                                                           *
+ * So credentials to run the tests don't have to be shown in plain text,     *
+ * the tests are configured to decode them from base 64 encoding. To get     *
+ * these values, in your browser console, run `atob` on your username and    *
+ * password. (ex. atob('gjr8050') > [some binary string]).                   *
  ****************************************************************************/
 global.TEST_UID = ''; // just the username, ex. efs2220
 global.TEST_PWD = '';

@@ -48,6 +48,11 @@ var app = angular.module('ays', [
         controller: 'PostingController',
         templateUrl: 'views/posting.html'
       })
+	  .state('category', {
+		url: '/category',
+		controller: 'CategoryController',
+		templateUrl: 'views/category.html'
+	  })
       .state('faq', {
         url: '/faq',
         templateUrl: 'views/faq.html'
@@ -56,14 +61,10 @@ var app = angular.module('ays', [
         url: '/',
         controller: 'MainCtrl',
         templateUrl: 'views/home.html'
-      })
-	  .state('category', {
-		url: '/category',
-		controller: 'CategoryController',
-		templateUrl: 'views/category.html'
-	  });
+      });
   });
 
 //Pull in the controllers, this should be done through modules eventually
 require('./controllers/main');
 require('./controllers/posting');
+require('./controllers/category');

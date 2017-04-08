@@ -56,7 +56,7 @@ var app = angular.module('ays', [
         url: '/',
         controller: 'MainCtrl',
         templateUrl: 'views/home.html'
-      });
+      })
 	  .state('category', {
 		url: '/category',
 		controller: 'CategoryController',

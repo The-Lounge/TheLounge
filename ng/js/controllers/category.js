@@ -5,9 +5,10 @@
 require('angular').module('ays').controller('CategoryController', function($sails, $scope, _){
 
   console.log("Category ctrl");
-  $sails.get('/api/category/').then(function(){
+  $sails.get('/api/category/').then(function(category){
     console.log(category);
 	$scope.category = category.data;
+	//Will need to do a check to only return active categories
   }, function(err) {
     console.log(err);
   });

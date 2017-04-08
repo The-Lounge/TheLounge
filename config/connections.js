@@ -58,7 +58,7 @@ module.exports.connections = {
   ***************************************************************************/
   herokuMongo: {
     adapter: 'sails-mongo',
-    url: `mongodb://${process.env.HEROKU_MONGO_USER}:${process.env.HEROKU_MONGO_PWD}@ds147799.mlab.com:47799/heroku_mrn33f1k`,
+    // url: `mongodb://${process.env.HEROKU_MONGO_USER}:${process.env.HEROKU_MONGO_PWD}@ds147799.mlab.com:47799/heroku_mrn33f1k`,
     host: 'ds147799.mlab.com',
     port: 47799,
     user: process.env.HEROKU_MONGO_USER,

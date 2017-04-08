@@ -6,7 +6,6 @@ require('angular').module('ays').controller('PostingController', function($sails
 
   console.log("Posting ctrl");
   $sails.get('/api/posting/' +  $stateParams.id).then(function(posting){
-    console.log(posting);
 	$scope.posting = posting.data;
   }, function(err) {
     console.log(err);

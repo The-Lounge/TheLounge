@@ -1,0 +1,61 @@
+.row{
+  margin: 0;
+  padding: 0;
+}
+
+.glyphicon{
+    font-size: 3em;
+    padding: 1%;
+}
+
+nav{
+  background-color: #F36E21;
+  text-align: center;
+  color: #513127;
+}
+
+.headerImage{
+  background-image: url("../images/nails.jpg");
+  background-size: cover;
+  background-repeat: none;
+  height: 15em;
+}
+
+.owner{
+  background-color: #F36E21;
+  font-size: 3em;
+  color: #513127;
+}
+
+.title h1{
+  font-size: 4em;
+  color: #F36E21;
+}
+
+.title .glyphicon{
+  font-size: 2.5em;
+}
+
+.glyphicon-star{
+  color: #fde858;
+}
+
+.empty{
+  color: #7f7f7f;
+}
+
+.glyphicon-envelope{
+  color: #F36E21;
+  font-size: 10em;
+}
+
+.price{
+  font-size: 3em;
+  color: #513127;
+}
+
+.description{
+  font-size: 2em;
+  text-align: center;
+  color: #513127;
+}

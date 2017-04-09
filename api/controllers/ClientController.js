@@ -20,7 +20,7 @@ module.exports = {
   authenticate(req, res) {
     const credentials = req.body;
 
-    if(req.session.user) {
+    if(req.session.authenticated === true) {
       return res.badRequest('A user has already been authenticated for this session');
     }
 
@@ -30,11 +30,19 @@ module.exports = {
 
     User.authenticate(credentials)
       .then((user) => {
-        res.ok(user);
         req.session.authenticated = true;
         req.session.user = user;
+        res.ok(user);
       })
       .catch(err => mapError(err, res));
+  },
+
+  me(req, res) {
+    if(req.session.authenticated) {
+      res.ok(req.session.user);
+    } else {
+      res.unauthorized('You are not authenticated');
+    }
   },
 
   logout(req, res) {

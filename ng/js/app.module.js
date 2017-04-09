@@ -36,11 +36,11 @@ var app = angular.module('ays', [
     'ngSails'
   ])
   .constant('_', require('lodash'))
-  .config(function ($urlRouterProvider, $stateProvider) {
-    console.log("I'm running! wadup");
-    console.log("eh More things!");
+  .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
+    console.log("AYS is up and running...");
 
     $urlRouterProvider.otherwise('/');
+    $locationProvider.html5Mode(true);//remove #! from urls
 
     $stateProvider
       .state('posting', {
@@ -59,12 +59,19 @@ var app = angular.module('ays', [
       })
       .state('main', {
         url: '/',
-        controller: 'MainCtrl',
+        controller: 'LoginController',
+        templateUrl: 'views/login.html'
+      })
+      .state('home', {
+        url: '/home',
+        controller: 'HomeController',
         templateUrl: 'views/home.html'
       });
   });
 
 //Pull in the controllers, this should be done through modules eventually
+require('../services/auth')
+require('./controllers/login')
 require('./controllers/main');
 require('./controllers/posting');
 require('./controllers/category');

@@ -40,12 +40,9 @@
         <![endif]-->
 
     </head>
-
     <body>
-
         <!-- Top content -->
         <div class="top-content">
-
             <div class="inner-bg">
                 <div class="container">
                     <div class="row">
@@ -65,32 +62,28 @@
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>Login to our site</h3>
-                            		<p>Enter your college email and password to log on:</p>
+                        			<h3>Login to our site</h3>                            		
                         		</div>
                         		<div class="form-top-right">
                         			<i class="fa fa-key"></i>
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="" method="post" class="login-form">
+			                    <form class="login-form">
 			                    	<div class="form-group">
-			                    		<label class="sr-only" for="form-username">Email</label>
-			                        	<input type="text" name="form-username" placeholder="College Email..." class="form-username form-control" id="form-username">
+			                        	<input ng-model="credentials.userName" type="text" placeholder="RIT Username" class="form-email form-control">
 			                        </div>
 			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">Password</label>
-			                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+			                        	<input ng-model="credentials.password" type="password" placeholder="Password" class="form-password form-control">
 			                        </div>
-			                        <button type="submit" class="btn">Sign in!</button>
+			                        <button ng-click="authenticate()" class="btn">Sign in!</button>
 			                    </form>
 		                    </div>
+                            <label ng-bind="loginMessage"></label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </body>
-
 </html>

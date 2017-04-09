@@ -18,6 +18,10 @@ const testData = {
     title: 'This is a test posting',
     description: 'some posting description text',
     categoryId: 3,
+    price: {
+      minimum: null,
+      maximum: 10,
+    }
   }
 };
 
@@ -28,8 +32,8 @@ const expected = {
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl',
     active: true,
     price: {
-      maximum: "15",
-      minimum: "5",
+      maximum: 15,
+      minimum: 5,
     },
     category: {
       shortname: 'beauty',
@@ -58,7 +62,7 @@ const expected = {
     },
     price:  {
       minimum: null,
-      maximum: null,
+      maximum: 10,
     },
     seller: {
       id: '-5',

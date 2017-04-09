@@ -7,8 +7,8 @@
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
         "price" : {
-            "minimum" : "5",
-            "maximum" : "15"
+            "minimum" : 5,
+            "maximum" : 15
         },
         "date" : "4/11/16",
         "tags" : [],
@@ -23,8 +23,8 @@
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
         "price" : {
-            "minimum" : "5",
-            "maximum" : "10"
+            "minimum" : null,
+            "maximum" : 10
         },
         "date" : "8/20/16",
         "tags" : [],
@@ -39,8 +39,8 @@
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
         "price" : {
-            "minimum" : "99",
-            "maximum" : "250"
+            "minimum" : 99,
+            "maximum" : 250
         },
         "date" : "1/12/17",
         "tags" : [],
@@ -55,8 +55,8 @@
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
         "price" : {
-            "minimum" : "50",
-            "maximum" : "150"
+            "minimum" : 50,
+            "maximum" : null
         },
         "date" : "4/16/16",
         "tags" : [],
@@ -71,8 +71,8 @@
         "image" : null,
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
         "price" : {
-            "minimum" : "1",
-            "maximum" : "20"
+            "minimum" : 1,
+            "maximum" : 20
         },
         "date" : "7/5/16",
         "tags" : [],

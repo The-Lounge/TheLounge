@@ -4,6 +4,7 @@
  */
 const Q = require('q');
 const modelUtil = require('../lib/modelUtils');
+const _ = require('lodash');
 
 /**
  * Resolves entities on a posting response and removes extra fields
@@ -29,6 +30,12 @@ function processPosting(postingData) {
   });
 
   return Q.when(postingData);
+}
+
+function isValidPriceBlock(price) {
+  return price instanceof Object &&
+    (_.isNumber(price.minimum) || _.isNumber(price.maximum)) &&
+    (price.maximum >= price.minimum);
 }
 
 const modelSettings = {
@@ -105,6 +112,11 @@ const modelSettings = {
   beforeValidate(postingData, next) {
     postingData.seller = postingData.sellerId;
     postingData.category = parseInt(postingData.categoryId, 10);
+
+    if(!isValidPriceBlock(postingData.price)) {
+      return next(new Error('Invalid posting parameters, "price" block must be defined, with minimum and/or maximum'));
+    }
+
     next();
   },
 };

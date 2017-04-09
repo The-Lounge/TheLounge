@@ -47,11 +47,7 @@ module.exports = {
         }
 
         resolve(categoryList
-          .filter(category => category.active === true || includeInactive)
-          .map(category => {
-            category.iconUrl = '';
-            return category;
-          }));
+          .filter(category => category.active === true || includeInactive));
       });
     });
   },

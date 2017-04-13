@@ -68,6 +68,7 @@ Other tasks are run when different files are changed:
 ├─ ng/ - Angular application code
 │  ├─ js/ - JS that will run in the browser
 │  ├─ styles/ - CSS/SCSS
+│  ├─ services/ - Custom Angular Services
 │  ├─ views/ - angular templates/views
 │  ├─ images/ - image assets
 │  └─ index.html - starting point for the Angular app

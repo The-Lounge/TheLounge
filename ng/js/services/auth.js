@@ -2,15 +2,17 @@
 
 require('angular').module('ays')
 
-	.factory('Auth', function() {
-		var user;
+	.factory('AuthService', function($sails) {
 
-		return {
-			setUser : function(aUser) {
-				user = aUser;
+		var AuthService = {
+			async: function() {
+				// $http/$sails returns a promise, which has a then function, which also returns a promise
+				var promise = $sails.get('/me')
+					.then(function (response) {
+						return response.status;
+					});
+				return promise;
 			},
-			isLoggedIn : function() {
-				return(user) ? user : false;
-			}
-		}
-	})
+		};
+		return AuthService;
+	});

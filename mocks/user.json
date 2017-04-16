@@ -141,5 +141,18 @@
 		"skills" : [],
 		"status" : "active",
 		"tags" : []
+	},
+	{
+		"id" : "-12",
+		"userName" : "tlr3552",
+		"email" : "tlr3552@g.rit.edu",
+		"name" : {
+			"firstName" : "Tyler",
+			"lastName" : "Russell"
+		},
+		"role" : "student",
+		"skills" : [],
+		"status" : "active",
+		"tags" : []
 	}
 ]

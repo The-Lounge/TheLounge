@@ -3,6 +3,9 @@
     "browser": false,
     "node": true
   },
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
   "globals": {
     "Category": false,
     "User": false,

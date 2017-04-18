@@ -10,18 +10,16 @@ module.exports = (grunt) => {
       //   'ng/scripts/dependencies/sails.io.js',
       // ],
     },
-    all: {
-      src: [
-        '/Gruntfile.js',
-        '<%= yeoman.app %>/scripts/{,*/}*.js',
-      ],
-    },
-    server:  {
+    api:  {
       options: {},
       src: [
         'Gruntfile.js',
         'api/**/*.js',
       ],
+    },
+    ui: {
+      options: {},
+      src: ['ng/**/*.js', '!ng/js/dependencies/**/*.js', '!ng/dist/**/*.js'],
     },
     test: {
       // options: {

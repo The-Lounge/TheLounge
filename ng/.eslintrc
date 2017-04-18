@@ -1,0 +1,23 @@
+{
+  "env": {
+    "browser": true,
+    "node": false,
+    "commonjs": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 5,
+    "ecmaFeatures": {
+      "jsx": false
+    }
+  },
+  "rules": {
+    "prefer-arrow-callback": "off",
+    "func-names": "off",
+    "prefer-template": "off",
+    "no-var": "off",
+    "object-shorthand": "off"
+  },
+  "globals": {
+
+  }
+}

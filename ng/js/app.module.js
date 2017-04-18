@@ -1,4 +1,3 @@
-'use strict';
 /**
  * app.module
  * This is the entry point of the browser app
@@ -8,6 +7,7 @@
  */
 
 // Include JQuery and BootStrap
+// eslint-disable-next-line no-multi-assign
 window.$ = window.jQuery = require('jquery');
 window.boostrapjs = require('bootstrap-sass');
 window.angular = require('angular');
@@ -26,8 +26,7 @@ window.io = require('./dependencies/sails.io')(require('socket.io-client'));
  * Main module of the application.
  */
 
-
-var app = angular.module('ays', [
+window.angular.module('ays', [
     require('angular-animate'),
     require('angular-cookies'),
     require('angular-resource'),
@@ -35,46 +34,46 @@ var app = angular.module('ays', [
     require('angular-sanitize'),
     require('angular-touch'),
     require('angular-ui-router'),
-    'ngSails'
+    'ngSails',
   ])
-  //This handles the users session, redirects to login if currently unauthorized, homepage otherwise
-  .run(function(AuthService, $state) {
-    AuthService.async().then(function(authorized) {
+  // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
+  .run(function run(AuthService, $state) {
+    AuthService.async().then(function authCallback(authorized) {
       console.log(authorized);
-      if(authorized == 401) {
+      if (authorized === 401) {
         $state.go('entry');
-      }
-      else {
+      } else {
         $state.go('home');
       }
-    })
+    });
   })
   .constant('_', require('lodash'))
   .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
-    console.log("AYS is up and running...");
+    console.log('AYS is up and running...');
 
     $urlRouterProvider.otherwise('/');
-    //$locationProvider.html5Mode(true);//removes #! from urls.
+    $locationProvider.hashPrefix('');
+    // $locationProvider.html5Mode(true);//removes #! from urls.
 
     $stateProvider
       .state('posting', {
         url: '/posting/:id',
         controller: 'PostingController',
-        templateUrl: 'views/posting.html'
+        templateUrl: 'views/posting.html',
       })
       .state('category', {
         url: '/category',
         controller: 'CategoryController',
-        templateUrl: 'views/category.html'
+        templateUrl: 'views/category.html',
       })
       .state('faq', {
         url: '/faq',
-        templateUrl: 'views/faq.html'
+        templateUrl: 'views/faq.html',
       })
       .state('entry', {
         url: '/',
         controller: 'LoginController',
-        templateUrl: 'views/login.html'
+        templateUrl: 'views/login.html',
       })
       .state('home', {
         url: '/home',
@@ -83,9 +82,9 @@ var app = angular.module('ays', [
       });
   });
 
-   //Pull in the controllers, this should be done through modules eventually
-require('./services/auth')
-require('./controllers/login')
+// Pull in the controllers, this should be done through modules eventually
+require('./services/auth');
+require('./controllers/login');
 require('./controllers/main');
 require('./controllers/posting');
 require('./controllers/category');

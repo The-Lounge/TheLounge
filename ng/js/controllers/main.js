@@ -1,31 +1,26 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name appApp.controller:MainCtrl
  * @description
  * # HomeController
- * The home page of the app. Note that when this route is accessed, 
+ * The home page of the app. Note that when this route is accessed,
  * an instance of this controller is created and instantiated. Referencing
  * this anywhere else will create a new instance!
  */
 require('angular').module('ays')
-  
-  .controller('HomeController', function ($scope, AuthService) {
 
+  .controller('HomeController', function ($scope, AuthService) {
     console.log('Home Controller instantiated');
 
-    $scope.authenticated;
+    $scope.authenticated = false;
 
-    //Service call returns the HTTP status of the /me endpoint
-    AuthService.async().then(function(resp) {
-      
+    // Service call returns the HTTP status of the /me endpoint
+    AuthService.async().then(function (resp) {
       console.log(resp);
-      if(resp != 401) {
+      if (resp !== 401) {
         $scope.authenticated = true;
-      }
-      else {
+      } else {
         $scope.authenticated = false;
       }
-    })
+    });
   });

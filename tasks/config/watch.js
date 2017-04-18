@@ -30,9 +30,6 @@ module.exports = (grunt) => {
     js: {
       files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
       tasks: ['newer:eslint', 'build', 'syncAssets'/* , 'newer:jscs:all'*/],
-      options: {
-        livereload: '<%= connect.options.livereload %>',
-      },
     },
     jsTest: {
       files: ['test/ui-spec/{,*/}*.js'],
@@ -44,17 +41,6 @@ module.exports = (grunt) => {
     },
     gruntfile: {
       files: ['Gruntfile.js'],
-    },
-    // TODO get this working again...
-    livereload: {
-      options: {
-        livereload: '<%= connect.options.livereload %>',
-      },
-      files: [
-        '<%= yeoman.app %>/{,*/}*.html',
-        '.tmp/styles/{,*/}*.css',
-        '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-      ],
     },
     options: {
       livereload: true,

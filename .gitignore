@@ -133,5 +133,3 @@ build/Release
 .sass-cache
 *.zip
 *.rar
-
-views/layout.ejs

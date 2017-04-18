@@ -1,4 +1,3 @@
-'use strict';
 /**
  * Created by Greg on 4/12/2016.
  */
@@ -24,7 +23,7 @@ function processPosting(postingData) {
     'updatedAt'];
 
   Object.keys(postingData).forEach((key) => {
-    if(returnedFields.indexOf(key) === -1) {
+    if (returnedFields.indexOf(key) === -1) {
       delete postingData[key];
     }
   });
@@ -48,7 +47,7 @@ const modelSettings = {
 
     price: {
       type: 'json',
-      defaultsTo() {return {minimum: null, maximum: null}; },
+      defaultsTo() { return {minimum: null, maximum: null}; },
     },
 
     description: {
@@ -86,8 +85,8 @@ const modelSettings = {
 
     active: {
       type: 'boolean',
-      defaultsTo: true
-    }
+      defaultsTo: true,
+    },
   },
 
   getById(id) {
@@ -95,16 +94,16 @@ const modelSettings = {
       Posting.findOne(id)
         .populate('seller', {select: ['id', 'name', 'active']})
         .populate('category', {select: ['id', 'shortname', 'name', 'active']})
-        .exec(function(error, postingResult){
-          if(error) {
+        .exec((error, postingResult) => {
+          if (error) {
             return reject(error);
           }
 
-          if(!postingResult) {
+          if (!postingResult) {
             return resolve(null);
           }
 
-          resolve(processPosting(postingResult.toJSON()));
+          return resolve(processPosting(postingResult.toJSON()));
         });
     });
   },
@@ -113,11 +112,11 @@ const modelSettings = {
     postingData.seller = postingData.sellerId;
     postingData.category = parseInt(postingData.categoryId, 10);
 
-    if(!isValidPriceBlock(postingData.price)) {
+    if (!isValidPriceBlock(postingData.price)) {
       return next(new Error('Invalid posting parameters, "price" block must be defined, with minimum and/or maximum'));
     }
 
-    next();
+    return next();
   },
 };
 

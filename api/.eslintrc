@@ -1,0 +1,12 @@
+{
+  "env": {
+    "browser": false,
+    "node": true
+  },
+  "globals": {
+    "Category": false,
+    "User": false,
+    "Posting": false,
+    "sails": false
+  }
+}

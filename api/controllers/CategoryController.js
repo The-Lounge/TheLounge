@@ -1,4 +1,3 @@
-'use strict';
 /**
  * CategoryController
  *
@@ -9,19 +8,18 @@
 const mockCategories = require('../../mocks/category.json');
 
 function getMockCategory(id) {
-  const category = mockCategories.filter(function(category){
-    return category.id === id;
-  }).pop();
+  return mockCategories
+    .filter(category => category.id === id).pop();
 }
 
 module.exports = {
-  findOne(req, res, next) {
+  findOne(req, res) {
     const id = req.allParams().id;
 
     Category.getById(id).then((category) => {
-      if(!category) {
+      if (!category) {
         category = getMockCategory(id);
-        if(!category) {
+        if (!category) {
           res.notFound();
         }
       }
@@ -30,7 +28,7 @@ module.exports = {
     }).catch(res.serverError);
   },
 
-  find(req, res, next) {
+  find(req, res) {
     const includeInactive = req.allParams().inactive === '1';
     Category.getAll(includeInactive)
       .then(res.ok)

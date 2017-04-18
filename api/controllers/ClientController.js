@@ -1,4 +1,3 @@
-'use strict';
 /**
  * Created by Greg on 3/15/2017.
  */
@@ -7,7 +6,7 @@
 const HttpError = require('standard-http-error');
 
 function mapError(err, res) {
-  switch(err.code) {
+  switch (err.code) {
     case HttpError.UNAUTHORIZED:
     case HttpError.UNPROCESSABLE_ENTITY: return res.unauthorized(err);
     case HttpError.BAD_REQUEST: return res.badRequest(err);
@@ -20,15 +19,15 @@ module.exports = {
   authenticate(req, res) {
     const credentials = req.body;
 
-    if(req.session.authenticated === true) {
+    if (req.session.authenticated === true) {
       return res.badRequest('A user has already been authenticated for this session');
     }
 
-    if(!credentials.userName || !credentials.password) {
+    if (!credentials.userName || !credentials.password) {
       return res.badRequest('Login request missing userName or password field');
     }
 
-    User.authenticate(credentials)
+    return User.authenticate(credentials)
       .then((user) => {
         req.session.authenticated = true;
         req.session.user = user;
@@ -38,7 +37,7 @@ module.exports = {
   },
 
   me(req, res) {
-    if(req.session.authenticated) {
+    if (req.session.authenticated) {
       res.ok(req.session.user);
     } else {
       res.unauthorized('You are not authenticated');
@@ -51,7 +50,7 @@ module.exports = {
     res.ok();
   },
 
-  ping(req, res, next) {
+  ping(req, res) {
     res.ok('pong');
-  }
+  },
 };

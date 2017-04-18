@@ -1,4 +1,3 @@
-'use strict';
 /**
  * Category.js
  *
@@ -14,24 +13,24 @@ module.exports = {
     id: {
       type: 'integer',
       primaryKey: true,
-      unique: true
+      unique: true,
     },
 
     name: {
       type: 'string',
       size: 50,
-      defaultsTo: ''
+      defaultsTo: '',
     },
 
     description: {
       type: 'mediumtext',
-      defaultsTo: ''
+      defaultsTo: '',
     },
 
     iconUrl: {
       type: 'string',
-      defaultsTo: ''
-    }
+      defaultsTo: '',
+    },
   },
 
   /**
@@ -42,11 +41,11 @@ module.exports = {
   getAll(includeInactive = false) {
     return Q.Promise((resolve, reject) => {
       Category.find({}).exec((e, categoryList) => {
-        if(e) {
+        if (e) {
           return reject(e);
         }
 
-        resolve(categoryList
+        return resolve(categoryList
           .filter(category => category.active === true || includeInactive));
       });
     });
@@ -60,12 +59,12 @@ module.exports = {
   getById(id) {
     return Q.Promise((resolve, reject) => {
       Category.findOne(id).exec((e, category) => {
-        if(e) {
+        if (e) {
           reject(e);
         } else {
           resolve(category);
         }
-      })
+      });
     });
-  }
+  },
 };

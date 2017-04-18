@@ -1,4 +1,4 @@
-'use strict';
+
 /**
  * @author Greg Rozmarynowycz <greg@thunderlab.net>
  */
@@ -31,24 +31,24 @@ const modelSettings = {
   attributes: {
     name: {
       type: 'json',
-      required: true
+      required: true,
     },
 
     userName: {
       type: 'string',
-      required: true
+      required: true,
     },
 
     email: {
       type: 'string',
-      required: true
+      required: true,
     },
 
     status: {
       type: 'string',
       enum: ['active', 'inactive', 'under_review', 'banned'],
-      defaultsTo: 'active'
-    }
+      defaultsTo: 'active',
+    },
   },
 
   /**
@@ -65,62 +65,58 @@ const modelSettings = {
         if (error) { return reject(error); }
         if (!userResult) { return reject(invalidCredError); }
 
-        resolve(userResult);
+        return resolve(userResult);
       });
-    }).then(userResult => {
-      return Q.nfcall(
+    }).then(userResult => Q.nfcall(
         client.bind.bind(client),
         ldapParams.getDn(userResult.userName),
         credentials.password)
 
-        .then(() => {return processUser(userResult);})
+        .then(() => processUser(userResult))
         .catch((err) => {
-        if(err.message && err.message.indexOf('Invalid Credentials') > -1) {
+        if (err.message && err.message.indexOf('Invalid Credentials') > -1) {
           return Q.reject(invalidCredError);
-        } else {
-          return Q.reject(err);
         }
-        });
-    });
+
+        return Q.reject(err);
+        }));
   },
 
   getById(id) {
-    return new Promise(function(resolve, reject){
-      User.findOne(id).exec(function(error, userResult){
-        if(error) {
+    return new Promise((resolve, reject) => {
+      User.findOne(id).exec((error, userResult) => {
+        if (error) {
           return reject(error);
         }
 
-        if(!userResult){
-          userResult = users.filter(function(posting){
-            return posting.id === id;
-          }).pop();
+        if (!userResult) {
+          userResult = users.filter(posting => posting.id === id).pop();
         }
 
         if (!userResult) {
           return reject(`User with ID ${id} not found`);
         }
 
-        resolve(processUser(userResult));
+        return resolve(processUser(userResult));
       });
     });
   },
 
-  beforeValidate: function (values, cb) {
+  beforeValidate: (values, cb) => {
     if (values.name) {
       const firstName = values.name.firstName;
       const lastName = values.name.lastName;
 
-      if(!(typeof firstName === 'string' && firstName.length > 0)) {
-        return cb('Invalid first_name ' + firstName);
+      if (!(typeof firstName === 'string' && firstName.length > 0)) {
+        return cb(`Invalid first_name ${firstName}`);
       }
 
       if (!(typeof lastName === 'string' && lastName.length > 0)) {
-        return cb('Invalid last_name ' + lastName);
+        return cb(`Invalid last_name ${lastName}`);
       }
-
-      cb();
     }
+
+    return cb();
   },
 };
 

@@ -1,0 +1,25 @@
+{
+  "extends": "airbnb/base",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "no-underscore-dangle" : "off",
+    "indent": "off",
+    "no-use-before-define": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-unresolved": "off",
+    "no-bitwise": "off",
+    "object-curly-spacing": "off",
+    "no-multi-spaces": "off",
+    "no-trailing-spaces": "off",
+    "no-param-reassign": "off",
+    "global-require": "off",
+    "key-spacing": "off",
+    "max-len": ["error", 120],
+    "no-plusplus": "off",
+    "no-continue": "off",
+    "no-mixed-operators": "off",
+    "linebreak-style": "off",
+  }
+}

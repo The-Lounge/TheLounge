@@ -42,8 +42,8 @@ module.exports = (grunt) => {
         expand: true,
         cwd: '.tmp/public',
         src: ['**/*'],
-        dest: 'www'
-      }]
+        dest: 'www',
+      }],
     },
     dist: {
       files: [{

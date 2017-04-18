@@ -14,6 +14,7 @@ module.exports = (grunt) => {
       options: {},
       src: [
         'Gruntfile.js',
+        'tasks/**/*.js',
         'api/**/*.js',
       ],
     },

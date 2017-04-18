@@ -22,21 +22,21 @@ module.exports = (grunt) => {
     assets: {
 
       // Assets to watch:
-      files: ['ng/**/*', 'index.html', 'tasks/pipeline.js', '!**/node_modules/**'],
+      files: ['ng/**/*', 'index.html', '!**/node_modules/**'],
 
       // When assets are changed:
-      tasks: ['build', 'syncAssets', 'linkAssets'],
+      tasks: ['build', 'syncAssets'],
     },
     js: {
       files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-      tasks: ['newer:jshint:all', 'build', 'syncAssets'/* , 'newer:jscs:all'*/],
+      tasks: ['newer:eslint', 'build', 'syncAssets'/* , 'newer:jscs:all'*/],
       options: {
         livereload: '<%= connect.options.livereload %>',
-      }
+      },
     },
     jsTest: {
       files: ['test/ui-spec/{,*/}*.js'],
-      tasks: ['newer:jshint:test', 'newer:jscs:test', 'karma'],
+      tasks: ['newer:eslint:test', 'karma'],
     },
     compass: {
       files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -45,6 +45,7 @@ module.exports = (grunt) => {
     gruntfile: {
       files: ['Gruntfile.js'],
     },
+    // TODO get this working again...
     livereload: {
       options: {
         livereload: '<%= connect.options.livereload %>',

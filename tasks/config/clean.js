@@ -10,8 +10,7 @@
  *   https://github.com/gruntjs/grunt-contrib-clean
  *
  */
-module.exports = function(grunt) {
-
+module.exports = (grunt) => {
   grunt.config.set('clean', {
     dev: ['.tmp/public/**', '.tmp/localDiskDb.db'],
     build: ['www'],
@@ -21,11 +20,11 @@ module.exports = function(grunt) {
         src: [
           '.tmp',
           '<%= yeoman.dist %>/{,*/}*',
-          '!<%= yeoman.dist %>/.git{,*/}*'
-        ]
-      }]
+          '!<%= yeoman.dist %>/.git{,*/}*',
+        ],
+      }],
     },
-    server: '.tmp'
+    server: '.tmp',
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');

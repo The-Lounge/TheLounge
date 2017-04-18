@@ -1,19 +1,19 @@
 /**
  * Created by Greg on 4/11/2016.
  */
-module.exports = function(grunt){
+module.exports = (grunt) => {
   grunt.config.set('concurrent', {
     server: [
-      'compass:server'
+      'compass:server',
     ],
     test: [
-      'compass'
+      'compass',
     ],
     dist: [
       'compass:dist',
       'imagemin',
-      'svgmin'
-    ]
+      'svgmin',
+    ],
   });
 
   grunt.loadNpmTasks('grunt-concurrent');

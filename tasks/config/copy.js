@@ -19,8 +19,7 @@
  *   https://github.com/gruntjs/grunt-contrib-copy
  *
  */
-module.exports = function(grunt) {
-
+module.exports = (grunt) => {
   grunt.config.set('copy', {
     dev: {
       files: [{
@@ -33,19 +32,19 @@ module.exports = function(grunt) {
           'views/{,*/}*',
           'images/{,*/}*',
           'dist/{,*/}*',
-          'styles/fonts/{,*/}*.*'
+          'styles/fonts/{,*/}*.*',
         ],
-        dest: '<%= yeoman.dist %>'
+        dest: '<%= yeoman.dist %>',
+      }],
+    },
+    build: {
+      files: [{
+        expand: true,
+        cwd: '.tmp/public',
+        src: ['**/*'],
+        dest: 'www'
       }]
     },
-    // build: {
-    //   files: [{
-    //     expand: true,
-    //     cwd: '.tmp/public',
-    //     src: ['**/*'],
-    //     dest: 'www'
-    //   }]
-    // },
     dist: {
       files: [{
         expand: true,
@@ -58,21 +57,21 @@ module.exports = function(grunt) {
           '../index.html',
           'dist/{,*/}*',
           'images/{,*/}*.{webp}',
-          'styles/fonts/{,*/}*.*'
-        ]
+          'styles/fonts/{,*/}*.*',
+        ],
       }, {
         expand: true,
         cwd: '.tmp/images',
         dest: '<%= yeoman.dist %>/images',
-        src: ['generated/*']
-      }]
+        src: ['generated/*'],
+      }],
     },
     styles: {
       expand: true,
       cwd: '<%= yeoman.app %>/styles',
       dest: '.tmp/styles/',
-      src: '{,*/}*.css'
-    }
+      src: '{,*/}*.css',
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');

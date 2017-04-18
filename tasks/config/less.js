@@ -13,8 +13,7 @@
  *   https://github.com/gruntjs/grunt-contrib-less
  *
  */
-module.exports = function(grunt) {
-
+module.exports = (grunt) => {
   grunt.config.set('less', {
     dev: {
       files: [{
@@ -22,9 +21,9 @@ module.exports = function(grunt) {
         cwd: 'assets/styles/',
         src: ['importer.less'],
         dest: '.tmp/public/styles/',
-        ext: '.css'
-      }]
-    }
+        ext: '.css',
+      }],
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-less');

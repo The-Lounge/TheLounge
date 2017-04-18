@@ -1,7 +1,7 @@
 /**
  * Created by Greg on 4/11/2016.
  */
-module.exports = function(grunt) {
+module.exports = (grunt) => {
   grunt.config.set('compass', {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
@@ -16,18 +16,18 @@ module.exports = function(grunt) {
         httpFontsPath: '/styles/fonts',
         relativeAssets: false,
         assetCacheBuster: false,
-        raw: 'Sass::Script::Number.precision = 10\n'
+        raw: 'Sass::Script::Number.precision = 10\n',
       },
       dist: {
         options: {
-          generatedImagesDir: '<%= yeoman.dist %>/images/generated'
-        }
+          generatedImagesDir: '<%= yeoman.dist %>/images/generated',
+        },
       },
       server: {
         options: {
-          sourcemap: true
-        }
-      }
+          sourcemap: true,
+        },
+      },
     });
 
   grunt.loadNpmTasks('grunt-contrib-compass');

@@ -1,11 +1,10 @@
-var appConfig = {
+const appConfig = {
   app: 'ng',
-  dist: '.tmp/public'
+  dist: '.tmp/public',
 };
 
-module.exports = function(grunt){
+module.exports = (grunt) => {
   grunt.config.set('yeoman', appConfig);
-
   return appConfig;
 };
 

@@ -17,29 +17,25 @@
  *   http://sailsjs.org/documentation/anatomy/my-app/tasks/register/build-js
  *
  */
-module.exports = function(grunt) {
-
-  grunt.log.write("Running Build Task");
-
+module.exports = (grunt) => {
   grunt.registerTask('build', [
     'compileAssets',
-    'linkAssetsBuild',
-    //'clean:build',
-    //From Yeoman
-    //'clean:dist',
+    // 'clean:build',
+    // From Yeoman
+    // 'clean:dist',
     'browserify:dev',
-    //'useminPrepare',
-    //'concurrent:dist',
-    //'postcss',
-    //'ngtemplates',
-    //'concat',
-    //'ngAnnotate',
-    //'cdnify',
-    //'cssmin',
-    //'uglify',
-    //'filerev',
-    //'usemin',
-    //'htmlmin'
-    'copy:dev'
+    // 'useminPrepare',
+    // 'concurrent:dist',
+    // 'postcss',
+    // 'ngtemplates',
+    // 'concat',
+    // 'ngAnnotate',
+    // 'cdnify',
+    // 'cssmin',
+    // 'uglify',
+    // 'filerev',
+    // 'usemin',
+    // 'htmlmin'
+    'copy:dev',
   ]);
 };

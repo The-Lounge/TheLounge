@@ -9,10 +9,11 @@ const atob = require('atob');
 chai.use(require('chai-as-promised'));
 
 // include local config if it's present
-try { require('../../config/local'); } catch (e) { console.log ('no local config'); }
+try { require('../../config/local'); } catch (e) { console.log('no local config'); }
 
 const expect = chai.expect;
 const util = require('./util');
+
 const API_PATH = 'http://localhost:1337/api/';
 const endpoint = {
   CATEGORY_LIST: '/api/login',
@@ -28,7 +29,7 @@ const loginOptions = {
 
 const logoutOptions = {
   resolveWithFullResponse: true,
-  url: url.resolve(API_PATH, endpoint.LOGOUT)
+  url: url.resolve(API_PATH, endpoint.LOGOUT),
 };
 
 const testData = {
@@ -46,7 +47,7 @@ const testData = {
   invalidLogin_un: {
     userName: 'DNE',
     password: 'testPw',
-  }
+  },
 };
 
 const expected = {
@@ -58,8 +59,8 @@ const expected = {
     userName: 'gjr8050',
     id: '-3',
     email: 'gjr8050@g.rit.edu',
-    status: 'active'
-  }
+    status: 'active',
+  },
 };
 
 describe('/login', () => {

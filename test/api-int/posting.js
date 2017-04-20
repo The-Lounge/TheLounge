@@ -1,4 +1,3 @@
-'use strict';
 /**
  * @author Greg Rozmarynowycz <greg@thunderlab.net>
  */
@@ -21,8 +20,8 @@ const testData = {
     price: {
       minimum: null,
       maximum: 10,
-    }
-  }
+    },
+  },
 };
 
 const expected = {
@@ -39,7 +38,7 @@ const expected = {
       shortname: 'beauty',
       name: 'Beauty',
       active: true,
-      id: 2
+      id: 2,
     },
     seller: {
       id: '-6',
@@ -47,10 +46,10 @@ const expected = {
         firstName: 'Radha',
         lastName: 'Mendapra',
       },
-    }
+    },
   },
   postPosting: {
-    id: null, //determined in test
+    id: null, // determined in test
     title: 'This is a test posting',
     description:  'some posting description text',
     active: true,
@@ -68,10 +67,10 @@ const expected = {
       id: '-5',
       name: {
         firstName: 'Mark',
-        lastName: 'Koellmann'
+        lastName: 'Koellmann',
       },
-    }
-  }
+    },
+  },
 };
 
 describe('/posting', () => {
@@ -84,22 +83,22 @@ describe('/posting', () => {
   });
 
   it('POST /posting/', () => {
-    const posting = request.post({
+    const postingOp = request.post({
       url: `${API_PATH}posting/`,
       json: true,
       headers: {'Content-Type': 'application/json'},
-      body: testData.createPosting
-    }).then(posting => {
+      body: testData.createPosting,
+    }).then((posting) => {
       expected.postPosting.id = posting.id;
       expected.postPosting.createdAt = posting.createdAt;
       expected.postPosting.updatedAt = posting.updatedAt;
-      if(!posting.id) {
+      if (!posting.id) {
         throw new Error('posting did not return with ID');
       }
 
       return posting;
     });
 
-    return expect(posting).to.eventually.deep.equal(expected.postPosting);
+    return expect(postingOp).to.eventually.deep.equal(expected.postPosting);
   });
 });

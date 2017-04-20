@@ -23,10 +23,8 @@ module.exports = (grunt) => {
       src: ['ng/**/*.js', '!ng/js/dependencies/**/*.js', '!ng/dist/**/*.js'],
     },
     test: {
-      // options: {
-      //   configFile: 'test/.eslintrc',
-      // },
-      // src: ['test/ui-spec/{,*/}*.js'],
+      options: {},
+      src: ['test/**/*.js'],
     },
   });
 

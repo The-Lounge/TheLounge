@@ -15,8 +15,8 @@ const expect = chai.expect;
 const util = require('./util');
 const API_PATH = 'http://localhost:1337/api/';
 const endpoint = {
-  CATEGORY_LIST: '/login',
-  LOGOUT: '/logout',
+  CATEGORY_LIST: '/api/login',
+  LOGOUT: '/api/logout',
 };
 const Q = require('q');
 

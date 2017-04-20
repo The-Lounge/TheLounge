@@ -10,8 +10,8 @@ chai.use(require('chai-as-promised'));
 const expect = chai.expect;
 const API_PATH = 'http://localhost:1337/api/';
 const endpoint = {
-  CATEGORY_LIST: '/category',
-  CATEGORY_LIST_ALL: '/category?inactive=1',
+  CATEGORY_LIST: '/api/category',
+  CATEGORY_LIST_ALL: '/api/category?inactive=1',
 };
 
 const reqOptions = {

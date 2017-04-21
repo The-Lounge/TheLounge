@@ -48,11 +48,9 @@ window.angular.module('ays', [
   })
   .constant('_', require('lodash'))
   .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
-    $urlRouterProvider.otherwise('/');
     $locationProvider.hashPrefix('');
     // $locationProvider.html5Mode(true);//removes #! from urls, disables browser refresh without backend changes
     console.log("AYS is up and running...");
-    $urlRouterProvider.otherwise('/');
     // $locationProvider.html5Mode(true);//remove #! from urls
 
     $stateProvider
@@ -79,7 +77,13 @@ window.angular.module('ays', [
         url: '/home',
         controller: 'HomeController',
         templateUrl: 'views/home.html'
+      })
+      .state('otherwise', {
+        url: '/*path',
+        templateUrl: './404.html'
       });
+
+      $urlRouterProvider.otherwise('otherwise');
   });
 
 // Pull in the controllers, this should be done through modules eventually

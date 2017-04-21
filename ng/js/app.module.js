@@ -48,11 +48,12 @@ window.angular.module('ays', [
   })
   .constant('_', require('lodash'))
   .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
-    console.log('AYS is up and running...');
-
     $urlRouterProvider.otherwise('/');
     $locationProvider.hashPrefix('');
     // $locationProvider.html5Mode(true);//removes #! from urls, disables browser refresh without backend changes
+    console.log("AYS is up and running...");
+    $urlRouterProvider.otherwise('/');
+    $locationProvider.html5Mode(true);//remove #! from urls
 
     $stateProvider
       .state('posting', {
@@ -83,8 +84,8 @@ window.angular.module('ays', [
 
 // Pull in the controllers, this should be done through modules eventually
 require('./directives/header');
-require('./services/auth');
-require('./controllers/login');
+require('../services/auth')
+require('./controllers/login')
 require('./controllers/main');
 require('./controllers/posting');
 require('./controllers/categories');

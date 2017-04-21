@@ -39,11 +39,10 @@ window.angular.module('ays', [
   // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
   .run(function run(AuthService, $state) {
     AuthService.async().then(function authCallback(authorized) {
-      console.log(authorized);
       if (authorized === 401) {
-        $state.go('entry');
+        $state.go('login');
       } else {
-        $state.go('home');
+        $state.go('categories');
       }
     });
   })
@@ -53,7 +52,7 @@ window.angular.module('ays', [
 
     $urlRouterProvider.otherwise('/');
     $locationProvider.hashPrefix('');
-    // $locationProvider.html5Mode(true);//removes #! from urls.
+    // $locationProvider.html5Mode(true);//removes #! from urls, disables browser refresh without backend changes
 
     $stateProvider
       .state('posting', {
@@ -61,16 +60,16 @@ window.angular.module('ays', [
         controller: 'PostingController',
         templateUrl: 'views/posting.html',
       })
-      .state('category', {
-        url: '/category',
-        controller: 'CategoryController',
-        templateUrl: 'views/category.html',
+      .state('categories', {
+        url: '/categories',
+        controller: 'CategoriesController',
+        templateUrl: 'views/categories.html'
       })
       .state('faq', {
         url: '/faq',
         templateUrl: 'views/faq.html',
       })
-      .state('entry', {
+      .state('login', {
         url: '/',
         controller: 'LoginController',
         templateUrl: 'views/login.html',
@@ -78,14 +77,15 @@ window.angular.module('ays', [
       .state('home', {
         url: '/home',
         controller: 'HomeController',
-        templateUrl: 'views/home.html',
+        templateUrl: 'views/home.html'
       });
   });
 
 // Pull in the controllers, this should be done through modules eventually
+require('./directives/header');
 require('./services/auth');
 require('./controllers/login');
 require('./controllers/main');
 require('./controllers/posting');
-require('./controllers/category');
+require('./controllers/categories');
 

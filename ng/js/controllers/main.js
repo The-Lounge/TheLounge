@@ -16,7 +16,6 @@ require('angular').module('ays')
 
     // Service call returns the HTTP status of the /me endpoint
     AuthService.async().then(function (resp) {
-      console.log(resp);
       if (resp !== 401) {
         $scope.authenticated = true;
       } else {

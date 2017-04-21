@@ -1,7 +1,4 @@
 require('angular').module('ays')
-  .config(function ($qProvider) {
-    $qProvider.errorOnUnhandledRejections(false);
-  })
 
   .controller('LoginController', function ($sails, $scope, $state) {
     $scope.loginMessage = '';
@@ -18,7 +15,7 @@ require('angular').module('ays')
         })
         .then(function (resp) {
           if (resp.status === 200) {
-            $state.go('home');
+            $state.go('categories');
           }
         });
     };

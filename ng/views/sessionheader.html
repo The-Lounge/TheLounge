@@ -1,0 +1,14 @@
+<nav>
+	<div class="container-fluid">
+    	<div>
+	      	<a class="navbar-brand">The Lounge at RIT</a>
+    	</div>
+    	<ul class="nav navbar-nav navbar-right">
+    		<li>
+                <!--Redirect to login page in when clicking login and after clicking-->
+		      	<a ng-if="!loggedIn" ui-sref="login">Login</a>
+		      	<a ng-if="loggedIn" ng-click="logout()" ui-sref="login">Logout</a>
+    		</li>
+      	</ul>
+    </div>
+</nav>

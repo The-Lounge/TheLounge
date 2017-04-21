@@ -12,7 +12,7 @@ angular.module('ays')
 				$scope.loggedIn = false;
 				$scope.data = {};
 
-				AuthService.async().then(function authCallback(authorized) {
+				AuthService.checkAuth().then(function authCallback(authorized) {
 					if (authorized === 401) {} 
 					else {
 						$scope.data = authorized.data;

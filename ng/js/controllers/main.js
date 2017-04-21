@@ -4,7 +4,8 @@
  * @description
  * # HomeController
  * The home page of the app. Note that when this route is accessed,
- * an instance of this controller is created and instantiated.
+ * an instance of this controller is created and instantiated. This
+ * controller is binded to the 'home' state in app.module.js
  */
 require('angular').module('ays')
 

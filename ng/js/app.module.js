@@ -38,7 +38,7 @@ window.angular.module('ays', [
   ])
   // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
   .run(function run(AuthService, $state) {
-    AuthService.async().then(function authCallback(authorized) {
+    AuthService.checkAuth().then(function authCallback(authorized) {
       if (authorized === 401) {
         $state.go('login');
       } else {
@@ -53,7 +53,7 @@ window.angular.module('ays', [
     // $locationProvider.html5Mode(true);//removes #! from urls, disables browser refresh without backend changes
     console.log("AYS is up and running...");
     $urlRouterProvider.otherwise('/');
-    $locationProvider.html5Mode(true);//remove #! from urls
+    // $locationProvider.html5Mode(true);//remove #! from urls
 
     $stateProvider
       .state('posting', {
@@ -84,7 +84,7 @@ window.angular.module('ays', [
 
 // Pull in the controllers, this should be done through modules eventually
 require('./directives/header');
-require('../services/auth')
+require('./services/auth')
 require('./controllers/login')
 require('./controllers/main');
 require('./controllers/posting');

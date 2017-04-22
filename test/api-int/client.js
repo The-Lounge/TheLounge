@@ -16,16 +16,18 @@ const util = require('./util');
 
 const API_PATH = 'http://localhost:1337/api/';
 const endpoint = {
-  CATEGORY_LIST: '/api/login',
-  LOGOUT: '/api/logout',
+  LOGIN : 'login',
+  LOGOUT: 'logout',
 };
 const Q = require('q');
 
 const loginOptions = {
-  url: url.resolve(API_PATH, endpoint.CATEGORY_LIST),
+  url: url.resolve(API_PATH, endpoint.LOGIN),
   json: true,
   headers: {'Content-Type': 'application/json'},
 };
+
+console.log(loginOptions);
 
 const logoutOptions = {
   resolveWithFullResponse: true,
@@ -65,7 +67,7 @@ const expected = {
 
 describe('/login', () => {
   it('responds to a POST request', () => {
-    const loginReq = request.post(Object.assign({body: {}}, loginOptions)).then();
+    const loginReq = request.post(Object.assign({body: {}}, loginOptions));
     return expect(loginReq).to.be.rejectedWith(Error, '400');
   });
 

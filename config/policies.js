@@ -55,4 +55,10 @@ module.exports.policies = {
     find: true,
     create: ['sessionAuth'],
   },
+
+  UserController: {
+    '*': false,
+    findOne: ['sessionAuth'],
+    find: ['sessionAuth'],
+  },
 };

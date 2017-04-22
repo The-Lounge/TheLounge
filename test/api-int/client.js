@@ -5,43 +5,26 @@ require('any-promise/register/q');
 const request = require('request-promise-any');
 const url = require('url');
 const chai = require('chai');
-const atob = require('atob');
+const config = require('./sharedConfig');
 chai.use(require('chai-as-promised'));
-
-// include local config if it's present
-try { require('../../config/local'); } catch (e) { console.log('no local config'); }
 
 const expect = chai.expect;
 const util = require('./util');
 
-const API_PATH = 'http://localhost:1337/api/';
-const endpoint = {
-  LOGIN : 'login',
-  LOGOUT: 'logout',
-};
 const Q = require('q');
 
 const loginOptions = {
-  url: url.resolve(API_PATH, endpoint.LOGIN),
+  url: url.resolve(config.API_PATH, config.endpoint.LOGIN),
   json: true,
   headers: {'Content-Type': 'application/json'},
 };
 
-console.log(loginOptions);
-
 const logoutOptions = {
   resolveWithFullResponse: true,
-  url: url.resolve(API_PATH, endpoint.LOGOUT),
+  url: url.resolve(config.API_PATH, config.endpoint.LOGOUT),
 };
 
 const testData = {
-  validLogin: {
-    // These must be valid, real RIT SSO credentials
-    // To setup, put them in your config/local.js file, according to the template
-    // just so the credentials don't have to be stored in completely plain text, encode them
-    userName: atob(process.env.TEST_UID || global.TEST_UID),
-    password: atob(process.env.TEST_PWD || global.TEST_PWD),
-  },
   invalidLogin_pw: {
     userName: 'gjr8050',
     password: 'notMyPassword',
@@ -72,7 +55,7 @@ describe('/login', () => {
   });
 
   it('responds with user details (200) when provided with valid credentials', () => {
-    const loginReq = request.post(Object.assign({body: testData.validLogin}, loginOptions))
+    const loginReq = request.post(Object.assign({body: config.validLogin}, loginOptions))
       .then(util.stripMetaDates);
     return expect(loginReq).to.eventually.deep.equal(expected.user);
   });

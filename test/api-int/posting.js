@@ -4,18 +4,15 @@
 require('any-promise/register/q');
 const request = require('request-promise-any');
 const chai = require('chai');
-const atob = require('atob');
+const config = require('./sharedConfig');
 chai.use(require('chai-as-promised'));
 
 const expect = chai.expect;
 const util = require('./util');
 
 const endpoint = {
-  LOGIN : 'login',
-  LOGOUT: 'logout',
   POSTING: 'posting',
 };
-const API_PATH = 'http://localhost:1337/api/';
 let httpClient = null;
 
 const testData = {
@@ -28,13 +25,6 @@ const testData = {
       minimum: null,
       maximum: 10,
     },
-  },
-  validLogin: {
-    // These must be valid, real RIT SSO credentials
-    // To setup, put them in your config/local.js file, according to the template
-    // just so the credentials don't have to be stored in completely plain text, encode them
-    userName: atob(process.env.TEST_UID || global.TEST_UID),
-    password: atob(process.env.TEST_PWD || global.TEST_PWD),
   },
 };
 
@@ -89,13 +79,13 @@ const expected = {
 
 describe('/posting', () => {
   before(() => {
-    httpClient = new util.HttpClient({baseUrl: API_PATH});
-    return httpClient.authenticate(endpoint.LOGIN, testData.validLogin);
+    httpClient = new util.HttpClient({baseUrl: config.API_PATH});
+    return httpClient.authenticate(config.endpoint.LOGIN, config.validLogin);
   });
 
   it('GET /posting/:id', () => {
     const postingId = '-1';
-    const posting = request.get(`${API_PATH}posting/${postingId}`)
+    const posting = request.get(`${config.API_PATH}posting/${postingId}`)
       .then(JSON.parse)
       .then(util.stripMetaDates);
     return expect(posting).to.eventually.deep.equal(expected.getPosting);

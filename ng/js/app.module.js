@@ -50,7 +50,6 @@ window.angular.module('ays', [
   .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
     $locationProvider.hashPrefix('');
     // $locationProvider.html5Mode(true);//removes #! from urls, disables browser refresh without backend changes
-    console.log("AYS is up and running...");
     // $locationProvider.html5Mode(true);//remove #! from urls
 
     $stateProvider
@@ -62,7 +61,7 @@ window.angular.module('ays', [
       .state('categories', {
         url: '/categories',
         controller: 'CategoriesController',
-        templateUrl: 'views/categories.html'
+        templateUrl: 'views/categories.html',
       })
       .state('faq', {
         url: '/faq',
@@ -76,16 +75,16 @@ window.angular.module('ays', [
       .state('home', {
         url: '/home',
         controller: 'HomeController',
-        templateUrl: 'views/home.html'
-      })
+        templateUrl: 'views/home.html',
+      });
 
       $urlRouterProvider.otherwise('/');
   });
 
 // Pull in the controllers, this should be done through modules eventually
 require('./directives/header');
-require('./services/auth')
-require('./controllers/login')
+require('./services/auth');
+require('./controllers/login');
 require('./controllers/main');
 require('./controllers/posting');
 require('./controllers/categories');

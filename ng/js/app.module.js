@@ -78,12 +78,8 @@ window.angular.module('ays', [
         controller: 'HomeController',
         templateUrl: 'views/home.html'
       })
-      .state('otherwise', {
-        url: '/*path',
-        templateUrl: './404.html'
-      });
 
-      $urlRouterProvider.otherwise('otherwise');
+      $urlRouterProvider.otherwise('/');
   });
 
 // Pull in the controllers, this should be done through modules eventually

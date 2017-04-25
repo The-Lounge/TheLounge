@@ -9,7 +9,7 @@
                         ng-model="newPosting.title" 
                         type="text" 
                         class="form-control" 
-                        placeholder="Enter Post Title"
+                        placeholder="Post Title"
                         name="postTitleName"
                         id="postTitle">
                     <div ng-repeat="message in titleErrorMessages">
@@ -41,11 +41,22 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="form-group">
-                    <label for="description"><h3>Description</h3></label> 
-                    <textArea ng-model="newPosting.description" type="text" class="form-control" id="description"></textArea>
-                </div>
                 <div class="form-group">
+                    <label for="description"><h3>Description</h3></label> 
+                    <textArea 
+                        ng-model-options="{updateOn: 'blur'}"
+                        ng-model="newPosting.description" 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Describe your post here..."                    
+                        id="postDescription"
+                        rows="4">
+                    </textArea>
+                    <div ng-repeat="message in descriptionErrorMessages">
+                        <h4 style="color: red">{{message}}</h4>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
                     <label><h3>Category</h3></label>
                     <select ng-model="newPosting.category" ng-options="category as category for category in categoryOptions"></select>
                 </div> -->

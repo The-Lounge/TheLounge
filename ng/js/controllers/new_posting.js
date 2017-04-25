@@ -4,10 +4,12 @@ require('angular').module('ays')
   	$scope.categoryOptions = [];
   	$scope.titleErrorMessages = [];
   	$scope.priceErrorMessages = [];
+  	$scope.descriptionErrorMessages = [];
 
   	$scope.allInputValidated = false;
   	$scope.titleValidated = false;
   	$scope.pricesValidated = false;
+  	$scope.descriptionValidated = false;
 
   	//Populate category options based on what server has
   	$sails.get('/category')
@@ -27,8 +29,20 @@ require('angular').module('ays')
   	  console.log('form submitted!');
   	};
   	$scope.validateForm = function() {
-  		if($scope.pricesValidated && $scope.titleValidated)
+  		if($scope.pricesValidated && 
+  			 $scope.titleValidated &&
+  			 $scope.descriptionValidated)
   			$scope.allInputValidated = true;
+  	}
+
+  	$scope.validateDescription = function () {
+  		$scope.descriptionErrorMessages = [];
+  		$scope.descriptionValidated = true;
+  		var text = $scope.newPosting.description;
+  		if(text.length < 1) {
+  			$scope.descriptionValidated = false;
+  			$scope.descriptionErrorMessages.push('A description of your post is required');
+  		}
   	}
 
   	// Ensure title is between 3-60 characters and is alphanumeric.
@@ -61,38 +75,42 @@ require('angular').module('ays')
 		// Validate each price field. Gets called in 'focusableForm'
 		// directive, based on which input field was last 'blurred',
 		// or unfocused.
-		$scope.validatePrice = function () {
+		$scope.validatePrices = function () {
   		$scope.priceErrorMessages = [];
   		$scope.pricesValidated = true;
   		var lowPrice = $scope.newPosting.priceLow;
   		var highPrice = $scope.newPosting.priceHigh;
   		var fLow = parseFloat(lowPrice);
   		var fHigh = parseFloat(highPrice);
-  		var regex = /\d*\.?\d{0,2}/;
+  		var regex = /^(\$|)([1-9]\d{0,2}(\,\d{3})*|([1-9]\d*))(\.\d{2})?$/;
  
   		// If min price is empty
   		if(lowPrice == '') {
   			// If high price is also empty, mark invalid
   			if(highPrice == '') {
   				$scope.pricesValidated = false;
-  				$scope.priceErrorMessages.push('Either the minimum or maximum price (or both if posting a price range) is required');
+  				var msg = 'Either the minimum or maximum price (or both if posting a price range) is required';
+  				if($scope.priceErrorMessages.indexOf(msg) == -1)
+  					$scope.priceErrorMessages.push(msg);
   			}
   		}
   		// If low price isnt empty, but has invalid input
   		else if(!lowPrice.match(regex)) {
   			$scope.pricesValidated = false;
-  			$scope.priceErrorMessages.push('Desired minimum price is invalid')
+  			$scope.priceErrorMessages.push('Minimum price is invalid')
   		}
   		// If max price is empty along with min price (will not repeat first 'if' since its in an if/else if block)
-  		else if(highPrice == '') {
+  		if(highPrice == '') {
   			if(lowPrice == '') {
   				$scope.pricesValidated = false;
-  				$scope.priceErrorMessages.push('Either the minimum or maximum price (or both if posting a price range) is required');
+  				var msg = 'Either the minimum or maximum price (or both if posting a price range) is required';
+  				if($scope.priceErrorMessages.indexOf(msg) == -1)
+  					$scope.priceErrorMessages.push(msg);
   			}
   		}
   		else if(!highPrice.match(regex)) {
   			$scope.pricesValidated = false;
-  			$scope.priceErrorMessages.push('Desired maximum price is invalid')	
+  			$scope.priceErrorMessages.push('Maximum price is invalid')	
   		}
   		// Min is equal to or greater than max price
   		if(fLow >= fHigh) {
@@ -110,6 +128,23 @@ require('angular').module('ays')
 			link: function (scope, element, attr) {
 				var FOCUSED_CLASS = 'focused';
 				var input_elements = element.find('input');
+				var textareas = element.find('textarea');
+
+				// Check each textarea in the form, filter through each by the ID attribute,
+				// then call their respective validation functions
+				angular.forEach(textareas, function (value, key) {
+					angular.element(value)
+						.on('blur', function () {
+							// Validate this input field when the user leaves that field
+							if(value.id == 'postDescription') {
+								scope.validateDescription();
+							}
+							scope.validateForm();
+							$timeout(function () {
+								$animate.setClass(element, '', FOCUSED_CLASS);
+							}, 0);
+						});
+				});
 				
 				angular.forEach(input_elements, function (value, key) {
 					angular.element(value)
@@ -119,17 +154,18 @@ require('angular').module('ays')
 							}, 0);
 						})
 						.on('blur', function () {
-							scope.$apply();
 							// Validate title field when user leaves the input element
 							if(value.id == 'postTitle') {
 								scope.validateTitle();
 							}
 							// Validate this input field when user leaves the field
 							if(value.id == 'inputPriceLow' || value.id == 'inputPriceHigh') {
-								scope.validatePrice();
+								scope.validatePrices();
 							}
+							// After validation on all input fields, validate the entire form
 							scope.validateForm();
 							scope.$apply();
+							
 							$timeout(function () {
 								$animate.setClass(element, '', FOCUSED_CLASS);
 							}, 0);

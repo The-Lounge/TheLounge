@@ -13,6 +13,8 @@ window.boostrapjs = require('bootstrap-sass');
 window.angular = require('angular');
 window._ = require('lodash');
 require('angular-sails');
+require('angular-validator');
+require('angular-filter');
 
 // Start the sails client
 window.io = require('./dependencies/sails.io')(require('socket.io-client'));
@@ -34,6 +36,7 @@ window.angular.module('ays', [
     require('angular-sanitize'),
     require('angular-touch'),
     require('angular-ui-router'),
+    'angular.filter',
     'ngSails',
   ])
   // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
@@ -53,6 +56,11 @@ window.angular.module('ays', [
     // $locationProvider.html5Mode(true);//remove #! from urls
 
     $stateProvider
+      .state('newposting', {
+        url: '/posting/new',
+        controller: 'CreatePostingController',
+        templateUrl: 'views/createPost.html',
+      })
       .state('posting', {
         url: '/posting/:id',
         controller: 'PostingController',
@@ -82,6 +90,7 @@ window.angular.module('ays', [
   });
 
 // Pull in the controllers, this should be done through modules eventually
+require('./controllers/new_posting');
 require('./directives/header');
 require('./services/auth');
 require('./controllers/login');

@@ -1,98 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Posting</title>
-    <link rel="icon" href="../images/favicon.ico">
-    
-    <!-- Font awesome -->  
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-
-    <!-- Linked Bootstrap CSS -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-    <!-- Linked JQuery  -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-
-    <!-- Linked Bootstrap JS -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
-    <!-- Custom CSS -->
-    <link href="../styles/style.css" rel="stylesheet">
-
-</head>
-    <body>        
-   
-        <div class="container">
-        
-             <!-- Start of Nav Bar -->
-             <div class="row rowHeader">
-                <div class="navIcon col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
-                    </a>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <form name="postingForm" class="form-horizontal" novalidate focusable-form>
+                <div class="form-group">
+                    <label for="inputTitle"><h3>Title</h3></label>
+                    <input 
+                        ng-model-options="{updateOn: 'blur'}"
+                        ng-model="newPosting.title" 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Enter Post Title"
+                        name="postTitleName"
+                        id="postTitle">
+                    <div ng-repeat="message in titleErrorMessages">
+                        <h4 style="color: red">{{message}}</h4>
+                    </div>
                 </div>
-                <div class="navIcon col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    </a>
+                <div class="form-group">
+                    <label for="prices"><h3>Price Range</h3></label>
+                    <p>You may enter either a minimum or maximum price, or both. Entering only a minimum price will result in a price advertised as Starting at $X (ex. Starting at $10). Entering only a maximum price will advertise a flat rate (ex. $10). Entering both a minimum and maximum will advertise a range (ex. $5 - $10).</p>
+                    <div id="priceForm">
+                        <input 
+                            ng-model-options="{updateOn: 'blur'}"
+                            ng-model="newPosting.priceLow" 
+                            type="text" 
+                            class="form-control"
+                            placeholder="Minimum Price"
+                            name="postLowPriceName"
+                            id="inputPriceLow">
+                        <input 
+                            ng-model-options="{updateOn: 'blur'}"
+                            ng-model="newPosting.priceHigh" 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Maximum Price"
+                            name="postHighPriceName"
+                            id="inputPriceHigh">
+                        <div ng-repeat="message in priceErrorMessages">
+                            <h4 style="color: red">{{message}}</h4>
+                        </div>
+                    </div>
                 </div>
-                <div class="navIcon col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                    </a>
+                <!-- <div class="form-group">
+                    <label for="description"><h3>Description</h3></label> 
+                    <textArea ng-model="newPosting.description" type="text" class="form-control" id="description"></textArea>
                 </div>
-             </div>
-             <!-- End of Nav Bar -->
-            
-             <!-- Open Image -->
-             <div class="row">
-                <img class="postImage" src="../images/addCoverImage.png"/>
-             </div>
-             <!-- Open Image
-
-             <!-- Open Tag -->
-             <div class="row rowHeader">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <h2>Michelle Kwong</h2>  
+                <div class="form-group">
+                    <label><h3>Category</h3></label>
+                    <select ng-model="newPosting.category" ng-options="category as category for category in categoryOptions"></select>
+                </div> -->
+                <div class="text-center">
+                    <br/>
+                    <button ng-disabled="!allInputValidated" ng-click="submitForm()" type="submit" class="btn-block btn-primary">Create Post</button>
+                    <br/>
+                    <br/>
                 </div>
-             </div>
-             <!-- End Open Tag -->
-            
-             <!-- Start the form -->
-             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                 <form>
-                    <div class="form-group">
-                        <label for="inputTitle"><h3>Title</h3></label>
-                        <input type="text" class="form-control" id="inputTitle" placeholder="Enter Post Title">
-                    </div>
-                    <div class="form-group">
-                        <label for="lowPrice"><h3>Price Range</h3></label>
-                        <input type="text" class="form-control" id="inputPriceLow" placeholder="Lowest Price">
-                        <input type="text" class="form-control" id="inputHighPrice" placeholder="Highet Price">
-                    </div>
-                    <div class="form-group">
-                        <label for="description"><h3>Description</h3></label> 
-                        <textArea type="text" class="form-control" id="description"></textArea>
-                    </div>
-                    <div>
-                        <img style="width: 30%; margin: 1% 0;" src="../images/addImage.png" alt=""> 
-                    </div>
-                    <div class="text-center">
-                        <br/>
-                        <button type="submit" class="btn-block btn-primary">Save</button>
-                        <button type="submit" class="btn-block btn-default">Cancel</button>
-                        <br/>
-                        <br/>
-                    </div>
-                </form>
-                </div> 
-             </div>    
-             <!-- End of Form -->
-         </div>
-         <!-- End of Container --> 
-    </body>
-</html>
+            </form>
+        </div> 
+    </div>    
+</div>

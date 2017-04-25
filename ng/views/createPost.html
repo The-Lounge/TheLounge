@@ -4,14 +4,16 @@
             <form name="postingForm" class="form-horizontal" novalidate focusable-form>
                 <div class="form-group">
                     <label for="inputTitle"><h3>Title</h3></label>
-                    <input 
-                        ng-model-options="{updateOn: 'blur'}"
-                        ng-model="newPosting.title" 
-                        type="text" 
-                        class="form-control" 
-                        placeholder="Post Title"
-                        name="postTitleName"
-                        id="postTitle">
+                    <fieldset ng-disabled="isSubmitting">
+                        <input 
+                            ng-model-options="{updateOn: 'blur'}"
+                            ng-model="newPosting.title" 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Post Title"
+                            name="postTitleName"
+                            id="postTitle">
+                    </fieldset>
                     <div ng-repeat="message in titleErrorMessages">
                         <h4 style="color: red">{{message}}</h4>
                     </div>
@@ -19,7 +21,7 @@
                 <div class="form-group">
                     <label for="prices"><h3>Price Range</h3></label>
                     <p>You may enter either a minimum or maximum price, or both. Entering only a minimum price will result in a price advertised as Starting at $X (ex. Starting at $10). Entering only a maximum price will advertise a flat rate (ex. $10). Entering both a minimum and maximum will advertise a range (ex. $5 - $10).</p>
-                    <div id="priceForm">
+                    <fieldset ng-disabled="isSubmitting">
                         <input 
                             ng-model-options="{updateOn: 'blur'}"
                             ng-model="newPosting.priceLow" 
@@ -36,33 +38,44 @@
                             placeholder="Maximum Price"
                             name="postHighPriceName"
                             id="inputPriceHigh">
-                        <div ng-repeat="message in priceErrorMessages">
-                            <h4 style="color: red">{{message}}</h4>
-                        </div>
+                    </fieldset>
+                    <div ng-repeat="message in priceErrorMessages">
+                        <h4 style="color: red">{{message}}</h4>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="description"><h3>Description</h3></label> 
-                    <textArea 
-                        ng-model-options="{updateOn: 'blur'}"
-                        ng-model="newPosting.description" 
-                        type="text" 
-                        class="form-control" 
-                        placeholder="Describe your post here..."                    
-                        id="postDescription"
-                        rows="4">
-                    </textArea>
+                    <label for="description"><h3>Description</h3></label>
+                    <fieldset ng-disabled="isSubmitting">
+                        <textArea 
+                            ng-model-options="{updateOn: 'blur'}"
+                            ng-model="newPosting.description" 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Describe your post here..."                    
+                            id="postDescription"
+                            rows="4">
+                        </textArea>
+                    </fieldset>
                     <div ng-repeat="message in descriptionErrorMessages">
                         <h4 style="color: red">{{message}}</h4>
                     </div>
                 </div>
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label><h3>Category</h3></label>
-                    <select ng-model="newPosting.category" ng-options="category as category for category in categoryOptions"></select>
-                </div> -->
+                    <fieldset ng-disabled="isSubmitting">
+                        <select 
+                            ng-model="newPosting.category" 
+                            ng-options="category as category for category in categoryOptions"
+                            id="categorySelector">
+                        </select>
+                    </fieldset>
+                    <div ng-repeat="message in categoryErrorMessages">
+                        <h4 style="color: red">{{message}}</h4>
+                    </div>
+                </div>
                 <div class="text-center">
                     <br/>
-                    <button ng-disabled="!allInputValidated" ng-click="submitForm()" type="submit" class="btn-block btn-primary">Create Post</button>
+                    <button ng-disabled="!allInputValidated" ng-click="submitForm()" type="submit" class="btn-block">Create Posting</button>
                     <br/>
                     <br/>
                 </div>

@@ -1,15 +1,19 @@
 require('angular').module('ays')
-  .controller('CreatePostingController', function ($scope, $sails) {
+  .controller('CreatePostingController', function ($scope, $sails, $timeout) {
 
   	$scope.categoryOptions = [];
   	$scope.titleErrorMessages = [];
   	$scope.priceErrorMessages = [];
   	$scope.descriptionErrorMessages = [];
+  	$scope.categoryErrorMessages = [];
 
   	$scope.allInputValidated = false;
   	$scope.titleValidated = false;
   	$scope.pricesValidated = false;
   	$scope.descriptionValidated = false;
+  	$scope.categoryValidated = false;
+
+  	$scope.isSubmitting = false;
 
   	//Populate category options based on what server has
   	$sails.get('/category')
@@ -26,13 +30,29 @@ require('angular').module('ays')
   		category: '',
   	};
   	$scope.submitForm = function() {
+  		$scope.isSubmitting = true;
+  		// Simulating an http call, used for disabling input during submission
+  		$timeout(function () {
+  			$scope.isSubmitting = false;
+  		}, 3000)
+  		// Need to disable form when this is called
   	  console.log('form submitted!');
   	};
   	$scope.validateForm = function() {
   		if($scope.pricesValidated && 
   			 $scope.titleValidated &&
-  			 $scope.descriptionValidated)
+  			 $scope.descriptionValidated &&
+  			 $scope.categoryValidated)
   			$scope.allInputValidated = true;
+  	}
+
+  	$scope.validateCategory = function () {
+  		$scope.categoryErrorMessages = [];
+  		$scope.categoryValidated = true;
+  		if($scope.newPosting.category == '') {
+  			$scope.categoryValidated = false;
+  			$scope.categoryErrorMessages.push('You must select a category that your post belongs to');
+  		}
   	}
 
   	$scope.validateDescription = function () {
@@ -129,7 +149,21 @@ require('angular').module('ays')
 				var FOCUSED_CLASS = 'focused';
 				var input_elements = element.find('input');
 				var textareas = element.find('textarea');
+				var selects = element.find('select');
 
+				angular.forEach(selects, function (value, key) {
+					angular.element(value)
+						.on('blur', function () {
+							// Validate this input field when the user leaves that field
+							if(value.id == 'categorySelector') {
+								scope.validateCategory();
+							}
+							scope.validateForm();
+							$timeout(function () {
+								$animate.setClass(element, '', FOCUSED_CLASS);
+							}, 0);
+						});
+				});
 				// Check each textarea in the form, filter through each by the ID attribute,
 				// then call their respective validation functions
 				angular.forEach(textareas, function (value, key) {

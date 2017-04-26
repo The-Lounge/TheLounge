@@ -41,7 +41,6 @@ window.angular.module('ays', [
   ])
   // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
   .run(function run(AuthService, $state, $rootScope) {
-
     $rootScope.$on('$stateChangeStart', function () {
       AuthService.checkAuth().then(function authCallback(authorized) {
         if (authorized === 401) {
@@ -50,14 +49,12 @@ window.angular.module('ays', [
           $state.go('categories');
         }
       });
-    })
-    
+    });
   })
   .constant('_', require('lodash'))
   .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
     $locationProvider.hashPrefix('');
     // $locationProvider.html5Mode(true);//removes #! from urls, disables browser refresh without backend changes
-
     $stateProvider
       .state('newposting', {
         url: '/posting/new',

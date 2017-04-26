@@ -1,12 +1,9 @@
+/* @author Tyler Russell
+ * New Posting Controller, with local directive.
+ * 
+ */
 require('angular').module('ays')
   .controller('CreatePostingController', function (AuthService, $scope, $sails, $timeout, $state) {
-    // Check authenticity before allowing user to create a post
-    AuthService.checkAuth().then(function authCallback(authorized) {
-      if (authorized === 401) {
-        $state.go('login');
-      }
-    });
-
     $scope.categoryOptions = [];
     $scope.titleErrorMessages = [];
     $scope.priceErrorMessages = [];
@@ -102,10 +99,12 @@ require('angular').module('ays')
     $scope.validatePrices = function () {
       var lowPrice = $scope.newPosting.priceLow;
       var highPrice = $scope.newPosting.priceHigh;
-      var fLow = parseFloat(lowPrice);
-      var fHigh = parseFloat(highPrice);
-      var msg = 'Either the minimum or maximum price (or both if posting a price range) is required';
-      var regex = /^(\$|)([1-9]\d{0,2}(,\d{3})*|([1-9]\d*))(\.\d{2})?$/;
+      var fLow = parseFloat(lowPrice.replace(/,/g , ""));
+      var fHigh = parseFloat(highPrice.replace(/,/g, ""));
+      var msg1 = 'Either the minimum or maximum price (or both if posting a price range) is required';
+      var msg2 = 'Minimum price is invalid';
+      var msg3 = 'Maximum price is invalid';
+      var regex = /^([1-9]\d{0,2}(,\d{3})*|([1-9]\d*))(\.\d{2})?$/;
       $scope.priceErrorMessages = [];
       $scope.pricesValidated = true;
       // If min price is empty
@@ -113,35 +112,46 @@ require('angular').module('ays')
         // If high price is also empty, mark invalid
         if (highPrice === '') {
           $scope.pricesValidated = false;
-          if ($scope.priceErrorMessages.indexOf(msg) === -1) {
-            $scope.priceErrorMessages.push(msg);
+          if ($scope.priceErrorMessages.indexOf(msg1) === -1) {
+            $scope.priceErrorMessages.push(msg1);
           }
         }
       } else if (!lowPrice.match(regex)) { // If low price isnt empty, but has invalid input
         $scope.pricesValidated = false;
-        $scope.priceErrorMessages.push('Minimum price is invalid');
+        if(lowPrice.includes('$')) {
+          $scope.priceErrorMessages.push('Minimum price is invalid, please remove the dollar sign');
+        } else {
+          $scope.priceErrorMessages.push(msg2);
+        }
       }
       // If max price is empty along with min price (will not repeat first 'if' since its in an if/else if block)
       if (highPrice === '') {
         if (lowPrice === '') {
           $scope.pricesValidated = false;
-          if ($scope.priceErrorMessages.indexOf(msg) === -1) {
-            $scope.priceErrorMessages.push(msg);
+          if ($scope.priceErrorMessages.indexOf(msg1) === -1) {
+            $scope.priceErrorMessages.push(msg1);
           }
         }
       } else if (!highPrice.match(regex)) {
         $scope.pricesValidated = false;
-        $scope.priceErrorMessages.push('Maximum price is invalid');
+        if(highPrice.includes('$')) {
+          $scope.priceErrorMessages.push('Maximum price is invalid, please remove the dollar sign')
+        } else {
+          $scope.priceErrorMessages.push(msg3);
+        }
       }
       // Min is equal to or greater than max price
       if (fLow >= fHigh) {
         $scope.pricesValidated = false;
-        $scope.priceErrorMessages.push('Minimum price must be less than the maximum price');
+        // Don't want to include redundant error messages. If its not already saying its invalid, then include this message
+        if(!$scope.priceErrorMessages.includes(msg2) && !$scope.priceErrorMessages.includes(msg3)) {
+          $scope.priceErrorMessages.push('Minimum price must be less than the maximum price');
+        }
       }
     };
   })
 
-  // This directive is added to the form in createPost, used to execute validation
+  // This directive is added to the form in createPost.html, used to execute validation
   // during the on-blur events.
   .directive('focusableForm', function ($timeout, $animate) {
     return {

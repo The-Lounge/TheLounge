@@ -41,7 +41,7 @@ window.angular.module('ays', [
   ])
   // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
   .run(function run(AuthService, $state, $rootScope) {
-    $rootScope.$on('$stateChangeStart', function () {
+    // $rootScope.$on('$stateChangeStart', function () {
       AuthService.checkAuth().then(function authCallback(authorized) {
         if (authorized === 401) {
           $state.go('login');
@@ -49,7 +49,7 @@ window.angular.module('ays', [
           $state.go('categories');
         }
       });
-    });
+    // });
   })
   .constant('_', require('lodash'))
   .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {

@@ -40,20 +40,23 @@ window.angular.module('ays', [
     'ngSails',
   ])
   // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
-  .run(function run(AuthService, $state) {
-    AuthService.checkAuth().then(function authCallback(authorized) {
-      if (authorized === 401) {
-        $state.go('login');
-      } else {
-        $state.go('categories');
-      }
-    });
+  .run(function run(AuthService, $state, $rootScope) {
+
+    $rootScope.$on('$stateChangeStart', function () {
+      AuthService.checkAuth().then(function authCallback(authorized) {
+        if (authorized === 401) {
+          $state.go('login');
+        } else {
+          $state.go('categories');
+        }
+      });
+    })
+    
   })
   .constant('_', require('lodash'))
   .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
     $locationProvider.hashPrefix('');
     // $locationProvider.html5Mode(true);//removes #! from urls, disables browser refresh without backend changes
-    // $locationProvider.html5Mode(true);//remove #! from urls
 
     $stateProvider
       .state('newposting', {

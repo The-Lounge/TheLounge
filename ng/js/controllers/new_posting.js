@@ -1,5 +1,12 @@
 require('angular').module('ays')
-  .controller('CreatePostingController', function ($scope, $sails, $timeout) {
+  .controller('CreatePostingController', function (AuthService, $scope, $sails, $timeout) {
+
+  	// Check authenticity before allowing user to create a post
+  	AuthService.checkAuth().then(function authCallback(authorized) {
+      if (authorized === 401) {
+        $state.go('login');
+      };
+    });
 
   	$scope.categoryOptions = [];
   	$scope.titleErrorMessages = [];
@@ -34,9 +41,7 @@ require('angular').module('ays')
   		// Simulating an http call, used for disabling input during submission
   		$timeout(function () {
   			$scope.isSubmitting = false;
-  		}, 3000)
-  		// Need to disable form when this is called
-  	  console.log('form submitted!');
+  		}, 3000);
   	};
   	$scope.validateForm = function() {
   		if($scope.pricesValidated && 
@@ -44,8 +49,7 @@ require('angular').module('ays')
   			 $scope.descriptionValidated &&
   			 $scope.categoryValidated)
   			$scope.allInputValidated = true;
-  	}
-
+  	};
   	$scope.validateCategory = function () {
   		$scope.categoryErrorMessages = [];
   		$scope.categoryValidated = true;
@@ -53,7 +57,7 @@ require('angular').module('ays')
   			$scope.categoryValidated = false;
   			$scope.categoryErrorMessages.push('You must select a category that your post belongs to');
   		}
-  	}
+  	};
 
   	$scope.validateDescription = function () {
   		$scope.descriptionErrorMessages = [];
@@ -63,8 +67,7 @@ require('angular').module('ays')
   			$scope.descriptionValidated = false;
   			$scope.descriptionErrorMessages.push('A description of your post is required');
   		}
-  	}
-
+  	};
   	// Ensure title is between 3-60 characters and is alphanumeric.
   	// Add each valid error message to the messages array, not including
   	// the length checks since its always one or the other

@@ -2,6 +2,8 @@
  * Created by Greg on 4/15/2016.
  */
 
+const mapError   = require('../lib/responseUtils.js').mapError;
+
 module.exports = {
   findOne(req, res) {
     const id = req.allParams().id;
@@ -21,13 +23,12 @@ module.exports = {
 
     return Posting.create(req.body).exec((error, posting) => {
       if (error) {
-        return res.serverError(error);
+        return mapError(error, res);
       }
 
-      console.log(posting);
       return Posting.getById(posting.id)
         .then(res.created)
-        .catch(res.serverError);
+        .catch(err => mapError(err, res));
     });
   },
 };

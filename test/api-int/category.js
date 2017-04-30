@@ -5,25 +5,24 @@ require('any-promise/register/q');
 const request = require('request-promise-any');
 const url = require('url');
 const chai = require('chai');
+const config = require('./sharedConfig');
 chai.use(require('chai-as-promised'));
 
+
 const expect = chai.expect;
-const API_PATH = 'http://localhost:1337/api/';
 const endpoint = {
-  CATEGORY_LIST: '/category',
-  CATEGORY_LIST_ALL: '/category?inactive=1',
+  LOGIN            : 'category',
+  CATEGORY_LIST_ALL: 'category?inactive=1',
 };
 
 const reqOptions = {
-  url: url.resolve(API_PATH, endpoint.CATEGORY_LIST),
+  url: url.resolve(config.API_PATH, endpoint.LOGIN),
   json: true,
-  headers: {'Content-Type': 'application/json'},
 };
 
 const reqOptionsAll = {
-  url: url.resolve(API_PATH, endpoint.CATEGORY_LIST_ALL),
+  url: url.resolve(config.API_PATH, endpoint.CATEGORY_LIST_ALL),
   json: true,
-  headers: {'Content-Type': 'application/json'},
 };
 
 describe('/category', () => {

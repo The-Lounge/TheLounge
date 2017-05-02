@@ -35,7 +35,7 @@ function processPosting(postingData) {
 function isValidPriceBlock(price) {
   return price instanceof Object &&
     (_.isNumber(price.minimum) || _.isNumber(price.maximum)) &&
-    (price.maximum >= price.minimum);
+    (price.maximum >= price.minimum || price.maximum === null);
 }
 
 const modelSettings = {

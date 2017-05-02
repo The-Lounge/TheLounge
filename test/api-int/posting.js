@@ -26,6 +26,16 @@ const testData = {
       maximum: 10,
     },
   },
+  badPriceBlock: {
+    sellerId: '-5',
+    title: 'This has a bad price block',
+    description: 'some posting description text, bad price block',
+    categoryId: 3,
+    price: {
+      minimum: 15,
+      maximum: 10,
+    },
+  },
 };
 
 const expected = {
@@ -91,19 +101,28 @@ describe('/posting', () => {
     return expect(posting).to.eventually.deep.equal(expected.getPosting);
   });
 
-  it('POST /posting/', () => {
-    const postingOp = httpClient.post(endpoint.POSTING, testData.createPosting)
-      .then((posting) => {
-      expected.postPosting.id = posting.id;
-      expected.postPosting.createdAt = posting.createdAt;
-      expected.postPosting.updatedAt = posting.updatedAt;
-      if (!posting.id) {
-        throw new Error('posting did not return with ID');
-      }
-
-      return posting;
+  describe('POST /posting/', () => {
+    it('it responds with 400 Bad Request provided with invalid fields', () => {
+      const postingOp = httpClient.post(endpoint.POSTING, testData.badPriceBlock);
+      return expect(postingOp).to.be.rejected
+        .and.to.eventually.be.instanceof(Error)
+        .and.to.have.property('statusCode', 400);
     });
 
-    return expect(postingOp).to.eventually.deep.equal(expected.postPosting);
+    it('responds with the created posting on success', () => {
+      const postingOp = httpClient.post(endpoint.POSTING, testData.createPosting)
+        .then((posting) => {
+          expected.postPosting.id = posting.id;
+          expected.postPosting.createdAt = posting.createdAt;
+          expected.postPosting.updatedAt = posting.updatedAt;
+          if (!posting.id) {
+            throw new Error('posting did not return with ID');
+          }
+
+          return posting;
+        });
+
+      return expect(postingOp).to.eventually.deep.equal(expected.postPosting);
+    });
   });
 });

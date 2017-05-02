@@ -4,6 +4,7 @@
 const Q = require('q');
 const modelUtil = require('../lib/modelUtils');
 const _ = require('lodash');
+const HttpError = require('standard-http-error');
 
 /**
  * Resolves entities on a posting response and removes extra fields
@@ -34,7 +35,7 @@ function processPosting(postingData) {
 function isValidPriceBlock(price) {
   return price instanceof Object &&
     (_.isNumber(price.minimum) || _.isNumber(price.maximum)) &&
-    (price.maximum >= price.minimum);
+    (price.maximum >= price.minimum || price.maximum === null);
 }
 
 const modelSettings = {
@@ -113,7 +114,15 @@ const modelSettings = {
     postingData.category = parseInt(postingData.categoryId, 10);
 
     if (!isValidPriceBlock(postingData.price)) {
-      return next(new Error('Invalid posting parameters, "price" block must be defined, with minimum and/or maximum'));
+      // return next({
+      //   code: 'E_UNIQUE',
+      //   model: 'Posting',
+      //   invalidAttributes: {price: [{
+      //     message: 'Invalid posting parameters, "price" block must be defined, with minimum and/or maximum',
+      //   }]},
+      //   status: 400});
+      return next(new HttpError(400,
+        'Invalid posting parameters, "price" block must be defined, with minimum and/or maximum'));
     }
 
     return next();

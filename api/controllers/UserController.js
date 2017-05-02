@@ -17,7 +17,7 @@ module.exports = {
 
   find(req, res, next) {
     try {
-      console.log('retrieve user');
+      sails.log('retrieve user');
       res.set('Content-Type', 'application/json');
       res.ok([]);
     } catch (e) {

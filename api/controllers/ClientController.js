@@ -2,18 +2,7 @@
  * Created by Greg on 3/15/2017.
  */
 
-/** @type HttpError */
-const HttpError = require('standard-http-error');
-
-function mapError(err, res) {
-  switch (err.code) {
-    case HttpError.UNAUTHORIZED:
-    case HttpError.UNPROCESSABLE_ENTITY: return res.unauthorized(err);
-    case HttpError.BAD_REQUEST: return res.badRequest(err);
-    case HttpError.NOT_FOUND: return res.notFound(err);
-    default: return res.serverError(err);
-  }
-}
+const mapError = require('../lib/responseUtils.js').mapError;
 
 module.exports = {
   authenticate(req, res) {

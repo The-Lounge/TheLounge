@@ -9,7 +9,6 @@ chai.use(require('chai-as-promised'));
 
 const expect = chai.expect;
 const util = require('./util');
-const nodeUtil = require('util');
 
 const endpoint = {
   POSTING: 'posting',
@@ -126,6 +125,4 @@ describe('/posting', () => {
       return expect(postingOp).to.eventually.deep.equal(expected.postPosting);
     });
   });
-
-
 });

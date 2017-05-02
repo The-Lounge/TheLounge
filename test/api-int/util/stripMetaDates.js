@@ -1,11 +1,10 @@
-'use strict'
 /**
  * @author Greg Rozmarynowycz <greg@thunderlab.net>
  */
 const chai = require('chai');
 
 function stripMetaDates(response, assertExist) {
-  if(assertExist) {
+  if (assertExist) {
     chai.expect(response).to.have.keys(['createdAt', 'updatedAt']);
   }
 

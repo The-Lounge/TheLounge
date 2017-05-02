@@ -90,6 +90,7 @@ window.angular.module('ays', [
   });
 
 // Pull in the controllers, this should be done through modules eventually
+require('./services/user');
 require('./controllers/new_posting');
 require('./directives/header');
 require('./services/auth');

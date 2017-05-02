@@ -1,3 +1,4 @@
+<a ui-sref='categories'>Categories</a>
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -24,7 +25,7 @@
                     <fieldset ng-disabled="isSubmitting">
                         <input 
                             ng-model-options="{updateOn: 'blur'}"
-                            ng-model="newPosting.priceLow" 
+                            ng-model="newPosting.price.minimum" 
                             type="text" 
                             class="form-control"
                             placeholder="Minimum Price"
@@ -32,7 +33,7 @@
                             id="inputPriceLow">
                         <input 
                             ng-model-options="{updateOn: 'blur'}"
-                            ng-model="newPosting.priceHigh" 
+                            ng-model="newPosting.price.maximum" 
                             type="text" 
                             class="form-control" 
                             placeholder="Maximum Price"
@@ -64,7 +65,7 @@
                     <label><h3>Category</h3></label>
                     <fieldset ng-disabled="isSubmitting">
                         <select 
-                            ng-model="newPosting.category" 
+                            ng-model="categoryDescription" 
                             ng-options="category as category for category in categoryOptions"
                             id="categorySelector">
                         </select>

@@ -13,11 +13,9 @@ const upInterval = setInterval(() => {
     console.log('start test suite');
     clearInterval(upInterval);
     run();
-  }).catch((e) => console.log('waiting: ' + (e || e.message)));
+  }).catch(e => console.log(`waiting: ${(e || e.message)}`));
 
-  if(elpased > timeout) {
+  if (elpased > timeout) {
     throw new Error('Timed out waiting for Sails to launch');
   }
 }, interval);
-
-

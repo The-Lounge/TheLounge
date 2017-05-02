@@ -1,16 +1,19 @@
-'use strict';
 /**
  * @author Greg Rozmarynowycz <greg@thunderlab.net>
  */
 require('any-promise/register/q');
 const request = require('request-promise-any');
 const chai = require('chai');
+const config = require('./sharedConfig');
 chai.use(require('chai-as-promised'));
 
 const expect = chai.expect;
 const util = require('./util');
 
-const API_PATH = 'http://localhost:1337/api/';
+const endpoint = {
+  POSTING: 'posting',
+};
+let httpClient = null;
 
 const testData = {
   createPosting: {
@@ -21,8 +24,8 @@ const testData = {
     price: {
       minimum: null,
       maximum: 10,
-    }
-  }
+    },
+  },
 };
 
 const expected = {
@@ -39,7 +42,7 @@ const expected = {
       shortname: 'beauty',
       name: 'Beauty',
       active: true,
-      id: 2
+      id: 2,
     },
     seller: {
       id: '-6',
@@ -47,10 +50,10 @@ const expected = {
         firstName: 'Radha',
         lastName: 'Mendapra',
       },
-    }
+    },
   },
   postPosting: {
-    id: null, //determined in test
+    id: null, // determined in test
     title: 'This is a test posting',
     description:  'some posting description text',
     active: true,
@@ -68,38 +71,39 @@ const expected = {
       id: '-5',
       name: {
         firstName: 'Mark',
-        lastName: 'Koellmann'
+        lastName: 'Koellmann',
       },
-    }
-  }
+    },
+  },
 };
 
 describe('/posting', () => {
+  before(() => {
+    httpClient = new util.HttpClient({baseUrl: config.API_PATH});
+    return httpClient.authenticate(config.endpoint.LOGIN, config.validLogin);
+  });
+
   it('GET /posting/:id', () => {
     const postingId = '-1';
-    const posting = request.get(`${API_PATH}posting/${postingId}`)
+    const posting = request.get(`${config.API_PATH}posting/${postingId}`)
       .then(JSON.parse)
       .then(util.stripMetaDates);
     return expect(posting).to.eventually.deep.equal(expected.getPosting);
   });
 
   it('POST /posting/', () => {
-    const posting = request.post({
-      url: `${API_PATH}posting/`,
-      json: true,
-      headers: {'Content-Type': 'application/json'},
-      body: testData.createPosting
-    }).then(posting => {
+    const postingOp = httpClient.post(endpoint.POSTING, testData.createPosting)
+      .then((posting) => {
       expected.postPosting.id = posting.id;
       expected.postPosting.createdAt = posting.createdAt;
       expected.postPosting.updatedAt = posting.updatedAt;
-      if(!posting.id) {
+      if (!posting.id) {
         throw new Error('posting did not return with ID');
       }
 
       return posting;
     });
 
-    return expect(posting).to.eventually.deep.equal(expected.postPosting);
+    return expect(postingOp).to.eventually.deep.equal(expected.postPosting);
   });
 });

@@ -45,11 +45,8 @@ module.exports.routes = {
   ***************************************************************************/
 
   // Client Controller
-  'POST /login': 'ClientController.authenticate',
-  'GET /logout': 'ClientController.logout',
-  'GET /ping': 'ClientController.ping',
-  'GET /me': 'ClientController.me',
-
-  // Category
-  'GET /category': 'CategoryController.find',
+  'POST /api/login': 'ClientController.authenticate',
+  'GET /api/logout': 'ClientController.logout',
+  'GET /api/ping': 'ClientController.ping',
+  'GET /api/me': 'ClientController.me',
   };

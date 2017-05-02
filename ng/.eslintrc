@@ -15,7 +15,8 @@
     "func-names": "off",
     "prefer-template": "off",
     "no-var": "off",
-    "object-shorthand": "off"
+    "object-shorthand": "off",
+    "vars-on-top": "off"
   },
   "globals": {
 

@@ -40,7 +40,7 @@ window.angular.module('ays', [
     'ngSails',
   ])
   // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
-  .run(function run(AuthService, $state, $rootScope) {
+  .run(function run(AuthService, $state) {
     AuthService.checkAuth().then(function authCallback(authorized) {
       if (authorized === 401) {
         $state.go('login');

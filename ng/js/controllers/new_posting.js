@@ -57,7 +57,7 @@ require('angular').module('ays')
         tags: '',
         skills: '',
         active: false,
-      }
+      };
     }
 
     // Submit the form. Only gets called after validation occurs.
@@ -70,15 +70,13 @@ require('angular').module('ays')
       
       if (isNaN($scope.newPosting.price.minimum)) {
         $scope.newPosting.price.minimum = null;
-      }
-      else if (isNaN($scope.newPosting.price.maximum)) {
+      } else if (isNaN($scope.newPosting.price.maximum)) {
         $scope.newPosting.price.maximum = null;
       }
-      //Copy over the input data to a new object, then reset the scope variable
+      // Copy over the input data to a new object, then reset the scope variable
       var actual = angular.copy($scope.newPosting);
       $scope.newPosting = getDisplayObject();
       $scope.responseID = null;
-      var response = {};
       $sails.post('/api/posting', actual)
         .success(function (resp) {
           $state.go('posting', {id: resp.id});
@@ -88,7 +86,7 @@ require('angular').module('ays')
         })
         .then(function () {
           $scope.isSubmitting = false;
-        })
+        });
     };
     $scope.validateForm = function () {
       if ($scope.pricesValidated && 
@@ -148,8 +146,8 @@ require('angular').module('ays')
     $scope.validatePrices = function () {
       var lowPrice = $scope.newPosting.price.minimum;
       var highPrice = $scope.newPosting.price.maximum;
-      var fLow = parseFloat(lowPrice.replace(/,/g , ""));
-      var fHigh = parseFloat(highPrice.replace(/,/g, ""));
+      var fLow = parseFloat(lowPrice.replace(/,/g, ''));
+      var fHigh = parseFloat(highPrice.replace(/,/g, ''));
       var msg1 = 'Either the minimum or maximum price (or both if posting a price range) is required';
       var msg2 = 'Minimum price is invalid';
       var msg3 = 'Maximum price is invalid';
@@ -183,7 +181,7 @@ require('angular').module('ays')
         }
       } else if (!highPrice.match(regex)) {
         $scope.pricesValidated = false;
-        if(highPrice.includes('$')) {
+        if (highPrice.includes('$')) {
           $scope.priceErrorMessages.push('Do not include a dollar sign in maximum price');
         } else {
           $scope.priceErrorMessages.push(msg3);
@@ -192,8 +190,9 @@ require('angular').module('ays')
       // Min is equal to or greater than max price
       if (fLow >= fHigh) {
         $scope.pricesValidated = false;
-        // Don't want to include redundant error messages. If its not already saying its invalid, then include this message
-        if(!$scope.priceErrorMessages.includes(msg2) && !$scope.priceErrorMessages.includes(msg3)) {
+        // Don't want to include redundant error messages. 
+        // If its not already saying its invalid, then include this message
+        if (!$scope.priceErrorMessages.includes(msg2) && !$scope.priceErrorMessages.includes(msg3)) {
           $scope.priceErrorMessages.push('Minimum price must be less than the maximum price');
         }
       }
@@ -203,68 +202,69 @@ require('angular').module('ays')
   // This directive is added to the form in createPost.html, used to execute validation
   // during the on-blur events.
   .directive('focusableForm', function ($timeout, $animate) {
-		return {
-			restrict: 'A',
-			link: function (scope, element, attr) {
-				var FOCUSED_CLASS = 'focused';
-				var input_elements = element.find('input');
-				var textareas = element.find('textarea');
-				var selects = element.find('select');
+    return {
+      restrict: 'A',
+      link: function (scope, element) {
+        var FOCUSED_CLASS = 'focused';
+        var inputElements = element.find('input');
+        var textareas = element.find('textarea');
+        var selects = element.find('select');
 
-				angular.forEach(selects, function (value, key) {
-					angular.element(value)
-						.on('blur', function () {
-							// Validate this input field when the user leaves that field
-							if(value.id == 'categorySelector') {
-								scope.validateCategory();
-							}
-							scope.validateForm();
-							$timeout(function () {
-								$animate.setClass(element, '', FOCUSED_CLASS);
-							}, 0);
-						});
-				});
-				// Check each textarea in the form, filter through each by the ID attribute,
-				// then call their respective validation functions
-				angular.forEach(textareas, function (value, key) {
-					angular.element(value)
-						.on('blur', function () {
-							// Validate this input field when the user leaves that field
-							if(value.id == 'postDescription') {
-								scope.validateDescription();
-							}
-							scope.validateForm();
-							$timeout(function () {
-								$animate.setClass(element, '', FOCUSED_CLASS);
-							}, 0);
-						});
-				});
-				
-				angular.forEach(input_elements, function (value, key) {
-					angular.element(value)
-						.on('focus', function () {
-							$timeout(function () {
-								$animate.setClass(element, FOCUSED_CLASS, '');
-							}, 0);
-						})
-						.on('blur', function () {
-							// Validate title field when user leaves the input element
-							if(value.id == 'postTitle') {
-								scope.validateTitle();
-							}
-							// Validate this input field when user leaves the field
-							if(value.id == 'inputPriceLow' || value.id == 'inputPriceHigh') {
-								scope.validatePrices();
-							}
-							// After validation on all input fields, validate the entire form
-							scope.validateForm();
-							scope.$apply();
-							
-							$timeout(function () {
-								$animate.setClass(element, '', FOCUSED_CLASS);
-							}, 0);
-						});
-				});
-			}
-		};
+        angular.forEach(selects, function (value) {
+          angular.element(value)
+            .on('blur', function () {
+              // Validate this input field when the user leaves that field
+              if (value.id === 'categorySelector') {
+                scope.validateCategory();
+              }
+              scope.validateForm();
+              $timeout(function () {
+                $animate.setClass(element, '', FOCUSED_CLASS);
+              }, 0);
+            });
+        });
+        // Check each textarea in the form, filter through each by the ID attribute,
+        // then call their respective validation functions
+        angular.forEach(textareas, function (value) {
+          angular.element(value)
+            .on('blur', function () {
+              // Validate this input field when the user leaves that field
+              if (value.id === 'postDescription') {
+                scope.validateDescription();
+              }
+              scope.validateForm();
+              $timeout(function () {
+                $animate.setClass(element, '', FOCUSED_CLASS);
+              }, 0);
+            });
+        });
+        
+        angular.forEach(inputElements, function (value) {
+          angular.element(value)
+            .on('focus', function () {
+              $timeout(function () {
+                $animate.setClass(element, FOCUSED_CLASS, '');
+              }, 0);
+            })
+            .on('blur', function () {
+              // Validate title field when user leaves the input element
+              if (value.id === 'postTitle') {
+                scope.validateTitle();
+              }
+              // Validate this input field when user leaves the field
+              if (value.id === 'inputPriceLow' || value.id === 'inputPriceHigh') {
+                scope.validatePrices();
+              }
+              // After validation on all input fields, validate the entire form
+              scope.validateForm();
+              scope.$apply();
+              
+              $timeout(function () {
+                $animate.setClass(element, '', FOCUSED_CLASS);
+              }, 0);
+            });
+        });
+      },
+    };
   });
+

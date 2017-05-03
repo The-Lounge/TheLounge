@@ -11,8 +11,8 @@ require('angular').module('ays')
     $scope.authenticate = function () {
       $sails.post('/api/login', $scope.credentials)
         .success(function (resp, data) {
-          //successful
-          if(data) {
+          // successful
+          if (data) {
             UserService.isLogged = true;
             UserService.data = data;
             $state.go('categories');
@@ -22,7 +22,7 @@ require('angular').module('ays')
           }
         })
         .error(function (status) {
-          if(status === AUTH_TWICE) {
+          if (status === AUTH_TWICE) {
             UserService.isLogged = true;
             $state.go('categories');
           } else {
@@ -30,6 +30,6 @@ require('angular').module('ays')
             UserService.username = '';
             $scope.loginMessage = 'Invalid username or password';
           }
-        })
+        });
     };
 });

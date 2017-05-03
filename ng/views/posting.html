@@ -1,8 +1,4 @@
-<nav class="row">
-	<span class="glyphicon glyphicon-th-large col-lg-4" aria-hidden="true"></span>
-	<span class="glyphicon glyphicon-search col-lg-4" aria-hidden="true"></span>
-	<span class="glyphicon glyphicon-home col-lg-4" aria-hidden="true"></span>
-</nav>
+<sessionheader></sessionheader>
 
 <div class="posting">
 
@@ -12,7 +8,7 @@
 			<div class="row">
 				<div class="headerImage col-xs-12 col-sm-12 col-md-12 col-lg-12"></div>
 
-				<div class="owner col-xs-12 col-sm-12 col-md-12 col-lg-12">{{posting.seller.name.firstName}} {{posting.seller.name.lastName}}</div>
+				<div class="owner col-xs-12 col-sm-12 col-md-12 col-lg-12">{{userFN}} {{userLN}}</div>
 			</div>
 
 			<div class="row">
@@ -30,7 +26,9 @@
 					<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 				</div>
 
-				<div class="price col-xs-12 col-sm-12 col-md-12 col-lg-12">$5-$10</div>
+				<div ng-if="posting.price.minimum && posting.price.maximum" class="price col-xs-12 col-sm-12 col-md-12 col-lg-12">${{posting.price.minimum}}-${{posting.price.maximum}}</div>
+				<div ng-if="!posting.price.minimum" class="price col-xs-12 col-sm-12 col-md-12 col-lg-12">${{posting.price.maximum}}</div>
+				<div ng-if="!posting.price.maximum" class="price col-xs-12 col-sm-12 col-md-12 col-lg-12">${{posting.price.minimum}}</div>
 
 				<div class="description col-xs-12 col-sm-12 col-md-12 col-lg-12">{{posting.description}}</div>
 

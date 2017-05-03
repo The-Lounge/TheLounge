@@ -3,7 +3,7 @@ require('angular').module('ays')
     var AuthService = {
       checkAuth: function () {
         // $http/$sails returns a promise, which has a then function, which also returns a promise
-        var promise = $sails.get('/me')
+        var promise = $sails.get('/api/me')
           .then(function (response) {
             return response;
           });

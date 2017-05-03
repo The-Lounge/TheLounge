@@ -1,9 +1,16 @@
+<!--This contains other links to home and newposting for ease of development only -->
 <nav>
 	<div class="container-fluid">
     	<div>
 	      	<label class="navbar-brand">The Lounge at RIT</label>
     	</div>
     	<ul class="nav navbar-nav navbar-right">
+            <li>
+                <a ui-sref='newposting'>Create Post</a>
+            </li>
+            <li>
+                <a ui-sref='home'>Home Page</a>
+            </li>
     		<li>
                 <!--Redirect to login page in when clicking login and after clicking-->
 		      	<a ng-if="!loggedIn" ui-sref="login">Login</a>

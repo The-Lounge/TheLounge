@@ -20,7 +20,8 @@ require('angular').module('ays')
         });
 
         $scope.logout = function () {
-          $sails.get('/logout')
+          $sails.get('/api/logout')
+            .success(function () {})
             .error(function (error) {
               console.log('Error calling /logout endpoint:\n' + error);
             })

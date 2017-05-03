@@ -1,5 +1,5 @@
 require('angular').module('ays')
-  .controller('CreatePostingController', function (AuthService, $scope, $sails, $timeout, $state) {
+  .controller('CreatePostingController', function ($scope, $sails, $timeout, $state) {
     $scope.categoryOptions = [];
     $scope.categoryDescription = '';
     $scope.titleErrorMessages = [];
@@ -40,6 +40,26 @@ require('angular').module('ays')
       active: false,
     };
 
+    // Simple helper function that resets the newposting object to default values.
+    function getDisplayObject() {
+      return {
+        sellerID: '',
+        id: '',
+        title: '',
+        categoryID: '',
+        image: null,
+        description: '',
+        price: {
+          minimum: '',
+          maximum: '',
+        },
+        date: '',
+        tags: '',
+        skills: '',
+        active: false,
+      }
+    }
+
     // Submit the form. Only gets called after validation occurs.
     $scope.submitForm = function () {
       $scope.newPosting.categoryID = $scope.categoryOptions.indexOf($scope.categoryDescription);
@@ -54,22 +74,21 @@ require('angular').module('ays')
       else if (isNaN($scope.newPosting.price.maximum)) {
         $scope.newPosting.price.maximum = null;
       }
+      //Copy over the input data to a new object, then reset the scope variable
+      var actual = angular.copy($scope.newPosting);
+      $scope.newPosting = getDisplayObject();
+      $scope.responseID = null;
       var response = {};
-      console.log($scope.newPosting);
-      $sails.post('/api/posting', $scope.newPosting)
+      $sails.post('/api/posting', actual)
         .success(function (resp) {
-          console.log('success!')
-          console.log(resp);
-          response = resp;
+          $state.go('posting', {id: resp.id});
         })
         .error(function (error) {
           console.log(error);
         })
-        .then(function() {
-          // console.log('asdfasdfasdf');
+        .then(function () {
+          $scope.isSubmitting = false;
         })
-      $scope.isSubmitting = false;
-      // $state.go('posting/', {id: data.id});
     };
     $scope.validateForm = function () {
       if ($scope.pricesValidated && 
@@ -181,7 +200,7 @@ require('angular').module('ays')
     };
   })
 
-  // This directive is added to the form in createPost, used to execute validation
+  // This directive is added to the form in createPost.html, used to execute validation
   // during the on-blur events.
   .directive('focusableForm', function ($timeout, $animate) {
 		return {

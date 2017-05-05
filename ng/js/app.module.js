@@ -26,7 +26,7 @@ window.io = require('./dependencies/sails.io')(require('socket.io-client'));
  * Main module of the application.
  */
 
-window.angular.module('ays', [
+require('angular').module('ays', [
     require('angular-animate'),
     require('angular-cookies'),
     require('angular-resource'),
@@ -48,39 +48,45 @@ window.angular.module('ays', [
     });
   })
   .constant('_', require('lodash'))
-  .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
-    console.log('AYS is up and running...');
+  .config([
+    '$urlRouterProvider',
+    '$stateProvider',
+    '$locationProvider',
+    config]);
 
-    $urlRouterProvider.otherwise('/');
-    $locationProvider.hashPrefix('');
-    // $locationProvider.html5Mode(true);//removes #! from urls.
+function config($urlRouterProvider, $stateProvider, $locationProvider) {
+  console.log('AYS is up and running...');
 
-    $stateProvider
-      .state('posting', {
-        url: '/posting/:id',
-        controller: 'PostingController',
-        templateUrl: 'views/posting.html',
-      })
-      .state('category', {
-        url: '/category',
-        controller: 'CategoryController',
-        templateUrl: 'views/category.html',
-      })
-      .state('faq', {
-        url: '/faq',
-        templateUrl: 'views/faq.html',
-      })
-      .state('entry', {
-        url: '/',
-        controller: 'LoginController',
-        templateUrl: 'views/login.html',
-      })
-      .state('home', {
-        url: '/home',
-        controller: 'HomeController',
-        templateUrl: 'views/home.html',
-      });
-  });
+  $urlRouterProvider.otherwise('/');
+  $locationProvider.hashPrefix('');
+  // $locationProvider.html5Mode(true);//removes #! from urls.
+
+  $stateProvider
+    .state('posting', {
+      url: '/posting/:id',
+      controller: 'PostingController',
+      templateUrl: 'views/posting.html',
+    })
+    .state('category', {
+      url: '/category',
+      controller: 'CategoryController',
+      templateUrl: 'views/category.html',
+    })
+    .state('faq', {
+      url: '/faq',
+      templateUrl: 'views/faq.html',
+    })
+    .state('entry', {
+      url: '/',
+      controller: 'LoginController',
+      templateUrl: 'views/login.html',
+    })
+    .state('home', {
+      url: '/home',
+      controller: 'HomeController',
+      templateUrl: 'views/home.html',
+    });
+}
 
 // Pull in the controllers, this should be done through modules eventually
 require('./services/auth');

@@ -5,7 +5,11 @@ module.exports = (grunt) => {
   grunt.config.set('wait', {
     build: {
       options: {
-        delay: 12000,
+        delay: 0,
+        after() {
+          const dirTree = require('nodetree');
+          dirTree('.tmp');
+        },
       },
     },
   });

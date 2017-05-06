@@ -3,10 +3,10 @@
  */
 module.exports = (grunt) => {
   grunt.registerTask('build', [
-    'compileAssets',
     'clean:build',
-    // From Yeoman
     'clean:dist',
+    'less:dev',
+    // From Yeoman
     'browserify:dev',
     // 'useminPrepare',
     // 'concurrent:dist',

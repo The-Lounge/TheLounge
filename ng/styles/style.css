@@ -142,7 +142,7 @@ body {
     }
 
     .top-nav-collapse {
-        padding: 20;
+        padding: 20px;
     }
 }
 
@@ -297,7 +297,7 @@ a:focus{
 	outline: none;
 	text-decoration: none;
 }
-h1,h2,h3,{
+h1,h2,h3 {
 	font-family: 'Raleway', sans-serif;
 }
 h2 {
@@ -840,7 +840,7 @@ img{
 	  width: 50%;
 	}
 	#about {
-	  padding: 20 0 50px;
+	  padding: 20px 0 50px;
 	}
 	.about-left {
 	  width: 90%;

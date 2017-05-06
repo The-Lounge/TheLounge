@@ -12,6 +12,7 @@
  */
 module.exports = (grunt) => {
   grunt.config.set('clean', {
+    diskDb: ['.tmp/localDiskDb.db'],
     dev: ['.tmp/public/**', '.tmp/localDiskDb.db'],
     build: ['www'],
     dist: {

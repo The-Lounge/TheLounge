@@ -21,6 +21,5 @@ module.exports = (grunt) => {
     // 'usemin',
     // 'htmlmin'
     'copy:dev',
-    'wait:build',
   ]);
 };

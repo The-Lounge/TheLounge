@@ -77,12 +77,12 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
       templateUrl: 'views/faq.html',
     })
     .state('entry', {
-      url: '/',
+      url: '/login',
       controller: 'LoginController',
       templateUrl: 'views/login.html',
     })
     .state('home', {
-      url: '/home',
+      url: '/',
       controller: 'HomeController',
       templateUrl: 'views/home.html',
     });

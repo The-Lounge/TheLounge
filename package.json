@@ -81,6 +81,7 @@
     "grunt-newer": "^1.1.2",
     "grunt-postcss": "^0.8.0",
     "grunt-run": "^0.6.0",
+    "grunt-wait": "^0.1.0",
     "grunt-wiredep": "^3.0.0",
     "jquery": "^2.2.4",
     "jshint-stylish": "^2.1.0",

@@ -8,7 +8,7 @@ function applyMockId(settings) {
       type: 'string',
       primaryKey: true,
       unique: true,
-      defaultsTo: () => String.fromCharCode(~~(Math.random() * 100)) + ~~(Math.random() * 1000) };
+      defaultsTo: () => Math.random().toString(36).slice(2)};
   }
 }
 

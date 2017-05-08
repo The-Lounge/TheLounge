@@ -59,11 +59,14 @@ const modelSettings = {
     seller: {
       model: 'User',
       columnName: 'sellerId',
+      required: true,
     },
 
     category: {
       model: 'Category',
       columnName: 'categoryId',
+      required: true,
+      numeric: true,
     },
 
     // datePosted: {
@@ -75,10 +78,6 @@ const modelSettings = {
     //   type: 'array',
     //   defaultsTo: []
     // },
-
-    // user: {
-    //   model: 'User'
-    // }
 
     // skills: {
     //   collection: 'Property'

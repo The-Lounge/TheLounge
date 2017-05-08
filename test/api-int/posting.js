@@ -26,6 +26,17 @@ const testData = {
       maximum: 10,
     },
   },
+  updatePosting: {
+    id: null, // set during test
+    sellerId: '-5',
+    title: 'This is an updated test posting',
+    description: 'some updated posting description text',
+    categoryId: 2,
+    price: {
+      minimum: 3,
+      maximum: 10,
+    },
+  },
   badPriceBlock: {
     sellerId: '-5',
     title: 'This has a bad price block',
@@ -63,18 +74,41 @@ const expected = {
     },
   },
   postPosting: {
+    id         : null, // determined in test
+    title      : 'This is a test posting',
+    description: 'some posting description text',
+    active     : true,
+    category   : {
+      id       : 3,
+      shortname: 'tutor',
+      name     : 'Tutor',
+      active   : true,
+    },
+    price      : {
+      minimum: null,
+      maximum: 10,
+    },
+    seller     : {
+      id  : '-5',
+      name: {
+        firstName: 'Mark',
+        lastName : 'Koellmann',
+      },
+    },
+  },
+  putPosting: {
     id: null, // determined in test
-    title: 'This is a test posting',
-    description:  'some posting description text',
+    title: 'This is an updated test posting',
+    description: 'some updated posting description text',
     active: true,
     category: {
-      id: 3,
-      shortname: 'tutor',
-      name: 'Tutor',
+      shortname: 'beauty',
+      name: 'Beauty',
       active: true,
+      id: 2,
     },
     price:  {
-      minimum: null,
+      minimum: 3,
       maximum: 10,
     },
     seller: {
@@ -102,7 +136,18 @@ describe('/posting', () => {
   });
 
   describe('POST /posting/', () => {
-    it('it responds with 400 Bad Request provided with invalid fields', () => {
+    function updateMetaValues(actualObj, expectedObj) {
+      if (!actualObj.id) {
+        throw new Error('Entity did not return w/ id');
+      }
+
+      expectedObj.id = actualObj.id;
+      expectedObj.createdAt = actualObj.createdAt;
+      expectedObj.updatedAt = actualObj.updatedAt;
+      return actualObj;
+    }
+
+    it('responds with 400 Bad Request provided with invalid fields', () => {
       const postingOp = httpClient.post(endpoint.POSTING, testData.badPriceBlock);
       return expect(postingOp).to.be.rejected
         .and.to.eventually.be.instanceof(Error)
@@ -111,18 +156,82 @@ describe('/posting', () => {
 
     it('responds with the created posting on success', () => {
       const postingOp = httpClient.post(endpoint.POSTING, testData.createPosting)
-        .then((posting) => {
-          expected.postPosting.id = posting.id;
-          expected.postPosting.createdAt = posting.createdAt;
-          expected.postPosting.updatedAt = posting.updatedAt;
-          if (!posting.id) {
-            throw new Error('posting did not return with ID');
-          }
+        .then(posting => updateMetaValues(posting, expected.postPosting));
 
+      return expect(postingOp).to.eventually.deep.equal(expected.postPosting);
+    });
+
+    it('rejects entities with invalid price field values', () => Promise.all([{
+      minimum: 20,
+      maximum: 10,
+    }, {
+      minimum: null,
+      maximum: null,
+    }, {
+      minimum: 'string',
+      maximum: {},
+    }].map((badPriceField) => {
+      testData.badPriceBlock.price = badPriceField;
+      const postingOp = httpClient.post(endpoint.POSTING, testData.badPriceBlock);
+      return expect(postingOp).to.be.rejected
+        .and.to.eventually.be.instanceof(Error)
+        .and.to.have.property('statusCode', 400);
+    })));
+
+    it('accepts entities with valid price field values', () => Promise.all([{
+      minimum: 3.25,
+      maximum: 10,
+    }, {
+      minimum: 10,
+      maximum: null,
+    }, {
+      minimum: null,
+      maximum: 10.50,
+    }].map((priceBlock) => {
+      testData.createPosting.price = priceBlock;
+      const expectedPosting = Object.assign({}, expected.postPosting);
+      expectedPosting.price = priceBlock;
+      const postingOp = httpClient.post(endpoint.POSTING, testData.createPosting)
+        .then(posting => updateMetaValues(posting, expectedPosting));
+
+      return expect(postingOp).to.eventually.deep.equal(expectedPosting);
+    })));
+  });
+
+  describe('PUT /posting/:id', () => {
+    it('responds with the created posting on success', () => {
+      const postingOp = httpClient.post(endpoint.POSTING, testData.createPosting)
+        .then((posting) => {
+          const updateEntity = Object.assign({}, testData.updatePosting);
+          updateEntity.id = posting.id;
+          return httpClient.put(`${endpoint.POSTING}/${posting.id}`, updateEntity);
+        })
+        .then((posting) => {
+          expected.putPosting.id = posting.id;
+          expected.putPosting.createdAt = posting.createdAt;
+          expected.putPosting.updatedAt = posting.updatedAt;
           return posting;
         });
 
-      return expect(postingOp).to.eventually.deep.equal(expected.postPosting);
+      return expect(postingOp).to.eventually.deep.equal(expected.putPosting);
+    });
+
+    it('does not allow update seller from original value', () => {
+      const postingOp = httpClient.post(endpoint.POSTING, testData.createPosting)
+        .then((posting) => {
+          const updateEntity = Object.assign({}, testData.updatePosting);
+          updateEntity.id = posting.id;
+          updateEntity.sellerId = '-3';
+          return httpClient.put(`${endpoint.POSTING}/${posting.id}`, updateEntity);
+        });
+
+      return expect(postingOp).to.be.rejected
+        .and.to.eventually.be.instanceof(Error)
+        .and.to.satisfy((error) => {
+          expect(error).to.have.property('statusCode', 400);
+          expect(error).to.have.property('message').includes('Seller field cannot be modified');
+          return true;
+      });
     });
   });
 });

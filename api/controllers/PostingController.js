@@ -31,4 +31,30 @@ module.exports = {
         .catch(err => mapError(err, res));
     });
   },
+
+  update(req, res) {
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.badRequest('400 Bad Request: Posting must include body');
+    }
+
+    const id = req.body.id;
+    if (!id || id !== req.allParams().id) {
+      return res.badRequest('400 Bad Request: Posting body id must match parameter id');
+    }
+
+    return Posting.getById(id).then((posting) => {
+      delete req.body.seller;
+      if (posting.seller.id !== req.body.sellerId) {
+        return res.badRequest('400 Bad Request: Seller field cannot be modified');
+      }
+
+      return Posting.update({id}, req.body).exec((error, updated) => {
+        if (error) {
+          return mapError(error, res);
+        }
+
+        return Posting.getById(updated[0].id).then(res.ok);
+      });
+    }).catch(err => mapError(err, res));
+  },
 };

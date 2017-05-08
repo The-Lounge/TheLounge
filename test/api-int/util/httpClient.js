@@ -33,6 +33,10 @@ class HttpClient {
   post(url, body) {
     return this._request.post({url, body});
   }
+
+  put(url, body) {
+    return this._request.put({url, body});
+  }
 }
 
 module.exports = {HttpClient};

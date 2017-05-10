@@ -10,7 +10,7 @@
 require('angular').module('ays')
   .controller('HomeController', function ($scope, AuthService) {
     $scope.authenticated = false;
-    AuthService.checkAuth().then(function authCallback(callback) {
+    AuthService.getUserAuthStatus().then(function authCallback(callback) {
       if (callback.status !== 401) {
         $scope.data = callback.data;
         $scope.authenticated = true;

@@ -3,16 +3,15 @@
  * Updated by Tyler on 5/2/2017.
  */
 require('angular').module('ays')
-  .controller('PostingController', function (UserService, $sails, $scope, $stateParams) {
+  .controller('PostingController', function (SessionService, $sails, $scope, $stateParams) {
     $scope.posting = {};
-    $scope.userFN = UserService.data.name.firstName;
-    $scope.userLN = UserService.data.name.lastName;
+    $scope.userData = SessionService.user;  
     
     $sails.get('/api/posting/' +  $stateParams.id)
-      .success(function (data) {
-        $scope.posting = data;
+      .then(function (response) {
+        $scope.posting = response.data;
       })
-      .error(function (error) {
+      .catch(function (error) {
         console.log(error);
-      });
+      })
 });

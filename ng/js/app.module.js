@@ -13,8 +13,6 @@ window.boostrapjs = require('bootstrap-sass');
 window.angular = require('angular');
 window._ = require('lodash');
 require('angular-sails');
-require('angular-validator');
-require('angular-filter');
 
 // Start the sails client
 window.io = require('./dependencies/sails.io')(require('socket.io-client'));
@@ -36,62 +34,79 @@ window.angular.module('ays', [
     require('angular-sanitize'),
     require('angular-touch'),
     require('angular-ui-router'),
-    'angular.filter',
     'ngSails',
   ])
   // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
-  .run(function run(AuthService, $state) {
-    AuthService.checkAuth().then(function authCallback(authorized) {
-      if (authorized === 401) {
-        $state.go('login');
-      } else {
-        $state.go('categories');
-      }
-    });
+  .run(function run(AuthService, SessionService) {
+    // clean service data before checking backend for auth status
+    SessionService.destroy();
+    AuthService.initAppLoad();
+    AuthService.initStateGuard();
   })
   .constant('_', require('lodash'))
   .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
     $locationProvider.hashPrefix('');
-    // $locationProvider.html5Mode(true);//removes #! from urls, disables browser refresh without backend changes
+    // removes #! from urls, disables browser refresh without backend changes
+    // $locationProvider.html5Mode(true);
     $stateProvider
-      .state('newposting', {
-        url: '/posting/new',
+      .state('posting', {
+        abstract: true,
+        url: '/posting',
+        templateUrl: 'views/posting.html',
+      })
+      .state('posting.view', {
+        url: '/view/:id',
+        templateUrl: 'views/postingDetails.html',
+        protected: true,
+        controller: 'PostingController',
+      })
+      .state('posting.new', {
+        url: '/new',
         controller: 'CreatePostingController',
         templateUrl: 'views/createPost.html',
-      })
-      .state('posting', {
-        url: '/posting/:id',
-        controller: 'PostingController',
-        templateUrl: 'views/posting.html',
+        protected: true,
       })
       .state('categories', {
         url: '/categories',
         controller: 'CategoriesController',
         templateUrl: 'views/categories.html',
+        protected: true,
       })
       .state('faq', {
         url: '/faq',
         templateUrl: 'views/faq.html',
+        protected: false,
       })
       .state('login', {
         url: '/',
         controller: 'LoginController',
         templateUrl: 'views/login.html',
+        protected: false,
+        params: { // used to navigate to desired page if redirected to login, sets /home as default
+          'toState': 'home',
+          'toParams': {},
+        },
       })
       .state('home', {
         url: '/home',
         controller: 'HomeController',
         templateUrl: 'views/home.html',
+        protected: false,
+      })
+      .state('404', {
+        url: '/404',
+        templateUrl: '404.html',
+        protected: false,
       });
 
-      $urlRouterProvider.otherwise('/');
+      $urlRouterProvider.otherwise('/404');
   });
 
 // Pull in the controllers, this should be done through modules eventually
-require('./services/user');
-require('./controllers/new_posting');
+require('./controllers/newPosting');
 require('./directives/header');
 require('./services/auth');
+require('./services/requestinterceptor');
 require('./controllers/login');
 require('./controllers/main');
 require('./controllers/posting');

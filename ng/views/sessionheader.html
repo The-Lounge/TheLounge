@@ -1,18 +1,23 @@
-<!--This contains other links to home and newposting for ease of development only -->
 <nav>
+<!--temporary-->
+<style>a{color: black;}</style>
 	<div class="container-fluid">
     	<div>
-	      	<label class="navbar-brand">The Lounge at RIT</label>
+            <label ng-if="loggedIn" class="navbar-brand">Welcome to The Lounge at RIT  {{userData.userName}}!</label>
+            <label ng-if="!loggedIn" class="navbar-brand">Welcome to The Lounge at RIT!</label>
     	</div>
     	<ul class="nav navbar-nav navbar-right">
-            <li>
-                <a ui-sref='newposting'>Create Post</a>
+            <li ng-if="loggedIn">
+                <a ui-sref='posting.new'>Create Post</a>
             </li>
             <li>
                 <a ui-sref='home'>Home Page</a>
             </li>
+            <li>
+                <a ui-sref='categories'>Categories</a>
+            </li>
     		<li>
-                <!--Redirect to login page in when clicking login and after clicking-->
+                <!--This contains other links to home and newposting for ease of development only -->
 		      	<a ng-if="!loggedIn" ui-sref="login">Login</a>
 		      	<a ng-if="loggedIn" ng-click="logout()" ui-sref="login">Logout</a>
     		</li>

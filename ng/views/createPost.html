@@ -1,12 +1,12 @@
-<a ui-sref='categories'>Categories</a>
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <form name="postingForm" class="form-horizontal" novalidate focusable-form>
+            <form name="postingForm" class="form-horizontal" novalidate validate-on-blur>
                 <div class="form-group">
-                    <label for="inputTitle"><h3>Title</h3></label>
+                    <label for="inputTitle"><h3><b>Title<b></h3></label>
                     <fieldset ng-disabled="isSubmitting">
                         <input 
+                            max-length="60"
                             ng-model-options="{updateOn: 'blur'}"
                             ng-model="newPosting.title" 
                             type="text" 
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="prices"><h3>Price Range</h3></label>
+                    <label for="prices"><h3><b>Price<b></h3></label>
                     <p>You may enter either a minimum or maximum price, or both. Entering only a minimum price will result in a price advertised as Starting at $X (ex. Starting at $10). Entering only a maximum price will advertise a flat rate (ex. $10). Entering both a minimum and maximum will advertise a range (ex. $5 - $10).</p>
                     <fieldset ng-disabled="isSubmitting">
                         <input 
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="description"><h3>Description</h3></label>
+                    <label for="description"><h3><b>Description<b></h3></label>
                     <fieldset ng-disabled="isSubmitting">
                         <textArea 
                             ng-model-options="{updateOn: 'blur'}"
@@ -62,12 +62,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label><h3>Category</h3></label>
+                    <label><h3><b>Category<b></h3></label>
                     <fieldset ng-disabled="isSubmitting">
                         <select 
                             ng-model="categoryDescription" 
                             ng-options="category as category for category in categoryOptions"
                             id="categorySelector">
+                            <option value="" disabled selected>Select a Category</option>
                         </select>
                     </fieldset>
                     <div ng-repeat="message in categoryErrorMessages">

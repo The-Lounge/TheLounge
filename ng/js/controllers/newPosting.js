@@ -1,5 +1,5 @@
 require('angular').module('ays')
-  .controller('CreatePostingController', function ($scope, $sails, $timeout, $state) {
+  .controller('CreatePostingController', function ($window, $scope, $sails, $timeout, $state) {
     $scope.categoryOptions = [];
     $scope.categoryDescription = '';
     $scope.titleErrorMessages = [];
@@ -40,8 +40,8 @@ require('angular').module('ays')
       active: false,
     };
 
-    // Simple helper function that resets the newposting object to default values.
-    function getDisplayObject() {
+    // Simple helper function that returns an empty posting object
+    function emptyPosting() {
       return {
         sellerID: '',
         id: '',
@@ -56,7 +56,7 @@ require('angular').module('ays')
         date: '',
         tags: '',
         skills: '',
-        active: false,
+        active: true,
       };
     }
 
@@ -75,17 +75,15 @@ require('angular').module('ays')
       }
       // Copy over the input data to a new object, then reset the scope variable
       var actual = angular.copy($scope.newPosting);
-      $scope.newPosting = getDisplayObject();
+      $scope.newPosting = emptyPosting();
       $scope.responseID = null;
       $sails.post('/api/posting', actual)
-        .success(function (resp) {
-          $state.go('posting', {id: resp.id});
-        })
-        .error(function (error) {
-          console.log(error);
-        })
-        .then(function () {
+        .then(function (resp) {
           $scope.isSubmitting = false;
+          $state.go('posting.view', {id: resp.data.id});
+        })
+        .catch(function (error) {
+          console.log(error);
         });
     };
     $scope.validateForm = function () {
@@ -130,13 +128,10 @@ require('angular').module('ays')
         $scope.titleValidated = false;
         $scope.titleErrorMessages.push('Title is too short');
       }
-      if (text.length > 60) {
+      // ensure title is alphanumeric and allows period, comma, colon, parentheses, spaces
+      if (!empty && !text.match(/^[a-zA-Z0-9 .,():]*$/)) {
         $scope.titleValidated = false;
-        $scope.titleErrorMessages.push('Title is too long');
-      }
-      if (!empty && !text.match(/^[\w ]*[^\W_][\w ]*$/)) {
-        $scope.titleValidated = false;
-        $scope.titleErrorMessages.push('Title is not alphanumeric');
+        $scope.titleErrorMessages.push('Title is not valid');
       }
     };
 
@@ -165,7 +160,7 @@ require('angular').module('ays')
         }
       } else if (!lowPrice.match(regex)) { // If low price isnt empty, but has invalid input
         $scope.pricesValidated = false;
-        if (lowPrice.includes('$')) {
+        if ($window.document.getElementById('inputPriceLow').value.indexOf('$') >= 0) {
           $scope.priceErrorMessages.push('Do not include a dollar sign in minimum price');
         } else {
           $scope.priceErrorMessages.push(msg2);
@@ -181,7 +176,7 @@ require('angular').module('ays')
         }
       } else if (!highPrice.match(regex)) {
         $scope.pricesValidated = false;
-        if (highPrice.includes('$')) {
+        if ($window.document.getElementById('inputPriceHigh').value.indexOf('$') >= 0) {
           $scope.priceErrorMessages.push('Do not include a dollar sign in maximum price');
         } else {
           $scope.priceErrorMessages.push(msg3);
@@ -192,16 +187,41 @@ require('angular').module('ays')
         $scope.pricesValidated = false;
         // Don't want to include redundant error messages. 
         // If its not already saying its invalid, then include this message
-        if (!$scope.priceErrorMessages.includes(msg2) && !$scope.priceErrorMessages.includes(msg3)) {
+        // IE11 retardant
+        var counter;
+        var flag = false;
+        if($scope.priceErrorMessages.length > 0) {
+          for (counter = 0; counter < $scope.priceErrorMessages.length; counter++) {
+            if ($scope.priceErrorMessages[counter] === msg2 || $scope.priceErrorMessages[counter] === msg3) {
+              flag = true;
+            }
+          }
+          if (flag) {
+            $scope.priceErrorMessages.push('Minimum price must be less than the maximum price');
+          }
+        } 
+        else {
           $scope.priceErrorMessages.push('Minimum price must be less than the maximum price');
         }
       }
     };
   })
 
-  // This directive is added to the form in createPost.html, used to execute validation
-  // during the on-blur events.
-  .directive('focusableForm', function ($timeout, $animate) {
+  /* This directive is added to the form in createPost.html, used 
+   * to execute validation when the user unfocuses a field/on-blur event is fired.
+   * Achieves on-blur validation by grabbing all input, textarea, and select elements
+   * within the form tag this directive is located. Angular does not have core functionality
+   * that allows you to elegantly restrict what element this is directive is added to. This 
+   * is only so remember: THIS ONLY WORKS like so:
+   * <form no-validate validate-on-blur>...</form>
+   *
+   * For each type of field, it calls .on('blur') and then calls a validation function
+   * based on what the field's 'id' attribute is. It immediately calls an all-inclusive
+   * validateForm() method within controller that manages the view the form is in.
+   * Finally, it calls $timeout to change its focus immediately on blur, instead of 
+   * just changing focus onto another element.
+   */
+  .directive('validateOnBlur', function ($timeout, $animate) {
     return {
       restrict: 'A',
       link: function (scope, element) {
@@ -241,11 +261,6 @@ require('angular').module('ays')
         
         angular.forEach(inputElements, function (value) {
           angular.element(value)
-            .on('focus', function () {
-              $timeout(function () {
-                $animate.setClass(element, FOCUSED_CLASS, '');
-              }, 0);
-            })
             .on('blur', function () {
               // Validate title field when user leaves the input element
               if (value.id === 'postTitle') {

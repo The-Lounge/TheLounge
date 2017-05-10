@@ -1,7 +1,7 @@
 {
   "name": "ays",
   "private": true,
-  "version": "0.0.25",
+  "version": "0.0.32",
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
@@ -81,11 +81,13 @@
     "grunt-newer": "^1.1.2",
     "grunt-postcss": "^0.8.0",
     "grunt-run": "^0.6.0",
+    "grunt-wait": "^0.1.0",
     "grunt-wiredep": "^3.0.0",
     "jquery": "^2.2.4",
     "jshint-stylish": "^2.1.0",
     "lodash": "^4.17.4",
     "mocha": "^3.2.0",
+    "nodetree": "0.0.3",
     "request": "^2.80.0",
     "request-promise-any": "^1.0.3",
     "sails-hook-autoreload": "^0.13.2",

@@ -26,7 +26,7 @@ window.io = require('./dependencies/sails.io')(require('socket.io-client'));
  * Main module of the application.
  */
 
-window.angular.module('ays', [
+require('angular').module('ays', [
     require('angular-animate'),
     require('angular-cookies'),
     require('angular-resource'),

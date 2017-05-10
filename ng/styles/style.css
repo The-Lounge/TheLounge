@@ -10,14 +10,36 @@ body {
 	width: 100%;
     height: 100%;
 }
-.header-inner{	
+.header-inner{
 	display: inline;
 	position: relative;
-	float: left;	
+	float: left;
 	width: 100%;
 }
 .header-inner>img{
 	width: 100%;
+}
+
+.container {
+  clear: both;
+}
+
+#services h2 {
+  padding: 1em;
+}
+
+#launch {
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.65);
+  width: 30em;
+  text-align: center;
+  display: inline-block;
+  border: 2px #222 solid;
+  border-radius: .3em;
+}
+
+#logo {
+  max-width: 100%;
 }
 
 .header-overlay{
@@ -60,8 +82,8 @@ body {
 .learnMore-btn{
 	border: 2px solid #fff;
 	border-radius: 2px;
-	color: #fff;	
-	font-size: 20px;	
+	color: #fff;
+	font-size: 20px;
 	font-weight: bold;
 	font-family: 'Raleway', sans-serif;
 	text-transform: uppercase;
@@ -120,7 +142,7 @@ body {
     }
 
     .top-nav-collapse {
-        padding: 20;
+        padding: 20px;
     }
 }
 
@@ -156,7 +178,7 @@ body {
 /*
 .main-nav li a:hover{
   color: #ee4532;
-} 
+}
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
@@ -177,7 +199,7 @@ body {
 .main-navbar {
 	background: #fff none repeat scroll 0 0;
 	border-radius: 0;
-	border-bottom: 1px solid #e7e7e7;  
+	border-bottom: 1px solid #e7e7e7;
 	border-right: medium none;
 	height: 100px;
 	margin-bottom: 0;
@@ -195,14 +217,14 @@ body {
 	transition: all 0.5s;
 }
 .logo {
-	height: 100px;  
+	height: 100px;
 	width: 85px;
 	margin-right: 45px;
 	margin-top: -1px;
 	padding: 0;
 }
 .logo-compressed {
-	height: 80px;  
+	height: 80px;
 	width: 70px;
 }
 .logo img {
@@ -267,24 +289,24 @@ ul{
 	margin: 0;
 	list-style: none;
 }
-a{ 
+a{
 	text-decoration: none;
-	color: #2f2f2f;  
+	color: #2f2f2f;
 }
 a:focus{
 	outline: none;
 	text-decoration: none;
 }
-h1,h2,h3,{
+h1,h2,h3 {
 	font-family: 'Raleway', sans-serif;
 }
 h2 {
-	color: #fff;  
+	color: #fff;
 	font-size: 30px;
 	font-weight: 700;
 	line-height: 40px;
 	margin: 0%;
-	padding-bottom: 10px;  
+	padding-bottom: 10px;
 }
 img{
  border:none;
@@ -298,12 +320,12 @@ img{
 	padding: 70px 0;
 	float: left;
 	display: inline;
-	width: 100%;	
+	width: 100%;
 }
 .about-area{
 	float: left;
 	display: inline;
-	width: 100%;	
+	width: 100%;
 }
 .title-area {
 	display: inline;
@@ -336,7 +358,7 @@ img{
 	display: inline-block;
 	text-align: center;
 }
-.wc-table li {  
+.wc-table li {
 	float: left;
 	width: 25%;
 }
@@ -365,7 +387,7 @@ img{
 	font-size: 18px;
 	border-bottom: 1px solid #bbbbbb;
 	margin-top: 32px;
-	padding-bottom: 17px;	
+	padding-bottom: 17px;
 }
 .single-wc-content p {
 	color: #7d7d7d;
@@ -376,7 +398,7 @@ img{
 	color: #fff;
 }
 .single-wc-content:hover .wc-tittle{
-	padding-bottom: 16px;	
+	padding-bottom: 16px;
 }
 .about-area {
 	display: inline;
@@ -444,9 +466,9 @@ img{
 	width: 100%;
 }
 .button {
-	float: left;	
+	float: left;
 	display: block;
-	margin: 1em;	
+	margin: 1em;
 	border: none;
 	background: none;
 	color: inherit;
@@ -636,7 +658,7 @@ img{
 }
 .footer-top {
 	display: inline;
-	float: left;  
+	float: left;
 	width: 100%;
 }
 .footer-top-area{
@@ -652,57 +674,57 @@ img{
 
 /*Media queries*/
 @media(max-width:1199px ){
-	.header-content {  
-      padding: 70px;  
+	.header-content {
+      padding: 70px;
 	}
 	.header-content h2 {
 	  font-size: 60px;
-	  line-height: 58px;  
+	  line-height: 58px;
 	}
-	.learnMore-btn {  
-	  font-size: 18px;  
-	  padding: 20px 25px;	  
+	.learnMore-btn {
+	  font-size: 18px;
+	  padding: 20px 25px;
 	}
-	.startApp-btn {  
-	  font-size: 18px;  
-	  padding: 20px 25px;	  
+	.startApp-btn {
+	  font-size: 18px;
+	  padding: 20px 25px;
 	}
 	.header-btn-area {
-	  margin-top: 65px;  
+	  margin-top: 65px;
 	}
 	.logo {
-	  margin-right: 0;	  
+	  margin-right: 0;
 	}/*
 	#navbar {
 	  width: 87%;
 	}
-	.main-nav li a {  
-	  padding: 39px 16px;  
+	.main-nav li a {
+	  padding: 39px 16px;
 	}
 	.single-service {
-	  padding: 45px 15px;  
+	  padding: 45px 15px;
 	}
-	.single-service .service-title {	  
-	  font-size: 20px;	  
+	.single-service .service-title {
+	  font-size: 20px;
 	}*/
 }
 
 
 @media(max-width:991px ){
-	.header-content {  
-      padding: 50px;  
+	.header-content {
+      padding: 50px;
 	}
 	.header-content h2 {
 	  font-size: 50px;
-	  line-height: 50px;  
+	  line-height: 50px;
 	}
-	.learnMore-btn {  
-	  font-size: 16px;  
-	  padding: 18px 20px;	  
+	.learnMore-btn {
+	  font-size: 16px;
+	  padding: 18px 20px;
 	}
-	.startApp-btn {  
-	  font-size: 16px;  
-	  padding: 18px 20px;	  
+	.startApp-btn {
+	  font-size: 16px;
+	  padding: 18px 20px;
 	}
 	.header-btn-area {
 	  margin-top: 20px;
@@ -718,10 +740,10 @@ img{
 	  padding: 30px 7px !important;
 	}
 	.single-wc-content .wc-tittle {
-	  font-size: 15px;	  
+	  font-size: 15px;
 	}
-	.about-left {  
-	  height: 328px;  
+	.about-left {
+	  height: 328px;
 	  width: 100%;
 	}
 	.about-left img {
@@ -732,23 +754,23 @@ img{
 	  font-size: 28px;
 	}
 	.about-right .tittle-line {
-	  margin-bottom: 15px;	 
+	  margin-bottom: 15px;
 	}
 	.about-right p {
 	  font-size: 14px;
 	  margin-bottom: 6px;
 	}
 	.about-btn-area {
-	  margin-top: 0;	 
+	  margin-top: 0;
 	}
-	.call-to-content h2 {  
+	.call-to-content h2 {
 	  font-size: 30px;
 	}
-	
+
 	.title-area {
-	  padding: 0 100px;  
+	  padding: 0 100px;
 	}
-	
+
 }
 
 
@@ -775,13 +797,13 @@ img{
 	  width: 100%;
 	}
 	.main-nav li a {
-	  display: block; 
+	  display: block;
 	  padding: 8px 7px;
 	}*/
 	.less-padding {
 	  padding: 8px 7px !important;
 	}
-    
+
     /*
 	#navbar {
 	  margin-right: 0;
@@ -809,18 +831,18 @@ img{
 	.navbar-default .navbar-toggle:hover .icon-bar,
 	.navbar-default .navbar-toggle:focus .icon-bar{
 		background-color: #fff;
-		
+
 	}*/
 
-	
+
 	.wc-table li {
 	  margin-bottom: 20px;
 	  width: 50%;
 	}
 	#about {
-	  padding: 20 0 50px;		
+	  padding: 20px 0 50px;
 	}
-	.about-left { 
+	.about-left {
 	  width: 90%;
 	}
 	.about-left img {
@@ -829,7 +851,7 @@ img{
 	}
 	.about-right {
 	  margin-top: 35px;
-	  padding-left: 0;  
+	  padding-left: 0;
 	}
 	.title-area {
 	  padding: 0 50px;
@@ -873,7 +895,7 @@ img{
 	  font-size: 20px;
 	}
 	.button-default::after, .button-default > span {
-	  font-size: 10px;	
+	  font-size: 10px;
 	}
 }
 
@@ -882,7 +904,7 @@ img{
 	.header-inner > img {
 	  height: 250px;
 	  width: 100%;
-        
+
 	}
 	.header-content {
 	  padding: 30px;
@@ -905,11 +927,11 @@ img{
 	}
 	.learnMore-btn {
 	  font-size: 14px;
-	  padding: 7px 8px;	  
+	  padding: 7px 8px;
 	}
 	.startApp-btn {
 	  font-size: 14px;
-	  padding: 7px 8px;	  
+	  padding: 7px 8px;
 	}
 /*
 	#navbar {
@@ -919,8 +941,8 @@ img{
 	.title-area {
 	  padding: 0 10px;
 	}
-	.tittle {  
-	  font-size: 20px;  
+	.tittle {
+	  font-size: 20px;
 	  padding-bottom: 5px;
 	}
 	.title-area p{
@@ -931,7 +953,7 @@ img{
 	  width: 100%;
 	}
 	.about-right {
-	  margin-top: 45px;	 
+	  margin-top: 45px;
 	}
 	.about-right .tittle {
 	  font-size: 20px;
@@ -942,14 +964,14 @@ img{
 	}
 	.call-to-content h2 {
 	  font-size: 20px;
-	}		
+	}
 	.button-default::after, .button-default > span {
-	  font-size: 14px;	
+	  font-size: 14px;
 	}
-	.introduction-btn {  
-	  font-size: 20px;	  
+	.introduction-btn {
+	  font-size: 20px;
 	}
-	.header-content h2 {  
+	.header-content h2 {
 	  margin-bottom: 10px;
 	}
 }
@@ -960,7 +982,7 @@ img{
 	  width: 100%;
 	}
 	.footer-bottom p {
-	  font-size: 15px;	
+	  font-size: 15px;
 	}
 }
 
@@ -1076,7 +1098,7 @@ hr {
     color: #95a5a6;
 }
 .fa-home{
-    color: #006442; 
+    color: #006442;
 }
 .fa-envelope{
     color: #ff9a49;

@@ -54,6 +54,7 @@ module.exports.policies = {
     findOne: true,
     find: true,
     create: ['sessionAuth'],
+    update: ['sessionAuth', 'entityOwner'],
   },
 
   UserController: {

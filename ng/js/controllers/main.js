@@ -8,7 +8,8 @@
  * controller is binded to the 'home' state in app.module.js
  */
 require('angular').module('ays')
-  .controller('HomeController', function ($scope, AuthService) {
+  .controller('HomeController',
+    ['$scope', 'AuthService', function ($scope, AuthService) {
     $scope.authenticated = false;
     AuthService.getUserAuthStatus().then(function authCallback(callback) {
       if (callback.status !== 401) {
@@ -16,4 +17,4 @@ require('angular').module('ays')
         $scope.authenticated = true;
       }
     });
-  });
+  }]);

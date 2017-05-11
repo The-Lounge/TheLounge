@@ -78,13 +78,13 @@ require('angular').module('ays', [
         protected: false,
       })
       .state('login', {
-        url: '/',
+        url: '/login',
         controller: 'LoginController',
         templateUrl: 'views/login.html',
         protected: false,
         params: { // used to navigate to desired page if redirected to login, sets /home as default
-          'toState': 'home',
-          'toParams': {},
+          toState: 'home',
+          toParams: {},
         },
       })
       .state('home', {
@@ -103,6 +103,7 @@ require('angular').module('ays', [
   });
 
 // Pull in the controllers, this should be done through modules eventually
+require('./directives/onBlurPostingValidation');
 require('./controllers/newPosting');
 require('./directives/header');
 require('./services/auth');

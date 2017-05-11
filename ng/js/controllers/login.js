@@ -3,7 +3,8 @@
  */
 require('angular').module('ays')
   .controller('LoginController', 
-    function (AUTH_EVENTS, $sails, $scope, $state, AuthService, $rootScope, SessionService) {
+    ['AUTH_EVENTS', '$sails', '$scope', '$state', 'AuthService', '$rootScope', 
+    function (AUTH_EVENTS, $sails, $scope, $state, AuthService, $rootScope) {
       $scope.loginErrorMessage = '';
       $scope.credentials = {
         userName: '',
@@ -17,13 +18,13 @@ require('angular').module('ays')
         // when logging in, check if user is already authenticated
         AuthService.getUserAuthStatus().then(function callback(response) {
           // if they aren't authenticated, attempt to log them in with input credentials
-          if(response.status === 401) {
-            loginUser().then(function (response) {
+          if (response.status === 401) {
+            loginUser().then(function (res) {
               // if user's login attempt failed with code 422
-              if (response.data.code === 422) {
+              if (res.data.code === 422) {
                 $rootScope.$broadcast(AUTH_EVENTS.loginFailed);// broadcast isn't being caught for now
-                $scope.loginErrorMessage = response.data.message;
-              } else if (response.status === 200) {
+                $scope.loginErrorMessage = res.data.message;
+              } else if (res.status === 200) {
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);// broadcast isn't being caught for now
                 $state.go($state.params.toState, $state.params.toParams);
               }
@@ -33,8 +34,8 @@ require('angular').module('ays')
           }
         })
         // catch when the user is not logged in
-        .catch(function (error) {
-          console.log(error);
+        .catch(function () {
+          console.log('An error occurred when checking the session status of the user.');
         });
       };
       var loginUser = function () {
@@ -42,8 +43,8 @@ require('angular').module('ays')
           .then(function (response) {
             return response;
           })
-          .catch(function (error) {
-            console.log(error);
-          })
-      }
-    });
+          .catch(function () {
+            console.log('An error occurred trying to log in.');
+          });
+      };
+    }]);

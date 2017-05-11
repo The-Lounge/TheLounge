@@ -1,5 +1,14 @@
 /*
  * Author: Tyler Russell
+ * Contains an Authentication Service that provides functionality such as checking if
+ * a user is logged in, logs a user in and out, and a static function that safeguards
+ * protected states from unauthenticated users. Contains a service that stores the
+ * user object returned from the DB, and checking if a user is authenticated is done
+ * by checking the status of SessionService.user. 
+ * Also contains an app constant called AUTH_EVENTS, which should be used to broadcast
+ * auth-related events app wide like: $rootScope.$on('$some-auth-event-name', ...)
+ * Will be useful for allowing/denying access to parts of the app when user permissions
+ * are implemented.
  */
 require('angular').module('ays')
   .constant('AUTH_EVENTS', {
@@ -7,10 +16,12 @@ require('angular').module('ays')
     loginFailed: 'auth-login-failed',
     logoutSuccess: 'auth-logout-success',
     loginWhileSessionValid: 'auth-login-with-valid-session',
-    notAuthenticated: 'auth-not-authenticated',
-    notAuthorized: 'auth-not-authorized',// useful for when User Roles are implemented
+    notAuthenticated: 'auth-not-authenticated', // this is broadcasted when a user isn't logged in
+    notAuthorized: 'auth-not-authorized',
   })
-  .factory('AuthService', function ($sails, SessionService, HttpPendingRequestsService, $rootScope, $state) {
+  .factory('AuthService', 
+    ['$sails', 'SessionService', 'HttpPendingRequestsService', '$rootScope', '$state',
+    function ($sails, SessionService, HttpPendingRequestsService, $rootScope, $state) {
     var AuthService = {
       getUserAuthStatus: function () {
         // $http/$sails returns a promise, which has a then function, which also returns a promise
@@ -21,11 +32,10 @@ require('angular').module('ays')
           })
           .catch(function (error) {
             return error;
-          })
+          });
         return promise;
       },
       login: function (credentials) {
-
         var promise = $sails.post('/api/login', credentials)
           .then(function (response) {
             SessionService.user = response.data;
@@ -33,7 +43,7 @@ require('angular').module('ays')
           })
           .catch(function (error) {
             return error;
-          })
+          });
         return promise;
       },
       isAuthenticated: function () {
@@ -52,17 +62,17 @@ require('angular').module('ays')
       },
       initStateGuard: function () {
         // run auth check for each url visited
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-          if(!AuthService.isAuthenticated()) {
-            if(toState.protected) {
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+          if (!AuthService.isAuthenticated()) {
+            if (toState.protected) {
               event.preventDefault();
               HttpPendingRequestsService.cancelAll(); // prevent all http requests
               // if user isnt authenticated and attempts to view a protected state,
               // redirect to login and store the desired view to redirect them back after
-              $state.go('login', {'toState': toState.name, 'toParams': toParams});
+              $state.go('login', {toState: toState.name, toParams: toParams});
             }
-          }
-        })
+          } 
+        });
       },
       initAppLoad: function () {
         // set up Session Service on app load
@@ -77,14 +87,12 @@ require('angular').module('ays')
       },
     };
     return AuthService;
-  })
+  }])
   .service('SessionService', function () {
     this.create = function (user) {
       this.user = user;
-      // this.userRole = userRole;
     };
     this.destroy = function () {
       this.user = null;
-      // this.userRole = null;
     };
-})
+  });

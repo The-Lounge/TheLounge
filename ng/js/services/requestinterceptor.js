@@ -1,5 +1,5 @@
 angular.module('ays')
-  .config(function($httpProvider) {
+  .config(function ($httpProvider) {
     $httpProvider.interceptors.push('HttpRequestTimeoutInterceptor');
   })
   .factory('HttpRequestTimeoutInterceptor', function ($q, HttpPendingRequestsService) {
@@ -38,6 +38,6 @@ angular.module('ays')
 
     return {
       newTimeout: newTimeout,
-      cancelAll: cancelAll
+      cancelAll: cancelAll,
     };
   });

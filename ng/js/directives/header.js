@@ -4,7 +4,7 @@ require('angular').module('ays')
    * Directive to be placed in various HTML headers for user management,
    * login/logout navigation, etc.
    */
-  .directive('sessionheader', function (AuthService, SessionService) {
+  .directive('sessionheader', function () {
     return {
       restrict: 'E',
       controller: function ($scope, $sails, AuthService, SessionService) {

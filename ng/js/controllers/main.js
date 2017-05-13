@@ -4,23 +4,17 @@
  * @description
  * # HomeController
  * The home page of the app. Note that when this route is accessed,
- * an instance of this controller is created and instantiated. Referencing
- * this anywhere else will create a new instance!
+ * an instance of this controller is created and instantiated. This
+ * controller is binded to the 'home' state in app.module.js
  */
 require('angular').module('ays')
-
-  .controller('HomeController', function ($scope, AuthService) {
-    console.log('Home Controller instantiated');
-
+  .controller('HomeController',
+    ['$scope', 'AuthService', function ($scope, AuthService) {
     $scope.authenticated = false;
-
-    // Service call returns the HTTP status of the /me endpoint
-    AuthService.async().then(function (resp) {
-      console.log(resp);
-      if (resp !== 401) {
+    AuthService.getUserAuthStatus().then(function authCallback(callback) {
+      if (callback.status !== 401) {
+        $scope.data = callback.data;
         $scope.authenticated = true;
-      } else {
-        $scope.authenticated = false;
       }
     });
-  });
+  }]);

@@ -18,5 +18,8 @@
     "no-continue": "off",
     "no-mixed-operators": "off",
     "linebreak-style": "off"
+  },
+  "globals": {
+    "angular": 1
   }
 }

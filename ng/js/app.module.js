@@ -37,61 +37,79 @@ require('angular').module('ays', [
     'ngSails',
   ])
   // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
-  .run(function run(AuthService, $state) {
-    AuthService.async().then(function authCallback(authorized) {
-      console.log(authorized);
-      if (authorized === 401) {
-        $state.go('entry');
-      } else {
-        $state.go('home');
-      }
-    });
+  .run(function run(AuthService, SessionService) {
+    // clean service data before checking backend for auth status
+    SessionService.destroy();
+    AuthService.initAppLoad();
+    AuthService.initStateGuard();
   })
   .constant('_', require('lodash'))
-  .config([
-    '$urlRouterProvider',
-    '$stateProvider',
-    '$locationProvider',
-    config]);
+  .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
+    $locationProvider.hashPrefix('');
+    // removes #! from urls, disables browser refresh without backend changes
+    // $locationProvider.html5Mode(true);
+    $stateProvider
+      .state('posting', {
+        abstract: true,
+        url: '/posting',
+        templateUrl: 'views/posting.html',
+      })
+      .state('posting.view', {
+        url: '/view/:id',
+        templateUrl: 'views/postingDetails.html',
+        protected: true,
+        controller: 'PostingController',
+      })
+      .state('posting.new', {
+        url: '/new',
+        controller: 'CreatePostingController',
+        templateUrl: 'views/createPost.html',
+        protected: true,
+      })
+      .state('categories', {
+        url: '/categories',
+        controller: 'CategoriesController',
+        templateUrl: 'views/categories.html',
+        protected: true,
+      })
+      .state('faq', {
+        url: '/faq',
+        templateUrl: 'views/faq.html',
+        protected: false,
+      })
+      .state('login', {
+        url: '/login',
+        controller: 'LoginController',
+        templateUrl: 'views/login.html',
+        protected: false,
+        params: { // used to navigate to desired page if redirected to login, sets /home as default
+          toState: 'home',
+          toParams: {},
+        },
+      })
+      .state('home', {
+        url: '/home',
+        controller: 'HomeController',
+        templateUrl: 'views/home.html',
+        protected: false,
+      })
+      .state('404', {
+        url: '/404',
+        templateUrl: '404.html',
+        protected: false,
+      });
 
-function config($urlRouterProvider, $stateProvider, $locationProvider) {
-  console.log('AYS is up and running...');
-
-  $urlRouterProvider.otherwise('/');
-  $locationProvider.hashPrefix('');
-  // $locationProvider.html5Mode(true);//removes #! from urls.
-
-  $stateProvider
-    .state('posting', {
-      url: '/posting/:id',
-      controller: 'PostingController',
-      templateUrl: 'views/posting.html',
-    })
-    .state('category', {
-      url: '/category',
-      controller: 'CategoryController',
-      templateUrl: 'views/category.html',
-    })
-    .state('faq', {
-      url: '/faq',
-      templateUrl: 'views/faq.html',
-    })
-    .state('entry', {
-      url: '/login',
-      controller: 'LoginController',
-      templateUrl: 'views/login.html',
-    })
-    .state('home', {
-      url: '/',
-      controller: 'HomeController',
-      templateUrl: 'views/home.html',
-    });
-}
+      $urlRouterProvider.otherwise('/404');
+  });
 
 // Pull in the controllers, this should be done through modules eventually
+require('./directives/onBlurPostingValidation');
+require('./controllers/newPosting');
+require('./directives/header');
 require('./services/auth');
+require('./services/requestinterceptor');
 require('./controllers/login');
 require('./controllers/main');
 require('./controllers/posting');
-require('./controllers/category');
+require('./controllers/categories');
 

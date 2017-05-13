@@ -1,41 +1,7 @@
-<nav class="row">
-	<span class="glyphicon glyphicon-th-large col-lg-4" aria-hidden="true"></span>
-	<span class="glyphicon glyphicon-search col-lg-4" aria-hidden="true"></span>
-	<span class="glyphicon glyphicon-home col-lg-4" aria-hidden="true"></span>
-</nav>
+<!--parent template for the 'posting' state-->
 
-<div class="posting">
-
-		<!-- Posting Content -->
-		<div class="row">
-
-			<div class="row">
-				<div class="headerImage col-xs-12 col-sm-12 col-md-12 col-lg-12"></div>
-
-				<div class="owner col-xs-12 col-sm-12 col-md-12 col-lg-12">{{posting.seller.name.firstName}} {{posting.seller.name.lastName}}</div>
-			</div>
-
-			<div class="row">
-
-				<div class="title col-xs-9 col-sm-9 col-md-9 col-lg-9">
-						<h1>{{posting.title}}</h1>
-						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-						<span class="glyphicon glyphicon-star empty" aria-hidden="true"></span>
-						<span class="glyphicon glyphicon-star empty" aria-hidden="true"></span>
-				</div>
-
-				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-					<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-				</div>
-
-				<div class="price col-xs-12 col-sm-12 col-md-12 col-lg-12">$5-$10</div>
-
-				<div class="description col-xs-12 col-sm-12 col-md-12 col-lg-12">{{posting.description}}</div>
-
-			</div>
-
-		</div>
-		<!-- End of Posting Content -->
-</div>
+<!--Not sure if we need or want this header for all urls under /posting, added for ease of development-->
+<sessionheader></sessionheader>
+<!--this template has children, so anything common to all /posting urls
+	along with this div tag, should be in here-->
+<div ui-view></div>

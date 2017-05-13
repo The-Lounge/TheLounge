@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <base href="/"></base>
     <title>The Lounge</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
@@ -10,7 +11,6 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" type='text/css' href="styles/posting.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
-
     <script src="dist/app.bundle.js"></script>
   </head>
   <body ng-app="ays">
@@ -46,13 +46,11 @@
       <!--</div>-->
     <!--</div>-->
 
-    <div class="container">
-    <div ui-view=""></div>
-    </div>
+    <div ui-view="" ng-cloak></div>
 
     <div class="footer">
       <div class="container">
-        <p>Footer</p>
+        <!-- <p>Footer Content Here</p> -->
       </div>
     </div>
 

@@ -1,0 +1,39 @@
+<div class="posting">
+
+		<!-- Posting Content -->
+		<div class="row">
+
+			<div class="row">
+				<div class="headerImage col-xs-12 col-sm-12 col-md-12 col-lg-12"></div>
+
+				<!-- <div class="owner col-xs-12 col-sm-12 col-md-12 col-lg-12"><p>{{userFN}} {{userLN}}</p></div>
+				<div class="owner col-xs-12 col-sm-12 col-md-12 col-lg-12"><p>{{isAuth}}</p></div> -->
+				<div class="owner col-xs-12 col-sm-12 col-md-12 col-lg-12"><p>{{userData.name.firstName}} {{userData.name.lastName}}</p></div>
+			</div>
+
+			<div class="row">
+
+				<div class="title col-xs-9 col-sm-9 col-md-9 col-lg-9">
+						<h1>{{posting.title}}</h1>
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star empty" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star empty" aria-hidden="true"></span>
+				</div>
+
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+				</div>
+
+				<div ng-if="posting.price.minimum && posting.price.maximum" class="price col-xs-12 col-sm-12 col-md-12 col-lg-12">${{posting.price.minimum}}-${{posting.price.maximum}}</div>
+				<div ng-if="!posting.price.minimum" class="price col-xs-12 col-sm-12 col-md-12 col-lg-12">${{posting.price.maximum}}</div>
+				<div ng-if="!posting.price.maximum" class="price col-xs-12 col-sm-12 col-md-12 col-lg-12">${{posting.price.minimum}}</div>
+
+				<div class="description col-xs-12 col-sm-12 col-md-12 col-lg-12">{{posting.description}}</div>
+
+			</div>
+
+		</div>
+		<!-- End of Posting Content -->
+</div>

@@ -32,7 +32,8 @@ Before you run the app for the first time, you will need to setup or local confi
 To do so, follow the instructions in `config/local_template.js`. 
 You will also need to execute a build of the app, by running `npm run build` prior to starting the app.
 
-To start the Sails server, you need to run `npm start`. This command points to a script defined in `package.json` that runs the server.
+To start the Sails server, you need to run `npm run devStart`. This command points to a script defined in `package.json` that runs the server.
+Executing `npm start` will run the app in production mode. 
 When the sails server is running, you can view the app at `http://localhost:1337`. 
 You will see message in your browser console similar to `Now connected to Sails`.
 

@@ -29,24 +29,26 @@
 global.TEST_UID = ''; // just the username, ex. efs2220
 global.TEST_PWD = '';
 
-module.exports = {
-  connections: {
-    /*************************************************************************
-     *                                                                       *
-     * Mongo Connection Configuration                                        *
-     *                                                                       *
-     * This block contains the credentials to connect to the Mongo server.   *
-     * You need a connection to Mongo to run the Sails app. Get these values *
-     * from Greg.                                                            *
-     *                                                                       *
-     ************************************************************************/
-    herokuMongo: {
-      adapter : 'sails-mongo', // leave this one alone
-      host    : '', // this is the address of the Mongo server
-      port    : 47799, // the port to connect to Mongo on, no need to modify
-      user    : '',
-      password: '',
-      database: ''
+if (process.env.NODE_ENV !== 'production') {
+  module.exports = {
+    connections: {
+      /*************************************************************************
+       *                                                                       *
+       * Mongo Connection Configuration                                        *
+       *                                                                       *
+       * This block contains the credentials to connect to the Mongo server.   *
+       * You need a connection to Mongo to run the Sails app. Get these values *
+       * from Greg.                                                            *
+       *                                                                       *
+       ************************************************************************/
+      herokuMongo: {
+        adapter : 'sails-mongo', // leave this one alone
+        host    : '', // this is the address of the Mongo server
+        port    : 47799, // the port to connect to Mongo on, no need to modify
+        user    : '',
+        password: '',
+        database: ''
+      }
     }
-  }
-};
+  };
+}

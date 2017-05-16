@@ -40,13 +40,13 @@ module.exports.connections = {
   * Run: npm install sails-mysql                                             *
   *                                                                          *
   ***************************************************************************/
-  someMysqlServer: {
-    adapter: 'sails-mysql',
-    host: 'YOUR_MYSQL_SERVER_HOSTNAME_OR_IP_ADDRESS',
-    user: 'YOUR_MYSQL_USER',
-    password: 'YOUR_MYSQL_PASSWORD',
-    database: 'YOUR_MYSQL_DB'
-  },
+  // someMysqlServer: {
+  //   adapter: 'sails-mysql',
+  //   host: 'YOUR_MYSQL_SERVER_HOSTNAME_OR_IP_ADDRESS',
+  //   user: 'YOUR_MYSQL_USER',
+  //   password: 'YOUR_MYSQL_PASSWORD',
+  //   database: 'YOUR_MYSQL_DB'
+  // },
 
   /***************************************************************************
   *                                                                          *
@@ -57,6 +57,8 @@ module.exports.connections = {
   *                                                                          *
   ***************************************************************************/
   herokuMongo: {
+    // override the connection url because building it fails in prod...
+    url: `mongodb://${process.env.HEROKU_MONGO_USER}:${process.env.HEROKU_MONGO_PWD}@ds147799.mlab.com:47799/heroku_mrn33f1k`,
     adapter: 'sails-mongo',
     host: 'ds147799.mlab.com',
     port: 47799,
@@ -74,13 +76,13 @@ module.exports.connections = {
   *                                                                          *
   *                                                                          *
   ***************************************************************************/
-  somePostgresqlServer: {
-    adapter: 'sails-postgresql',
-    host: 'YOUR_POSTGRES_SERVER_HOSTNAME_OR_IP_ADDRESS',
-    user: 'YOUR_POSTGRES_USER',
-    password: 'YOUR_POSTGRES_PASSWORD',
-    database: 'YOUR_POSTGRES_DB'
-  }
+  // somePostgresqlServer: {
+  //   adapter: 'sails-postgresql',
+  //   host: 'YOUR_POSTGRES_SERVER_HOSTNAME_OR_IP_ADDRESS',
+  //   user: 'YOUR_POSTGRES_USER',
+  //   password: 'YOUR_POSTGRES_PASSWORD',
+  //   database: 'YOUR_POSTGRES_DB'
+  // }
 
 
   /***************************************************************************

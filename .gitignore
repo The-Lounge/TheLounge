@@ -133,3 +133,4 @@ build/Release
 .sass-cache
 *.zip
 *.rar
+.env

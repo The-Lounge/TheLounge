@@ -8,10 +8,9 @@
 
 ## Global npm packages
 
- - sails@0.12.1
+ - sails@0.12.3
  - grunt
  - grunt-cli
- - bower
  - karma
  - pm2
 

@@ -37,70 +37,102 @@ require('angular').module('ays', [
     'ngSails',
   ])
   // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
-  .run(function run(AuthService, SessionService) {
-    // clean service data before checking backend for auth status
-    SessionService.destroy();
-    AuthService.initAppLoad();
-    AuthService.initStateGuard();
-  })
+  .run([
+    'AuthService',
+    'SessionService',
+    '$rootScope',
+    '$state',
+    run])
   .constant('_', require('lodash'))
-  .config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
-    $locationProvider.hashPrefix('');
-    // removes #! from urls, disables browser refresh without backend changes
-    // $locationProvider.html5Mode(true);
-    $stateProvider
-      .state('posting', {
-        abstract: true,
-        url: '/posting',
-        templateUrl: 'views/posting.html',
-      })
-      .state('posting.view', {
-        url: '/view/:id',
-        templateUrl: 'views/postingDetails.html',
-        protected: true,
-        controller: 'PostingController',
-      })
-      .state('posting.new', {
-        url: '/new',
-        controller: 'CreatePostingController',
-        templateUrl: 'views/createPost.html',
-        protected: true,
-      })
-      .state('categories', {
-        url: '/categories',
-        controller: 'CategoriesController',
-        templateUrl: 'views/categories.html',
-        protected: true,
-      })
-      .state('faq', {
-        url: '/faq',
-        templateUrl: 'views/faq.html',
-        protected: false,
-      })
-      .state('login', {
-        url: '/login',
-        controller: 'LoginController',
-        templateUrl: 'views/login.html',
-        protected: false,
-        params: { // used to navigate to desired page if redirected to login, sets /home as default
-          toState: 'home',
-          toParams: {},
-        },
-      })
-      .state('home', {
-        url: '/home',
-        controller: 'HomeController',
-        templateUrl: 'views/home.html',
-        protected: false,
-      })
-      .state('404', {
-        url: '/404',
-        templateUrl: '404.html',
-        protected: false,
-      });
+  .config([
+    '$urlRouterProvider',
+    '$stateProvider',
+    '$locationProvider',
+    config]);
 
-      $urlRouterProvider.otherwise('/404');
+function run(AuthService, SessionService, $rootScope, $state) {
+  // clean service data before checking backend for auth status
+  SessionService.destroy();
+  AuthService.initAppLoad();
+  AuthService.initStateGuard();
+
+  $rootScope.$on('$stateChangeStart', function redirect(event, toState, toParams) {
+    if (toState.data && typeof toState.data.redirect === 'string') {
+      event.preventDefault();
+      $state.go(toState.data.redirect, toParams);
+    }
   });
+}
+
+function config($urlRouterProvider, $stateProvider, $locationProvider) {
+  $locationProvider.hashPrefix('');
+  // removes #! from urls, disables browser refresh without backend changes
+  // $locationProvider.html5Mode(true);
+  $stateProvider
+    .state('posting', {
+      abstract: true,
+      url: '/posting',
+      templateUrl: 'views/posting.html',
+    })
+    .state('posting.view', {
+      url: '/view/:id',
+      templateUrl: 'views/postingDetails.html',
+      protected: true,
+      controller: 'PostingController',
+    })
+    .state('posting.new', {
+      url: '/new',
+      controller: 'CreatePostingController',
+      templateUrl: 'views/createPost.html',
+      protected: true,
+    })
+    .state('categories', {
+      url: '/categories',
+      controller: 'CategoriesController',
+      templateUrl: 'views/categories.html',
+      protected: true,
+    })
+    .state('faq', {
+      url: '/faq',
+      templateUrl: 'views/faq.html',
+      protected: false,
+    })
+    .state('login', {
+      url: '/login',
+      controller: 'LoginController',
+      templateUrl: 'views/login.html',
+      protected: false,
+      params: { // used to navigate to desired page if redirected to login, sets /home as default
+        toState: 'home',
+        toParams: {},
+      },
+    })
+    .state('home', {
+      url: '/home',
+      controller: 'HomeController',
+      templateUrl: 'views/home.html',
+      protected: false,
+    })
+    .state('landing', {
+      url: '/',
+      data: { redirect: 'home' },
+    })
+    .state('404', {
+      templateUrl: '404.html',
+      protected: false,
+    });
+
+  // handle no url route match
+  $urlRouterProvider.otherwise(function ($injector, $location) {
+    // if a bad path was provided, display 404 (while preserving the bad path w/o location change)
+    // if no path was provided, go to landing page
+    var state = $location.path() ? '404' : 'landing';
+    $injector.invoke(['$state', function ($state) {
+      $state.go(state);
+    }]);
+    return true;
+  });
+}
 
 // Pull in the controllers, this should be done through modules eventually
 require('./directives/onBlurPostingValidation');

@@ -72,6 +72,10 @@ require('angular').module('ays')
               $state.go('login', {toState: toState.name, toParams: toParams});
             }
           } 
+          if (toState.url === '/login' && AuthService.isAuthenticated()) {
+            event.preventDefault();
+            $state.transitionTo('home');
+          }
         });
       },
       initAppLoad: function () {

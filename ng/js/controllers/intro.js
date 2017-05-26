@@ -7,14 +7,14 @@ require('angular').module('ays')
     function ($scope, $state) {
         $scope.profile = function () {
             // Go to user profile
-        }
+        };
         $scope.goAsk = function () {
             // Go ask
-        }
+        };
         $scope.categories = function () {
             $state.go('categories');
-        }
+        };
         $scope.search = function () {
             // Search function
-        }
+        };
     }]);

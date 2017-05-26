@@ -92,6 +92,12 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
       templateUrl: 'views/categories.html',
       protected: true,
     })
+    .state('intro', {
+      url: '/intro',
+      templateUrl: '/views/intro.html',
+      controller: 'IntroController',
+      protected: true,
+    })
     .state('faq', {
       url: '/faq',
       templateUrl: 'views/faq.html',
@@ -103,7 +109,7 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
       templateUrl: 'views/login.html',
       protected: false,
       params: { // used to navigate to desired page if redirected to login, sets /home as default
-        toState: 'home',
+        toState: 'intro',
         toParams: {},
       },
     })
@@ -115,7 +121,7 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
     })
     .state('landing', {
       url: '/',
-      data: { redirect: 'home' },
+      data: { redirect: 'intro' },
     })
     .state('404', {
       templateUrl: '404.html',
@@ -138,10 +144,11 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
 require('./directives/onBlurPostingValidation');
 require('./controllers/newPosting');
 require('./directives/header');
+require('./directives/footer');
 require('./services/auth');
 require('./services/requestinterceptor');
+require('./controllers/intro');
 require('./controllers/login');
 require('./controllers/main');
 require('./controllers/posting');
 require('./controllers/categories');
-

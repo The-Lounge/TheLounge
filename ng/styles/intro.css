@@ -1,0 +1,41 @@
+.back-panel {
+	width: 100%;
+	height: 38em;
+	display: flex;
+	align-items: center;
+}
+
+.fixed-panel h3{
+  height: 12em;
+  display: flex;
+  align-items: center;
+}
+
+#fixed-button {
+	bottom: 0;
+	position: relative;
+}
+
+.control-xl {
+	width: 50%;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+/*Should think of a good way to include this CSS into the loungefooter directive*/
+#footer-list a {
+  font-size: 1.3em;
+  text-decoration: none;
+}
+
+#footer-list > ul > li {
+	white-space: nowrap;
+	width: 10%;
+	margin: 1em 8em;
+    display: inline-block;
+    /* You can also add some margins here to make it look prettier */
+    zoom:1;
+    *display:inline;
+    /* this fix is needed for IE7- */
+}

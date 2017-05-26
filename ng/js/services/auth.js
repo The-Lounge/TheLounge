@@ -74,7 +74,7 @@ require('angular').module('ays')
           } 
           if (toState.url === '/login' && AuthService.isAuthenticated()) {
             event.preventDefault();
-            $state.transitionTo('home');
+            $state.transitionTo('intro');
           }
         });
       },
@@ -85,7 +85,7 @@ require('angular').module('ays')
             SessionService.user = null;
           } else if (response.status === 200) {
             SessionService.user = response.data;
-            $state.go('home');// redirect user straight to /home if they are still logged in
+            $state.go('intro');// redirect user straight to /home if they are still logged in
           }
         });
       },

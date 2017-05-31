@@ -57,4 +57,22 @@ module.exports = {
       });
     }).catch(err => mapError(err, res));
   },
+
+  getByCategory(req, res) {
+    const category = req.allParams().category;
+    const pageNum = req.allParams().page || 1;
+    const pagination = {page: pageNum, limit: 10};
+
+    let categoryId;
+    if (!isNaN(parseInt(category, 10))) {
+      categoryId = parseInt(category, 10);
+    } else {
+      return Category.resolveShortName(category).then((id) => {
+        categoryId = id;
+        return Posting.findPopulated({categoryId}, pagination).then(res.ok);
+      });
+    }
+
+    return Posting.findPopulated({categoryId}, pagination).then(res.ok);
+  },
 };

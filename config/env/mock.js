@@ -1,43 +1,38 @@
-'use strict';
 /**
  * @author Greg Rozmarynowycz <greg@thunderlab.net>
  */
 
-const path = require('path');
 const Q = require('q');
 const fs = require('fs');
 
-const mockDir = './mocks';
-
 /** @type [] */
-const postings = require(path.resolve(mockDir, 'posting.json'));
+const postings = require.main.require('./mocks/posting.json');
 /** @type [] */
-const categories = require(path.resolve(mockDir, 'category.json'));
+const categories = require.main.require('./mocks/category.json');
 /** @type [] */
-const users = require(path.resolve(mockDir, 'user.json'));
+const users = require.main.require('./mocks/user.json');
 
 
 function createModel(model, data) {
-  if(model.simpleCreate instanceof Function) {
+  if (model.simpleCreate instanceof Function) {
     return model.simpleCreate(data).then(sails.log);
-  } else {
-    return Q.Promise((resolve, reject) => {
-      model.create(data).exec((err, model) => {
-        if(err) {
-          reject(err);
-        } else {
-          resolve(model);
-        }
-      });
-    }).then(sails.log);
   }
 
+  return Q.Promise((resolve, reject) => {
+    model.create(data).exec((err, instance) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(instance);
+      }
+    });
+  }).then(sails.log);
 }
 
 function promisify(f) {
   return Q.Promise((resolve, reject) => {
     f((e, r) => {
-      if(e) {
+      if (e) {
         reject(e);
       } else {
         resolve(r);
@@ -65,12 +60,12 @@ module.exports = {
    ***************************************************************************/
 
   models: {
-    connection: 'localDiskDb'
+    connection: 'localDiskDb',
   },
 
   bootstrap(cb) {
     try {
-      fs.unlinkSync(__dirname + '/../.tmp/localDiskDb.db');
+      fs.unlinkSync(`${__dirname}/../.tmp/localDiskDb.db`);
     } catch (e) {}
     populateMockData()
       .catch(sails.log)

@@ -60,7 +60,7 @@ const expected = {
       minimum: 5,
     },
     category: {
-      shortname: 'beauty',
+      shortName: 'beauty',
       name: 'Beauty',
       active: true,
       id: 2,
@@ -80,7 +80,7 @@ const expected = {
     active     : true,
     category   : {
       id       : 3,
-      shortname: 'tutor',
+      shortName: 'tutor',
       name     : 'Tutor',
       active   : true,
     },
@@ -102,7 +102,7 @@ const expected = {
     description: 'some updated posting description text',
     active: true,
     category: {
-      shortname: 'beauty',
+      shortName: 'beauty',
       name: 'Beauty',
       active: true,
       id: 2,
@@ -119,6 +119,30 @@ const expected = {
       },
     },
   },
+  byCategoryFix: [{
+    seller : {
+      id : '-7',
+      name : {
+        firstName : 'Patrick',
+        lastName : 'Putnum',
+      },
+    },
+    id : '-3',
+    title : 'Free Web Developerment',
+    category : {
+      shortName: 'fix',
+      name: 'FixIt',
+      active: true,
+      id: 6,
+    },
+    description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl',
+    price : {
+      minimum : 99,
+      maximum : 250,
+    },
+    active : true,
+  }],
+  byCategoryPagination: [],
 };
 
 describe('/posting', () => {
@@ -232,6 +256,32 @@ describe('/posting', () => {
           expect(error).to.have.property('message').includes('Seller field cannot be modified');
           return true;
       });
+    });
+  });
+
+  describe('GET /posting/category/:category/[:page]', () => {
+    it('responds with active postings in a category (short name)', () => {
+      const postingOp = httpClient.get(`${endpoint.POSTING}/category/fix`)
+        .then(result => result.map(util.stripMetaDates));
+      return expect(postingOp).to.eventually.deep.equal(expected.byCategoryFix);
+    });
+
+    it('responds with active postings in a category (id)', () => {
+      const postingOp = httpClient.get(`${endpoint.POSTING}/category/6`)
+        .then(result => result.map(util.stripMetaDates));
+      return expect(postingOp).to.eventually.deep.equal(expected.byCategoryFix);
+    });
+
+    it('does not include inactive postings', () => {
+      const postingOp = httpClient.get(`${endpoint.POSTING}/category/7`)
+        .then(result => result.map(util.stripMetaDates));
+      return expect(postingOp).to.eventually.deep.equal([]);
+    });
+
+    it('paginates postings with 25 results per page', () => {
+      const postingOp = httpClient.get(`${endpoint.POSTING}/category/2/1`);
+      //  .then(result => result.map(util.stripMetaDates));
+      return expect(postingOp).to.eventually.have.length(2);
     });
   });
 });

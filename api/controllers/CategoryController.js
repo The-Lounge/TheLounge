@@ -5,12 +5,7 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-const mockCategories = require('../../mocks/category.json');
-
-function getMockCategory(id) {
-  return mockCategories
-    .filter(category => category.id === id).pop();
-}
+const mapError   = require('../lib/responseUtils.js').mapError;
 
 module.exports = {
   findOne(req, res) {
@@ -18,14 +13,11 @@ module.exports = {
 
     Category.getById(id).then((category) => {
       if (!category) {
-        category = getMockCategory(id);
-        if (!category) {
-          res.notFound();
-        }
+        res.notFound();
       }
 
       res.ok(category);
-    }).catch(res.serverError);
+    }).catch(mapError);
   },
 
   find(req, res) {
@@ -34,6 +26,5 @@ module.exports = {
       .then(res.ok)
       .catch(res.serverError);
   },
-
 };
 

@@ -1,7 +1,6 @@
 /**
  * Created by Greg on 4/12/2016.
  */
-const Q = require('q');
 const modelUtil = require('../lib/modelUtils');
 const _ = require('lodash');
 const HttpError = require('standard-http-error');

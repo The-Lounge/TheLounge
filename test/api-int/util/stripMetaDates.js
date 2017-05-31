@@ -3,7 +3,12 @@
  */
 const chai = require('chai');
 
-function stripMetaDates(response, assertExist) {
+function stripMetaDates(response, assertExist = false) {
+  if (response instanceof Array) {
+    response.forEach(posting => stripMetaDates(posting, assertExist));
+    return response;
+  }
+
   if (assertExist) {
     chai.expect(response).to.have.keys(['createdAt', 'updatedAt']);
   }

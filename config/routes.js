@@ -53,4 +53,6 @@ module.exports.routes = {
   // Posting Routes
   'GET /api/posting/category/:category': 'PostingController.getByCategory',
   'GET /api/posting/category/:category/:page': 'PostingController.getByCategory',
+  'GET /api/posting/user/:user': 'PostingController.getByUser',
+  'GET /api/posting/user/:user/:page': 'PostingController.getByUser',
   };

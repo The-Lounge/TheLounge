@@ -6,6 +6,8 @@
  */
 const Q = require('q');
 
+const nameLookup = new Map();
+
 module.exports = {
 
   attributes: {
@@ -17,6 +19,12 @@ module.exports = {
     },
 
     name: {
+      type: 'string',
+      size: 50,
+      defaultsTo: '',
+    },
+
+    shortName: {
       type: 'string',
       size: 50,
       defaultsTo: '',
@@ -49,6 +57,17 @@ module.exports = {
           .filter(category => category.active === true || includeInactive));
       });
     });
+  },
+
+  resolveShortName(name) {
+    if (nameLookup.size === 0) {
+      // Populate the look up map
+      return Category.getAll().then((categories) => {
+        categories.forEach(category => nameLookup.set(category.shortName, category.id));
+      }).then(() => nameLookup.get(name));
+    }
+
+    return Promise.resolve(nameLookup.get(name));
   },
 
   /**

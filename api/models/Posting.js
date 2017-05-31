@@ -29,13 +29,30 @@ function processPosting(postingData) {
     }
   });
 
-  return Q.when(postingData);
+  return postingData;
 }
 
+/**
+ * Indicates if the given price block is valid
+ * @param price {{minimum, maximum}}
+ * @returns {boolean}
+ */
 function isValidPriceBlock(price) {
   return price instanceof Object &&
     (_.isNumber(price.minimum) || _.isNumber(price.maximum)) &&
     (price.maximum >= price.minimum || price.maximum === null);
+}
+
+/**
+ * Returns a sort index based on the updatedAt attribute
+ * @param a
+ * @param b
+ * @returns {number}
+ */
+function comparePostingUpdatedAt(a, b) {
+  if (a.updatedAt > b.updatedAt) return -1;
+  if (a.updatedAt < b.updatedAt) return 1;
+  return 0;
 }
 
 const modelSettings = {
@@ -69,11 +86,6 @@ const modelSettings = {
       numeric: true,
     },
 
-    // datePosted: {
-    //   type: 'integer',
-    //   defaultsTo: 0
-    // },
-
     // tags: {
     //   type: 'array',
     //   defaultsTo: []
@@ -93,7 +105,7 @@ const modelSettings = {
     return new Promise((resolve, reject) => {
       Posting.findOne(id)
         .populate('seller', {select: ['id', 'name', 'active']})
-        .populate('category', {select: ['id', 'shortname', 'name', 'active']})
+        .populate('category', {select: ['id', 'shortName', 'name', 'active']})
         .exec((error, postingResult) => {
           if (error) {
             return reject(error);
@@ -104,6 +116,30 @@ const modelSettings = {
           }
 
           return resolve(processPosting(postingResult.toJSON()));
+        });
+    });
+  },
+
+  findPopulated(criteria, pagination = {page: 1, limit: 25}, inactive = false) {
+    return new Promise((resolve, reject) => {
+      Posting.find(criteria)
+        .paginate(pagination)
+        .populate('seller', {select: ['id', 'name', 'active']})
+        .populate('category', {select: ['id', 'shortName', 'name', 'active']})
+        .exec((error, postingResult) => {
+          if (error) {
+            return reject(error);
+          }
+
+          if (!postingResult) {
+            return resolve([]);
+          }
+
+          return resolve(postingResult
+            .map(result => result.toJSON())
+            .filter(posting => posting.active || inactive)
+            .sort(comparePostingUpdatedAt)
+            .map(processPosting));
         });
     });
   },

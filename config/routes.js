@@ -49,4 +49,8 @@ module.exports.routes = {
   'GET /api/logout': 'ClientController.logout',
   'GET /api/ping': 'ClientController.ping',
   'GET /api/me': 'ClientController.me',
+
+  // Posting Routes
+  'GET /api/posting/category/:category': 'PostingController.getByCategory',
+  'GET /api/posting/category/:category/:page': 'PostingController.getByCategory',
   };

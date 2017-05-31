@@ -53,6 +53,7 @@ module.exports.policies = {
     '*': false,
     findOne: true,
     find: true,
+    getByCategory: ['sessionAuth'],
     create: ['sessionAuth'],
     update: ['sessionAuth', 'entityOwner'],
   },

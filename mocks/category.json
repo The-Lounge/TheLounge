@@ -1,56 +1,56 @@
 [
   {
     "id":"1",
-    "shortname":"rides",
+    "shortName":"rides",
     "name":"Ride Sharing",
     "description":"Ride Sharing for when you need to get around, but can't get a car.",
     "active": true
   },
   {
     "id":"2",
-    "shortname":"beauty",
+    "shortName":"beauty",
     "name":"Beauty",
     "description":"Nails. Makeup. All Cosmetics.",
     "active": true
   },
   {
     "id":"3",
-    "shortname":"tutor",
+    "shortName":"tutor",
     "name":"Tutor",
     "description":"Homework is hard. Find homework help here.",
     "active": true
   },
   {
     "id":"4",
-    "shortname":"house",
+    "shortName":"house",
     "name":"Housings",
     "description":"Need a place. Post here.",
     "active": true
   },
   {
     "id":"5",
-    "shortname":"other",
+    "shortName":"other",
     "name":"Other",
     "description":"A place to post when categories don't seem to fit.",
     "active": true
   },
   {
     "id":"6",
-    "shortname":"fix",
+    "shortName":"fix",
     "name":"FixIt",
     "description":"Helping others fix thier things.",
     "active": true
   },
   {
     "id":"7",
-    "shortname":"test",
+    "shortName":"test",
     "name":"Test",
     "description":"For Testing",
     "active": false
   },
   {
     "id":"8",
-    "shortname":"handmade",
+    "shortName":"handmade",
     "name":"Hand Made Items",
     "description":"Things that you've drawn, built, or created",
     "active": true

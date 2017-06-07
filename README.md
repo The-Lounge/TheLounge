@@ -11,6 +11,7 @@
  - sails@0.12.3
  - grunt
  - grunt-cli
+#### Optional
  - karma
  - pm2
 
@@ -29,7 +30,7 @@ Server dependencies should be installed with `npm i [name] --save` and browser d
 
 Before you run the app for the first time, you will need to setup or local configuration.
 To do so, follow the instructions in `config/local_template.js`. 
-You will also need to execute a build of the app, by running `npm run build` prior to starting the app.
+You will also need to execute a build of the app, by running `grunt build-dev` prior to starting the app.
 
 To start the Sails server, you need to run `npm run devStart`. This command points to a script defined in `package.json` that runs the server.
 Executing `npm start` will run the app in production mode. 
@@ -47,8 +48,8 @@ This will reload your page when you make changes to the app in your IDE and run 
 This connection will automatically reload your app when files are changed.
 
 Other tasks are run when different files are changed:
- - When JS files are updated, **[JS Hint](http://jshint.com/)** is run.
- JS Hint checks the quality of your code and catches common mistakes.
+ - When JS files are updated, **[ES Lint](http://eslint.org/)** is run.
+ ES Lint checks the quality of your code and catches common mistakes.
  These rules will be enforced on all code pushed to production, so is important to fix any errors/warnings given by JS Hint.
  - *(In progress)* When CSS/SCSS files are changed they will be recompiled and loaded into the browser (no refresh needed).
 
@@ -77,6 +78,7 @@ Other tasks are run when different files are changed:
 ├─ (node_modules/) - install directory for local node modules
 ├─ scripts - utility/build scripts
 ├─ test/ - contains tests
+│  ├─ api-int - Integration tests for the API
 │  ├─ api-spec - Unit tests for the API
 │  └─ ui-spec - UI unit test
 ├─ .jshintrc - JS Hint config

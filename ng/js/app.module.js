@@ -34,6 +34,7 @@ require('angular').module('ays', [
     require('angular-sanitize'),
     require('angular-touch'),
     require('angular-ui-router'),
+    require('angular-localstorage'),
     'ngSails',
   ])
   // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
@@ -121,7 +122,14 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
     })
     .state('landing', {
       url: '/',
-      data: { redirect: 'intro' },
+      // if user navigates to 'thelounge.co/' handle routing accordingly
+      controller: function (AuthService, $state) {
+        if (AuthService.isAuthenticated()) {
+          $state.go('intro');
+        } else {
+          $state.go('home');
+        }
+      },
     })
     .state('404', {
       templateUrl: '404.html',

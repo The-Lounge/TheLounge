@@ -5,6 +5,8 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "angular-local-storage": "^0.6.0",
+    "angular-localstorage": "^1.1.5",
     "captains-log": "^1.0.2",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.5",

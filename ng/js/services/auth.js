@@ -20,8 +20,8 @@ require('angular').module('ays')
     notAuthorized: 'auth-not-authorized',
   })
   .factory('AuthService', 
-    ['$sails', 'SessionService', 'HttpPendingRequestsService', '$rootScope', '$state',
-    function ($sails, SessionService, HttpPendingRequestsService, $rootScope, $state) {
+    ['$localStorage', '$sails', 'SessionService', 'HttpPendingRequestsService', '$rootScope', '$state',
+    function ($localStorage, $sails, SessionService, HttpPendingRequestsService, $rootScope, $state) {
     var AuthService = {
       getUserAuthStatus: function () {
         // $http/$sails returns a promise, which has a then function, which also returns a promise
@@ -61,21 +61,32 @@ require('angular').module('ays')
         return promise;
       },
       initStateGuard: function () {
+
         // run auth check for each url visited
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-          if (!AuthService.isAuthenticated()) {
-            if (toState.protected) {
-              event.preventDefault();
-              HttpPendingRequestsService.cancelAll(); // prevent all http requests
-              // if user isnt authenticated and attempts to view a protected state,
-              // redirect to login and store the desired view to redirect them back after
-              $state.go('login', {toState: toState.name, toParams: toParams});
-            }
-          } 
-          if (toState.url === '/login' && AuthService.isAuthenticated()) {
-            event.preventDefault();
-            $state.transitionTo('intro');
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+          $localStorage.put('last_visited', toState.name);
+          // console.log($localStorage.get('last_visited'));
+          if(!fromState.views) {
+            console.log($localStorage.get('last_visited'))
+            // $state.go($localStorage.get('last_visited'));
           }
+          AuthService.getUserAuthStatus().then(function (response) {
+            if (response.status === 401) {
+              if (toState.protected) {
+                event.preventDefault();
+                HttpPendingRequestsService.cancelAll(); // prevent all http requests
+                // if user isnt authenticated and attempts to view a protected state,
+                // redirect to login and store the desired view to redirect them back after
+                $state.go('login', {toState: toState.name, toParams: toParams});
+              }
+            } else if (response.status === 200) {
+              // if user is authenticated, dont make them log in again
+              if (toState.url === '/login') {
+                event.preventDefault();
+                $state.transitionTo('intro');
+              }
+            }
+          })
         });
       },
       initAppLoad: function () {
@@ -85,10 +96,15 @@ require('angular').module('ays')
             SessionService.user = null;
           } else if (response.status === 200) {
             SessionService.user = response.data;
-            $state.go('intro');// redirect user straight to /home if they are still logged in
+            $state.go('intro');// redirect user straight to /intro if they are still logged in
           }
         });
       },
+      recordStateHistory: function () {
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+          
+        })
+      }
     };
     return AuthService;
   }])

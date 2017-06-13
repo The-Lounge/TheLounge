@@ -154,5 +154,31 @@
 		"skills" : [],
 		"status" : "active",
 		"tags" : []
-	}
+	},
+  {
+    "id" : "-13",
+    "userName" : "dxs8115",
+    "email" : "dxs8115@g.rit.edu",
+    "name" : {
+      "firstName" : "Demetri",
+      "lastName" : "Sakellaropoulos"
+    },
+    "role" : "student",
+    "skills" : [],
+    "status" : "active",
+    "tags" : []
+  },
+  {
+    "id" : "-14",
+    "userName" : "ntw9049",
+    "email" : "ntw9049@g.rit.edu",
+    "name" : {
+      "firstName" : "Noah",
+      "lastName" : "Wilson"
+    },
+    "role" : "student",
+    "skills" : [],
+    "status" : "active",
+    "tags" : []
+  }
 ]

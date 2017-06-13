@@ -1,3 +1,7 @@
+@font-face{
+    font-family: circleFont;
+    src: url(fonts/Comfortaa.ttf)
+}
 .back-panel {
 	width: 100%;
 	height: 38em;
@@ -23,19 +27,188 @@
     border-radius: 10px;
 }
 
+/*New Intro Style*/
+body{
+    margin: 0 !important;
+}
+#intro-container{
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+    white-space: normal;
+}
+.half-container{
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+    width: 50%;
+}
+.col-6{
+    width: 50%;
+    text-align: center;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: top;
+}
+.heading-12{
+    width: 100% !important;
+}
+.heading-9{
+    width: 75% !important;
+}
+.heading-8{
+    width: calc(100% / 3 * 2) !important;
+}
+.heading-6{
+    width: 50% !important;
+}
+.heading-4{
+    width: calc(100% / 3 + 1%) !important;
+}
+.heading-3{
+    width: 25% !important;
+}
+.heading{
+    font-family: circleFont;
+    width: 100%;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20pt;
+    text-align: center;
+    color: white;
+    height: 70px;
+    background-color: #333;
+}
+.heading p{
+    padding-top: 10px;
+}
+.heading:hover{
+    cursor: pointer;
+    background-color: white;
+    color: #F36E21;
+}
+.heading-active{
+    background-color: inherit !important;
+    color: black !important;
+}
+.results{
+    padding: 10px;
+    margin-bottom: 100px;
+    /*border-right: 1px gray solid;
+    min-height: 100vh;
+    border-top-right-radius: 8px;*/
+}
+.result{
+    white-space: normal;
+    overflow: auto;
+    margin: 8px 0px;
+    background-color: white;
+    border: solid gray 1px;
+    border-radius: 6px;
+    border-top-right-radius: 0;
+    -webkit-box-shadow: 5px 5px 19px -2px rgba(0,0,0,0.34);
+    -moz-box-shadow: 5px 5px 19px -2px rgba(0,0,0,0.34);
+    box-shadow: 5px 5px 19px -2px rgba(0,0,0,0.34);
+}
+.results h1{
+    text-align: left;
+    word-break: break-word;
+    padding: 5px;
+    margin: 0px;
+    color: #F36E21;
+    font-size: 20px;
+    font-weight: 300;
+}
+.results h2{
+    text-align: left;
+    word-break: break-word;
+    padding: 5px;
+    line-height: inherit;
+    margin: 0px;
+    color: gray;
+    font-size: 15px;
+    font-weight: 200;
+}
+.result-heading{
+    width: 100%;
+    height: 70px;
+    background-color: #eee;
+}
+.result-image-div{
+    vertical-align: top;
+    display: inline-block;
+    height: 70px;
+    width: 70px;
+}
+.result-image{
+    padding: 3px;
+}
+.result-image img{
+    width: 64px;
+}
+.result-info{
+    vertical-align: middle;
+    text-align: left;
+    padding: 4px 4px;
+    padding-right: 0px;
+    display: inline-block;
+    color: black;
+}
+.result-content{
+    min-height: 50px;
+}
+.result p{
+    word-break: break-word;
+    font-size: 15px;
+    color: gray;
+}
+.result h3{
+    text-align: left;
+    word-break: break-word;
+    padding-bottom: 8px;
+    padding-top: 4px;
+    margin: 0px;
+    color: black;
+    font-size: 15px;
+    font-weight: 400;
+}
+.result:hover{
+    cursor: pointer;
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 38%, rgba(255,239,222,1) 81%, rgba(255,217,176,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(38%, rgba(255,255,255,1)), color-stop(81%, rgba(255,239,222,1)), color-stop(100%, rgba(255,217,176,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 38%, rgba(255,239,222,1) 81%, rgba(255,217,176,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 38%, rgba(255,239,222,1) 81%, rgba(255,217,176,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 38%, rgba(255,239,222,1) 81%, rgba(255,217,176,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 38%, rgba(255,239,222,1) 81%, rgba(255,217,176,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffd9b0', GradientType=0 );
+}
+.payment{
+    color: limegreen !important;
+}
+.fee{
+    color: black !important;
+}
 /*Should think of a good way to include this CSS into the loungefooter directive*/
+
 #footer-list a {
+    color: #333;
   font-size: 1.3em;
   text-decoration: none;
 }
-
+#footer-list > ul{
+    float: right;
+}
 #footer-list > ul > li {
 	white-space: nowrap;
-	width: 10%;
-	margin: 1em 8em;
+    margin-right: 2em;
     display: inline-block;
     /* You can also add some margins here to make it look prettier */
     zoom:1;
     *display:inline;
     /* this fix is needed for IE7- */
+}
+#footer-list a:hover {
+    color: #800000;
 }

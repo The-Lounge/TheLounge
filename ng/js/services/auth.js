@@ -4,7 +4,7 @@
  * a user is logged in, logs a user in and out, and a static function that safeguards
  * protected states from unauthenticated users. Contains a service that stores the
  * user object returned from the DB, and checking if a user is authenticated is done
- * by checking the status of SessionService.user. 
+ * by checking the status of SessionService.user.
  * Also contains an app constant called AUTH_EVENTS, which should be used to broadcast
  * auth-related events app wide like: $rootScope.$on('$some-auth-event-name', ...)
  * Will be useful for allowing/denying access to parts of the app when user permissions
@@ -19,7 +19,7 @@ require('angular').module('ays')
     notAuthenticated: 'auth-not-authenticated', // this is broadcasted when a user isn't logged in
     notAuthorized: 'auth-not-authorized',
   })
-  .factory('AuthService', 
+  .factory('AuthService',
     ['$localStorage', '$sails', 'SessionService', 'HttpPendingRequestsService', '$rootScope', '$state',
     function ($localStorage, $sails, SessionService, HttpPendingRequestsService, $rootScope, $state) {
     var AuthService = {
@@ -64,12 +64,8 @@ require('angular').module('ays')
 
         // run auth check for each url visited
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-          $localStorage.put('last_visited', toState.name);
-          // console.log($localStorage.get('last_visited'));
-          if(!fromState.views) {
-            console.log($localStorage.get('last_visited'))
-            // $state.go($localStorage.get('last_visited'));
-          }
+          $localStorage.put('to_state_name', toState.name);
+          $localStorage.put('from_state_name', fromState.name);
           AuthService.getUserAuthStatus().then(function (response) {
             if (response.status === 401) {
               if (toState.protected) {
@@ -90,19 +86,25 @@ require('angular').module('ays')
         });
       },
       initAppLoad: function () {
-        // set up Session Service on app load
-        AuthService.getUserAuthStatus().then(function (response) {
-          if (response.status === 401) {
-            SessionService.user = null;
-          } else if (response.status === 200) {
-            SessionService.user = response.data;
-            $state.go('intro');// redirect user straight to /intro if they are still logged in
-          }
-        });
+        // Handles browser refreshes with localstorage. If there's no from_state_name saved from the
+        // initStateGuard method, then the app was just loaded.
+        if($localStorage.get('from_state_name') === '') {
+          $state.go($localStorage.get('to_state_name'));
+        } else {
+          // set up Session Service on app load
+          AuthService.getUserAuthStatus().then(function (response) {
+            if (response.status === 401) {
+              SessionService.user = null;
+            } else if (response.status === 200) {
+              SessionService.user = response.data;
+              $state.go($localStorage.get('from_state_name'));// redirect user straight to /intro if they are still logged in
+            }
+          });
+        }
       },
       recordStateHistory: function () {
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-          
+
         })
       }
     };

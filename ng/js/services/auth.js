@@ -61,9 +61,8 @@ require('angular').module('ays')
         return promise;
       },
       initStateGuard: function () {
-
         // run auth check for each url visited
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
           $localStorage.put('to_state_name', toState.name);
           $localStorage.put('from_state_name', fromState.name);
           AuthService.getUserAuthStatus().then(function (response) {
@@ -82,13 +81,13 @@ require('angular').module('ays')
                 $state.transitionTo('intro');
               }
             }
-          })
+          });
         });
       },
       initAppLoad: function () {
         // Handles browser refreshes with localstorage. If there's no from_state_name saved from the
         // initStateGuard method, then the app was just loaded.
-        if($localStorage.get('from_state_name') === '') {
+        if ($localStorage.get('from_state_name') === '') {
           $state.go($localStorage.get('to_state_name'));
         } else {
           // set up Session Service on app load
@@ -97,16 +96,11 @@ require('angular').module('ays')
               SessionService.user = null;
             } else if (response.status === 200) {
               SessionService.user = response.data;
-              $state.go($localStorage.get('from_state_name'));// redirect user straight to /intro if they are still logged in
+              $state.go($localStorage.get('from_state_name'));// redirect user
             }
           });
         }
       },
-      recordStateHistory: function () {
-        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-
-        })
-      }
     };
     return AuthService;
   }])

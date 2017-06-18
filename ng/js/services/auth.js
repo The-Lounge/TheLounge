@@ -96,7 +96,7 @@ require('angular').module('ays')
               SessionService.user = null;
             } else if (response.status === 200) {
               SessionService.user = response.data;
-              $state.go($localStorage.get('from_state_name'));// redirect user
+              $state.go($localStorage.get('intro'));// redirect user
             }
           });
         }

@@ -1,5 +1,4 @@
 <nav>
-<!--temporary-->
 <style>a{color: black;}</style>
 	<div class="container-fluid">
     	<div>
@@ -7,6 +6,9 @@
             <label ng-if="!loggedIn" class="navbar-brand">Welcome to The Lounge at RIT!</label>
     	</div>
     	<ul class="nav navbar-nav navbar-right">
+						<li ng-if="loggedIn">
+							<a ng-click="profile()" ui-sref='profile'>User Profile</a>
+						</li>
             <li ng-if="loggedIn">
                 <a ui-sref='intro'>Introduction</a>
             </li>
@@ -19,11 +21,11 @@
             <li>
                 <a ui-sref='categories'>Categories</a>
             </li>
-    		<li>
-                <!--This contains other links to home and newposting for ease of development only -->
-		      	<a ng-if="!loggedIn" ui-sref="login">Login</a>
-		      	<a ng-if="loggedIn" ng-click="logout()" ui-sref="login">Logout</a>
-    		</li>
+
+		    		<li>
+				      	<a ng-if="!loggedIn" ui-sref="login">Login</a>
+				      	<a ng-if="loggedIn" ng-click="logout()" ui-sref="login">Logout</a>
+		    		</li>
       	</ul>
     </div>
 </nav>

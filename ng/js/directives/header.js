@@ -7,13 +7,16 @@ require('angular').module('ays')
   .directive('sessionheader', function () {
     return {
       restrict: 'E',
-      controller: function ($scope, $sails, AuthService, SessionService) {
+      controller: function ($scope, $sails, $state, AuthService, SessionService) {
         $scope.loggedIn = AuthService.isAuthenticated();
-        $scope.userData = SessionService.user;
 
         $scope.logout = function () {
           AuthService.logout();// no need for then()
         };
+
+        $scope.profile = function () {
+          $state.go('profile', {id: SessionService.user.id});
+        }
       },
       // In /ng/views/
       templateUrl: 'views/sessionheader.html',

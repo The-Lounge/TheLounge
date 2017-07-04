@@ -6,10 +6,9 @@
  * in and creates a single script
  */
 
-// Include JQuery and BootStrap
+// Include JQuery
 // eslint-disable-next-line no-multi-assign
 window.$ = window.jQuery = require('jquery');
-window.boostrapjs = require('bootstrap-sass');
 window.angular = require('angular');
 window._ = require('lodash');
 require('angular-sails');
@@ -35,6 +34,7 @@ require('angular').module('ays', [
     require('angular-touch'),
     require('angular-ui-router'),
     require('angular-localstorage'),
+    require('angular-material'),
     'ngSails',
   ])
   // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
@@ -86,6 +86,12 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
       controller: 'CreatePostingController',
       templateUrl: 'views/createPost.html',
       protected: true,
+    })
+    .state('profile', {
+      url: '/user/:id',
+      controller: 'UserProfileController',
+      templateUrl: 'views/userProfile.html',
+      protected: false,
     })
     .state('categories', {
       url: '/categories',
@@ -160,3 +166,4 @@ require('./controllers/login');
 require('./controllers/main');
 require('./controllers/posting');
 require('./controllers/categories');
+require('./controllers/userProfile');

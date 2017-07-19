@@ -328,4 +328,19 @@ describe('/posting', () => {
       // TODO: Not implemented
     });
   });
+
+  describe('DELETE /posting/:id', () => {
+    it('permanently removes the specified posting from storage', () => {
+      let postingId = null;
+      const testOp = httpClient.post(endpoint.POSTING, testData.createPosting)
+        .then(posting => { postingId = posting.id; })
+        .then(() => httpClient.delete(`${endpoint.POSTING}/${postingId}`))
+        .then(() => httpClient.get(`${endpoint.POSTING}/${postingId}`));
+
+      // expect the posting to have been destroyed (should return a 404 when requested)
+      return expect(testOp).to.be.rejected
+        .and.to.eventually.be.instanceof(Error)
+        .and.to.have.property('statusCode', 404);
+    });
+  });
 });

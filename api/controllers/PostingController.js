@@ -87,4 +87,18 @@ module.exports = {
       .then(res.ok)
       .catch(err => mapError(err, res));
   },
+
+  delete(req, res, next) {
+    const id = req.allParams().id;
+
+    Posting.destroy({id}).exec((error) => {
+      if (error) {
+        mapError(res, error);
+      } else {
+        res.ok();
+      }
+
+      next();
+    });
+  }
 };

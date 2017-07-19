@@ -100,5 +100,5 @@ module.exports = {
 
       next();
     });
-  }
+  },
 };

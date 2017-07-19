@@ -333,7 +333,7 @@ describe('/posting', () => {
     it('permanently removes the specified posting from storage', () => {
       let postingId = null;
       const testOp = httpClient.post(endpoint.POSTING, testData.createPosting)
-        .then(posting => { postingId = posting.id; })
+        .then((posting) => { postingId = posting.id; })
         .then(() => httpClient.delete(`${endpoint.POSTING}/${postingId}`))
         .then(() => httpClient.get(`${endpoint.POSTING}/${postingId}`));
 

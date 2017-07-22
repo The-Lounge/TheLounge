@@ -1,14 +1,14 @@
 require('angular').module('ays')
-  .controller('CreatePostingController', 
+  .controller('CreatePostingController',
     ['$window', '$scope', '$sails', '$timeout', '$state', 'SessionService',
     function ($window, $scope, $sails, $timeout, $state, SessionService) {
       $scope.postingCategories = [];
+      $scope.selectedCategoryDescription = '';
       $scope.categoryDescription = '';
       $scope.titleErrorMessages = [];
       $scope.priceErrorMessages = [];
       $scope.descriptionErrorMessages = [];
       $scope.categoryErrorMessages = [];
-
       $scope.allInputValidated = false;
       $scope.titleValidated = false;
       $scope.pricesValidated = false;
@@ -56,12 +56,12 @@ require('angular').module('ays')
       // Submit the form. Only gets called after validation occurs.
       $scope.submitForm = function () {
         $scope.validateForm();
-        parseCategoriesForCreation($scope.categoryDescription.description);
+        parseCategoriesForCreation($scope.categoryDescription);
         $scope.isSubmitting = true;
         // Since we know these prices are validated in string form already, convert directly to floats
         $scope.newPosting.price.minimum = parseFloat($scope.newPosting.price.minimum);
         $scope.newPosting.price.maximum = parseFloat($scope.newPosting.price.maximum);
-        
+
         if (isNaN($scope.newPosting.price.minimum)) {
           $scope.newPosting.price.minimum = null;
         } else if (isNaN($scope.newPosting.price.maximum)) {
@@ -75,12 +75,12 @@ require('angular').module('ays')
             $scope.isSubmitting = false;
             $state.go('posting.view', {id: resp.data.id});
           })
-          .catch(function () {
+          .catch(function (err) {
             console.log('error occured creating the posting');
           });
       };
       $scope.validateForm = function () {
-        if ($scope.pricesValidated && 
+        if ($scope.pricesValidated &&
            $scope.titleValidated &&
            $scope.descriptionValidated &&
            $scope.categoryValidated) {
@@ -88,6 +88,7 @@ require('angular').module('ays')
         }
       };
       $scope.validateCategory = function () {
+        console.log('here1');
         $scope.categoryErrorMessages = [];
         $scope.categoryValidated = true;
         if ($scope.categoryDescription === '') {
@@ -97,6 +98,7 @@ require('angular').module('ays')
       };
 
       $scope.validateDescription = function () {
+        console.log('here2');
         var text = $scope.newPosting.description;
         $scope.descriptionErrorMessages = [];
         $scope.descriptionValidated = true;
@@ -109,6 +111,7 @@ require('angular').module('ays')
       // Add each valid error message to the messages array, not including
       // the length checks since its always one or the other
       $scope.validateTitle = function () {
+        console.log('here3');
         var text = $scope.newPosting.title;
         var empty = false;
         $scope.titleErrorMessages = [];// empty out message array on each attempt
@@ -132,6 +135,7 @@ require('angular').module('ays')
       // directive, based on which input field was last 'blurred',
       // or unfocused.
       $scope.validatePrices = function () {
+        console.log('here4');
         var lowPrice = $scope.newPosting.price.minimum;
         var highPrice = $scope.newPosting.price.maximum;
         var fLow = parseFloat(lowPrice.replace(/,/g, ''));
@@ -178,7 +182,7 @@ require('angular').module('ays')
         // Min is equal to or greater than max price
         if (fLow >= fHigh) {
           $scope.pricesValidated = false;
-          // Don't want to include redundant error messages. 
+          // Don't want to include redundant error messages.
           // If its not already saying its invalid, then include this message
           // IE11 retardant
           var counter;

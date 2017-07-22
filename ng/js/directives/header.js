@@ -9,9 +9,10 @@ require('angular').module('ays')
       restrict: 'E',
       controller: function ($scope, $sails, $state, AuthService, SessionService) {
         $scope.loggedIn = AuthService.isAuthenticated();
-
+        $scope.userData = SessionService.user;
         $scope.logout = function () {
-          AuthService.logout();// no need for then()
+          AuthService.logout();
+          $state.go('login');
         };
 
         $scope.profile = function () {

@@ -1,73 +1,40 @@
 <nav>
 <style>a{color: black;}</style>
 	<div class="container-fluid">
-    	<!-- <div>
-            <label ng-if="loggedIn" class="navbar-brand">Welcome to The Lounge at RIT  {{userData.userName}}!</label>
+    <md-nav-bar
+        <md-selected-nav-item="currentNavItem"
+        		nav-bar-aria-label="navigation links"
+            class="navbar-right">
+        <md-list-item>
+            <label ng-if="loggedIn" class="navbar-brand" style="vertical-align: middle">Welcome to The Lounge at RIT  {{userData.userName}}!</label>
             <label ng-if="!loggedIn" class="navbar-brand">Welcome to The Lounge at RIT!</label>
-        -->
-        <!--
-    	<ul class="nav navbar-nav navbar-right">
-            
-						<li ng-if="loggedIn">
-							<a ng-click="profile()" ui-sref='profile'>User Profile</a>
-						</li>
-
-
-            <li ng-if="loggedIn">
-                <a ui-sref='intro'>Introduction</a>
-            </li>
-            <li ng-if="loggedIn">
-                <a ui-sref='posting.new'>Create Post</a>
-            </li>
-
-            <li>
-                <a ui-sref='home'>Home Page</a>
-            </li>
-            <li>
-                <a ui-sref='categories'>Categories</a>
-            </li>
-
-		    		<li>
-				      	<a ng-if="!loggedIn" ui-sref="login">Login</a>
-				      	<a ng-if="loggedIn" ng-click="logout()" ui-sref="login">Logout</a>
-		    		</li>
-      	</ul>
--->
-            <md-nav-bar
-                md-selected-nav-item="currentNavItem"
-                nav-bar-aria-label="navigation links"
-                        class="navbar-right">
-                <md-list-item>
-                    <label ng-if="loggedIn" class="navbar-brand" style="vertical-align: middle">Welcome to The Lounge at RIT  {{userData.userName}}!</label>
-                    <label ng-if="!loggedIn" class="navbar-brand">Welcome to The Lounge at RIT!</label>
-                </md-list-item>
-                <span flex></span>
-                    <md-nav-item md-nav-click="profile()"  ui-sref='profile' ng-if="loggedIn">
-                        User Profile
-                    </md-nav-item>
-                    <!-- needs to have md-nav-click function otherwise will not display -->
-                    <md-nav-item md-nav-click="something()" ng-if="loggedIn" ui-sref='intro'>
-                        Introduction
-                    </md-nav-item>
-                    <!-- needs to have md-nav-click function otherwise will not display -->
-                    <md-nav-item md-nav-click="something()" ng-if="loggedIn" ui-sref='posting.new'>
-                        Create Post
-                    </md-nav-item>
-                    <!-- needs to have md-nav-click function otherwise will not display -->
-                    <md-nav-item md-nav-click="something()"ui-sref="home">
-                        Home Page
-                    </md-nav-item>
-                    <!-- needs to have md-nav-click function otherwise will not display -->
-                    <md-nav-item md-nav-click="something()" ui-sref='categories'>
-                        Categories
-                    </md-nav-item>
-                    <md-nav-item ng-if="!loggedIn" md-nav-click="login()" ui-sref="login">
-                        Login
-                    </md-nav-item>
-                    <md-nav-item ng-if="loggedIn" md-nav-click="something()" ui-sref='logout'>
-                        Logout
-                    </md-nav-item>
-            </md-nav-bar>
-        <!-- </div> -->
-    </div>
+        </md-list-item>
+        <span flex></span>
+            <md-nav-item md-nav-click="profile()"  ui-sref='profile' ng-if="loggedIn">
+                User Profile
+            </md-nav-item>
+            <!-- needs to have md-nav-click function otherwise will not display -->
+            <md-nav-item md-nav-click="something()" ng-if="loggedIn" ui-sref='intro'>
+                Introduction
+            </md-nav-item>
+            <!-- needs to have md-nav-click function otherwise will not display -->
+            <md-nav-item md-nav-click="something()" ng-if="loggedIn" ui-sref='posting.new'>
+                Create Post
+            </md-nav-item>
+            <!-- needs to have md-nav-click function otherwise will not display -->
+            <md-nav-item md-nav-click="something()"ui-sref="home">
+                Home Page
+            </md-nav-item>
+            <!-- needs to have md-nav-click function otherwise will not display -->
+            <md-nav-item md-nav-click="something()" ui-sref='categories'>
+                Categories
+            </md-nav-item>
+            <md-nav-item ng-if="!loggedIn" md-nav-click="login()" ui-sref="login">
+                Login
+            </md-nav-item>
+            <md-nav-item ng-if="loggedIn" md-nav-click="logout()">
+                Logout
+            </md-nav-item>
+    </md-nav-bar>
+  </div>
 </nav>

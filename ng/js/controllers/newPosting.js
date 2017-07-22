@@ -76,7 +76,7 @@ require('angular').module('ays')
             $state.go('posting.view', {id: resp.data.id});
           })
           .catch(function (err) {
-            console.log('error occured creating the posting');
+            console.log(err);
           });
       };
       $scope.validateForm = function () {
@@ -88,7 +88,6 @@ require('angular').module('ays')
         }
       };
       $scope.validateCategory = function () {
-        console.log('here1');
         $scope.categoryErrorMessages = [];
         $scope.categoryValidated = true;
         if ($scope.categoryDescription === '') {
@@ -98,7 +97,6 @@ require('angular').module('ays')
       };
 
       $scope.validateDescription = function () {
-        console.log('here2');
         var text = $scope.newPosting.description;
         $scope.descriptionErrorMessages = [];
         $scope.descriptionValidated = true;
@@ -111,7 +109,6 @@ require('angular').module('ays')
       // Add each valid error message to the messages array, not including
       // the length checks since its always one or the other
       $scope.validateTitle = function () {
-        console.log('here3');
         var text = $scope.newPosting.title;
         var empty = false;
         $scope.titleErrorMessages = [];// empty out message array on each attempt
@@ -135,7 +132,6 @@ require('angular').module('ays')
       // directive, based on which input field was last 'blurred',
       // or unfocused.
       $scope.validatePrices = function () {
-        console.log('here4');
         var lowPrice = $scope.newPosting.price.minimum;
         var highPrice = $scope.newPosting.price.maximum;
         var fLow = parseFloat(lowPrice.replace(/,/g, ''));

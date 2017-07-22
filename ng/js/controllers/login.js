@@ -9,7 +9,7 @@ require('angular').module('ays')
       $scope.credentials = {
         userName: '',
         password: '',
-      }
+      };
 
       // $scope.authenticateByKey = function ($event) {
       //   console.log(response);
@@ -61,12 +61,12 @@ require('angular').module('ays')
       };
     }])
 
-    .directive('ngEnter', function() {
-        return function(scope, element, attrs) {
-            element.bind("keydown keypress", function(event) {
-                if(event.which === 13) {
-                    scope.$apply(function(){
-                        scope.$eval(attrs.ngEnter, {'event': event});
+    .directive('ngEnter', function () {
+        return function (scope, element, attrs) {
+            element.bind('keydown keypress', function (event) {
+                if (event.which === 13) {
+                    scope.$apply(function () {
+                        scope.$eval(attrs.ngEnter, {event: event});
                     });
 
                     event.preventDefault();

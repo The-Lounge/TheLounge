@@ -17,7 +17,7 @@ require('angular').module('ays')
 
         $scope.profile = function () {
           $state.go('profile', {id: SessionService.user.id});
-        }
+        };
       },
       // In /ng/views/
       templateUrl: 'views/sessionheader.html',

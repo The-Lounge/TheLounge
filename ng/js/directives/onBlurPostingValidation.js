@@ -25,7 +25,6 @@
         angular.forEach(selects, function (value) {
           angular.element(value)
             .on('blur', function () {
-              console.log('asdfasdf')
               // Validate this input field when the user leaves that field
               if (value.id === 'categorySelector') {
                 scope.validateCategory();

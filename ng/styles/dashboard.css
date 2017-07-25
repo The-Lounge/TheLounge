@@ -27,11 +27,11 @@
     border-radius: 10px;
 }
 
-/*New Intro Style*/
+/*New Dashboard Style*/
 body{
     margin: 0 !important;
 }
-#intro-container{
+#dashboard-container{
     font-size: 0;
     margin: 0;
     padding: 0;

@@ -78,7 +78,7 @@ require('angular').module('ays')
               // if user is authenticated, dont make them log in again
               if (toState.url === '/login') {
                 event.preventDefault();
-                $state.transitionTo('intro');
+                $state.transitionTo('dashboard');
               }
             }
           });

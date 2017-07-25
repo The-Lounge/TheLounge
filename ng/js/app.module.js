@@ -9,7 +9,6 @@
 // Include JQuery and BootStrap
 // eslint-disable-next-line no-multi-assign
 window.$ = window.jQuery = require('jquery');
-window.boostrapjs = require('bootstrap-sass');
 window.angular = require('angular');
 window._ = require('lodash');
 require('angular-sails');
@@ -93,10 +92,10 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
       templateUrl: 'views/categories.html',
       protected: true,
     })
-    .state('intro', {
-      url: '/intro',
-      templateUrl: '/views/intro.html',
-      controller: 'IntroController',
+    .state('dashboard', {
+      url: '/dashboard',
+      templateUrl: '/views/dashboard.html',
+      controller: 'DashboardController',
       protected: true,
     })
     .state('faq', {
@@ -110,7 +109,7 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
       templateUrl: 'views/login.html',
       protected: false,
       params: { // used to navigate to desired page if redirected to login, sets /home as default
-        toState: 'intro',
+        toState: 'dashboard',
         toParams: {},
       },
     })
@@ -125,7 +124,7 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
       // if user navigates to 'thelounge.co/' handle routing accordingly
       controller: function (AuthService, $state) {
         if (AuthService.isAuthenticated()) {
-          $state.go('intro');
+          $state.go('dashboard');
         } else {
           $state.go('home');
         }
@@ -155,7 +154,7 @@ require('./directives/header');
 require('./directives/footer');
 require('./services/auth');
 require('./services/requestinterceptor');
-require('./controllers/intro');
+require('./controllers/dashboard');
 require('./controllers/login');
 require('./controllers/main');
 require('./controllers/posting');

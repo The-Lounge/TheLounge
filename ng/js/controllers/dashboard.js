@@ -2,7 +2,7 @@
  * Author: Tyler Russell
  */
 require('angular').module('ays')
-  .controller('IntroController', 
+  .controller('DashboardController',
     ['$scope', '$state',
     function ($scope, $state) {
         $scope.profile = function () {

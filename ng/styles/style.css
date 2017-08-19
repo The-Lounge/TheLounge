@@ -147,7 +147,7 @@ body {
 }
 
 /*
-.intro-section {
+.dashboard-section {
     height: 100%;
     padding-top: 150px;
     text-align: center;
@@ -419,7 +419,7 @@ img{
 	position: absolute;
 	top: 23px;
 }
-.introduction-btn {
+.dashboard-btn {
 	color: #f9fffd;
 	display: inline-block;
 	font-size: 25px;
@@ -429,8 +429,8 @@ img{
 	text-decoration: none;
 	top: 50%;
 }
-.introduction-btn:hover,
-.introduction-btn:focus{
+.dashboard-btn:hover,
+.dashboard-btn:focus{
 	color: #f9fffd;
 	text-decoration: none;
 	outline: none;
@@ -968,7 +968,7 @@ img{
 	.button-default::after, .button-default > span {
 	  font-size: 14px;
 	}
-	.introduction-btn {
+	.dashboard-btn {
 	  font-size: 20px;
 	}
 	.header-content h2 {

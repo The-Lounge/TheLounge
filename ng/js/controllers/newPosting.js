@@ -103,6 +103,9 @@ require('angular').module('ays')
         if (text.length < 1) {
           $scope.descriptionValidated = false;
           $scope.descriptionErrorMessages.push('A description of your post is required');
+        } else if (text.length > 200) {
+          $scope.descriptionValidated = false;
+          $scope.descriptionErrorMessages.push('Please keep the description less than 200 characters');
         }
       };
       // Ensure title is between 3-60 characters and is alphanumeric.

@@ -1,0 +1,13 @@
+.create-posting-background {
+  background: url(../images/create-posting-background.jpg) no-repeat center center fixed;
+  background-size: 100%;
+  -webkit-background-size: cover; /* For WebKit*/
+  -moz-background-size: cover;    /* Mozilla*/
+  -o-background-size: cover;      /* Opera*/
+  background-size: cover;         /* Generic*/
+  width: 100vw;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  overflow: auto;
+}

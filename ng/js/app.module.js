@@ -37,7 +37,6 @@ require('angular').module('ays', [
     require('angular-material'),
     'ngSails',
   ])
-  // This handles the users session, redirects to login if currently unauthorized, homepage otherwise
   .run([
     'AuthService',
     'SessionService',
@@ -49,6 +48,7 @@ require('angular').module('ays', [
     '$urlRouterProvider',
     '$stateProvider',
     '$locationProvider',
+    '$mdThemingProvider',
     config]);
 
 function run(AuthService, SessionService, $rootScope, $state) {
@@ -58,6 +58,9 @@ function run(AuthService, SessionService, $rootScope, $state) {
   AuthService.initStateGuard();
 
   $rootScope.$on('$stateChangeStart', function redirect(event, toState, toParams) {
+    $rootScope.background = '';
+    // this references a css class, which references an image to use as a background
+    $rootScope.background = toState.data.background + '-background';
     if (toState.data && typeof toState.data.redirect === 'string') {
       event.preventDefault();
       $state.go(toState.data.redirect, toParams);
@@ -65,10 +68,14 @@ function run(AuthService, SessionService, $rootScope, $state) {
   });
 }
 
-function config($urlRouterProvider, $stateProvider, $locationProvider) {
+function config($urlRouterProvider, $stateProvider, $locationProvider, $mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .primaryPalette('orange', {
+      default: '700',   // make all material elements that use the default color use the hue 700
+    });
+    // .accentPalette('brown'); // do we care about this?????
+
   $locationProvider.hashPrefix('');
-  // removes #! from urls, disables browser refresh without backend changes
-  // $locationProvider.html5Mode(true);
   $stateProvider
     .state('posting', {
       abstract: true,
@@ -80,35 +87,54 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
       templateUrl: 'views/postingDetails.html',
       protected: true,
       controller: 'PostingController',
+      data: {
+        // this is a prefix for a CSS classname, which references the image asset
+        background: 'view-posting',
+      },
     })
     .state('posting.new', {
       url: '/new',
       controller: 'CreatePostingController',
       templateUrl: 'views/createPost.html',
       protected: true,
+      data: {
+        background: 'create-posting',
+      },
     })
     .state('profile', {
       url: '/user/:id',
       controller: 'UserProfileController',
       templateUrl: 'views/userProfile.html',
-      protected: false,
+      protected: true,
+      data: {
+        background: 'profile',
+      },
     })
     .state('categories', {
       url: '/categories',
       controller: 'CategoriesController',
       templateUrl: 'views/categories.html',
       protected: true,
+      data: {
+        background: 'categories',
+      },
     })
     .state('dashboard', {
       url: '/dashboard',
       templateUrl: '/views/dashboard.html',
       controller: 'DashboardController',
       protected: true,
+      data: {
+        background: 'dashboard',
+      },
     })
     .state('faq', {
       url: '/faq',
       templateUrl: 'views/faq.html',
       protected: false,
+      data: {
+        background: 'faq',
+      },
     })
     .state('login', {
       url: '/login',
@@ -118,6 +144,9 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
       params: { // used to navigate to desired page if redirected to login, sets /home as default
         toState: 'dashboard',
         toParams: {},
+      },
+      data: {
+        background: 'login',
       },
     })
     .state('home', {
@@ -156,11 +185,12 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
 
 // Pull in the controllers, this should be done through modules eventually
 require('./directives/onBlurPostingValidation');
-require('./controllers/newPosting');
 require('./directives/header');
 require('./directives/footer');
+require('./services/posting');
 require('./services/auth');
 require('./services/requestinterceptor');
+require('./controllers/newPosting');
 require('./controllers/dashboard');
 require('./controllers/login');
 require('./controllers/main');

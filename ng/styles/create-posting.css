@@ -11,3 +11,29 @@
   top: 0px;
   overflow: auto;
 }
+
+.create-posting-button {
+
+}
+
+.create-posting-category-dropdown {
+  width: 30vw;
+}
+
+.create-posting-error-msg {
+  color:red;
+  margin-top:0px;
+  margin-bottom:0px;
+}
+
+.create-posting-description {
+  height: auto;
+}
+
+.create-posting-card {
+  border-radius: 4px;
+}
+
+md-input-container label {
+  padding-bottom: .3vh;
+}

@@ -1,87 +1,110 @@
-<div layout="column" class="md-inline-form">
-  <md-content layout-gt-sm="row" layout-padding>
-    <form name="postingForm" class="form-horizontal" novalidate validate-on-blur>
+<div layout="column">
+  <form name="postingForm" class="form-horizontal" novalidate validate-on-blur>
 
-      <label for="inputTitle"><h3 class="md-display-1"><b>Title<b></h3></label>
-      <md-input-container class="md-block">
-          <input
-            ng-disabled="isSubmitting"
-            max-length="60"
-            ng-model-options="{updateOn: 'blur'}"
-            ng-model="newPosting.title"
-            type="text"
-            class="form-control"
-            placeholder="Post Title"
-            name="postTitleName"
-            id="postTitle">
-      </md-input-container>
-      <div ng-repeat="message in titleErrorMessages">
-          <p style="color:red;margin-top:0px;margin-bottom:0px;">{{message}}</p>
-      </div>
-
-      <label for="prices"><h3 class="md-display-1"><b>Price<b></h3></label>
-      <p>You may enter either a minimum or maximum price, or both. Entering only a minimum price will result in a price advertised as Starting at $X (ex. Starting at $10). Entering only a maximum price will advertise a flat rate (ex. $10). Entering both a minimum and maximum will advertise a range (ex. $5 - $10).</p>
-      <md-input-container class="md-block">
-          <input
-            ng-disabled="isSubmitting"
-            ng-model-options="{updateOn: 'blur'}"
-            ng-model="newPosting.price.minimum"
-            type="text"
-            class="form-control"
-            placeholder="Minimum Price"
-            name="postLowPriceName"
-            id="inputPriceLow">
-      </md-input-container>
-      <md-input-container class="md-block">
-        <input
-            ng-disabled="isSubmitting"
-            ng-model-options="{updateOn: 'blur'}"
-            ng-model="newPosting.price.maximum"
-            type="text"
-            class="form-control"
-            placeholder="Maximum Price"
-            name="postHighPriceName"
-            id="inputPriceHigh">
-      </md-input-container>
-      <div ng-repeat="message in priceErrorMessages">
-          <h3 style="color: red">{{message}}</h3>
-      </div>
-
-      <label for="description"><h3 class="md-display-1"><b>Description<b></h3></label>
-        <md-input-container class="md-block">
-            <textArea
+    <div layout="row" layout-margin>
+      <md-card flex="60" layout-padding class="create-posting-card">
+        <div layout="column">
+          <label for="inputTitle" class="md-headline">Title</label>
+          <md-input-container class="md-block">
+              <input
                 ng-disabled="isSubmitting"
+                max-length="60"
                 ng-model-options="{updateOn: 'blur'}"
-                ng-model="newPosting.description"
+                ng-model="newPosting.title"
                 type="text"
                 class="form-control"
-                placeholder="Describe your post here..."
-                id="postDescription"
-                rows="4">
-            </textArea>
-      </md-input-container>
-      <div ng-repeat="message in descriptionErrorMessages">
-          <h3 style="color: red">{{message}}</h3>
-      </div>
+                placeholder="Post Title"
+                name="postTitleName"
+                id="postTitle">
+          </md-input-container>
+          <div ng-repeat="message in titleErrorMessages">
+              <span class="create-posting-error-msg">{{message}}</span>
+          </div>
+        </div>
+      </md-card>
+    </div>
 
-      <label><h3 class="md-display-1"><b>Category<b></h3></label>
-      <md-input-container class="md-block">
-        <md-select
-            ng-model="categoryDescription"
-            ng-disabled="isSubmitting"
-            id="categorySelector">
-            <md-option ng-repeat="posting in postingCategories" value="{{posting.description}}">
-              {{posting.description}}
-            </md-option>
-        </md-select>
-      </md-input-container>
-      <div ng-repeat="message in categoryErrorMessages">
-          <h3 style="color: red">{{message}}</h3>
-      </div>
-      <br/>
-      <br/>
-      <br/>
-      <md-button ng-disabled="!allInputValidated" ng-click="submitForm()" type="submit" class="btn-block">Create Posting</md-button>
-    </form>
-  </md-content>
+    <div layout="row" layout-margin>
+      <md-card layout-padding flex="60" class="create-posting-card">
+        <div layout="column">
+          <label for="prices" class="md-headline">Price</label>
+          <p>You may enter either a minimum or maximum price, or both. Entering only a minimum price will result in a price advertised as Starting at $X (ex. Starting at $10). Entering only a maximum price will advertise a flat rate (ex. $10). Entering both a minimum and maximum will advertise a range (ex. $5 - $10).</p>
+          <md-input-container class="md-block">
+              <input
+                ng-disabled="isSubmitting"
+                ng-model-options="{updateOn: 'blur'}"
+                ng-model="newPosting.price.minimum"
+                type="text"
+                class="form-control"
+                placeholder="Minimum Price"
+                name="postLowPriceName"
+                id="inputPriceLow">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <input
+                ng-disabled="isSubmitting"
+                ng-model-options="{updateOn: 'blur'}"
+                ng-model="newPosting.price.maximum"
+                type="text"
+                class="form-control"
+                placeholder="Maximum Price"
+                name="postHighPriceName"
+                id="inputPriceHigh">
+          </md-input-container>
+          <div ng-repeat="message in priceErrorMessages">
+              <span class="create-posting-error-msg">{{message}}</span>
+          </div>
+        </div>
+      </md-card>
+    </div>
+
+    <div layout="row" layout-margin>
+      <md-card layout-padding flex="60" class="create-posting-card">
+        <div layout="column">
+          <label for="description" class="md-headline">Description</label>
+            <md-input-container>
+              <textarea
+                  ng-disabled="isSubmitting"
+                  ng-model-options="{updateOn: 'blur'}"
+                  ng-model="newPosting.description"
+                  type="text"
+                  class="create-posting-description form-control"
+                  placeholder="Describe the service you want to provide"
+                  id="postDescription"
+                  rows="1">
+              </textarea>
+            </md-input-container>
+          <div ng-repeat="message in descriptionErrorMessages">
+              <span class="create-posting-error-msg">{{message}}</span>
+          </div>
+        </div>
+      </md-card>
+    </div>
+
+    <div layout="row" layout-margin>
+      <md-card layout-padding flex="60" class="create-posting-card">
+        <div layout="column">
+          <label class="md-headline">Category</label>
+          <md-input-container class="md-block">
+            <md-select
+                class="create-posting-category-dropdown"
+                ng-model="categoryDescription"
+                ng-disabled="isSubmitting"
+                id="categorySelector">
+                <md-option placeholder="Select a category your post belongs to" ng-repeat="posting in postingCategories" value="{{posting.description}}">
+                  {{posting.description}}
+                </md-option>
+            </md-select>
+          </md-input-container>
+          <div ng-repeat="message in categoryErrorMessages">
+              <span class="create-posting-error-msg">{{message}}</span>
+          </div>
+        </div>
+      </md-card>
+    </div>
+
+    <div layout="row" layout-margin>
+      <md-button aria-label="Create Post" ng-disabled="!allInputValidated" ng-click="submitForm()" type="submit" md-colors="{background: 'primary-700'}" >Create Posting</md-button>
+    </div>
+  </form>
 </div>

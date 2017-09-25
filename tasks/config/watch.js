@@ -29,7 +29,7 @@ module.exports = (grunt) => {
     },
     js: {
       files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-      tasks: ['newer:eslint', 'build', 'syncAssets'/* , 'newer:jscs:all'*/],
+      tasks: ['newer:eslint', 'build', 'syncAssets'],
     },
     jsTest: {
       files: ['test/ui-spec/{,*/}*.js'],

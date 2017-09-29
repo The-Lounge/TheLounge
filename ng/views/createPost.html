@@ -1,8 +1,8 @@
 <div layout="column">
   <form name="postingForm" class="form-horizontal" novalidate validate-on-blur>
 
-    <div layout="row" layout-margin>
-      <md-card flex="60" layout-padding class="create-posting-card">
+    <div layout="row" layout-margin layout-align="center center">
+      <md-card flex="50" layout-padding class="create-posting-card">
         <div layout="column">
           <label for="inputTitle" class="md-headline">Title</label>
           <md-input-container class="md-block">
@@ -24,8 +24,8 @@
       </md-card>
     </div>
 
-    <div layout="row" layout-margin>
-      <md-card layout-padding flex="60" class="create-posting-card">
+    <div layout="row" layout-margin layout-align="center center">
+      <md-card layout-padding flex="50" class="create-posting-card">
         <div layout="column">
           <label for="prices" class="md-headline">Price</label>
           <p>You may enter either a minimum or maximum price, or both. Entering only a minimum price will result in a price advertised as Starting at $X (ex. Starting at $10). Entering only a maximum price will advertise a flat rate (ex. $10). Entering both a minimum and maximum will advertise a range (ex. $5 - $10).</p>
@@ -58,8 +58,8 @@
       </md-card>
     </div>
 
-    <div layout="row" layout-margin>
-      <md-card layout-padding flex="60" class="create-posting-card">
+    <div layout="row" layout-margin layout-align="center center">
+      <md-card layout-padding flex="50" class="create-posting-card">
         <div layout="column">
           <label for="description" class="md-headline">Description</label>
             <md-input-container>
@@ -81,8 +81,8 @@
       </md-card>
     </div>
 
-    <div layout="row" layout-margin>
-      <md-card layout-padding flex="60" class="create-posting-card">
+    <div layout="row" layout-margin layout-align="center center">
+      <md-card layout-padding flex="50" class="create-posting-card">
         <div layout="column">
           <label class="md-headline">Category</label>
           <md-input-container class="md-block">
@@ -103,8 +103,10 @@
       </md-card>
     </div>
 
-    <div layout="row" layout-margin>
-      <md-button aria-label="Create Post" ng-disabled="!allInputValidated" ng-click="submitForm()" type="submit" md-colors="{background: 'primary-700'}" >Create Posting</md-button>
+    <div layout="row" layout-align="center center">
+      <div layout="column" flex="50" layout-align="end end">
+        <md-button aria-label="Create Post" ng-disabled="!allInputValidated" ng-click="submitForm()" type="submit" md-colors="{color: 'primary-700'}">Create Posting</md-button>
+      </div>
     </div>
   </form>
 </div>

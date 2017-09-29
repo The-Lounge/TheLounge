@@ -92,7 +92,7 @@ require('angular').module('ays')
         $scope.categoryValidated = true;
         if ($scope.categoryDescription === '') {
           $scope.categoryValidated = false;
-          $scope.categoryErrorMessages.push('You must select a category that your post belongs to');
+          $scope.categoryErrorMessages.push('You must select a category that your post most closely belongs to.');
         }
       };
 
@@ -105,7 +105,7 @@ require('angular').module('ays')
           $scope.descriptionErrorMessages.push('A description of your post is required');
         } else if (text.length > 200) {
           $scope.descriptionValidated = false;
-          $scope.descriptionErrorMessages.push('Please keep the description less than 200 characters');
+          $scope.descriptionErrorMessages.push('The description must be at most 200 characters.');
         }
       };
       // Ensure title is between 3-60 characters and is alphanumeric.
@@ -139,7 +139,7 @@ require('angular').module('ays')
         var highPrice = $scope.newPosting.price.maximum;
         var fLow = parseFloat(lowPrice.replace(/,/g, ''));
         var fHigh = parseFloat(highPrice.replace(/,/g, ''));
-        var msg1 = 'Either the minimum or maximum price (or both if posting a price range) is required';
+        var msg1 = 'Either the minimum or maximum price (or both for a range) is required';
         var msg2 = 'Minimum price is invalid';
         var msg3 = 'Maximum price is invalid';
         var regex = /^([1-9]\d{0,2}(,\d{3})*|([1-9]\d*))(\.\d{2})?$/;

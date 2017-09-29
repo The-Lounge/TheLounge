@@ -1,29 +1,53 @@
-<nav>
-<!--temporary-->
-<style>a{color: black;}</style>
+<nav md-colors="{background: 'primary-700'}">
 	<div class="container-fluid">
-    	<div>
-            <label ng-if="loggedIn" class="navbar-brand">Welcome to The Lounge at RIT  {{userData.userName}}!</label>
+    <md-nav-bar
+        <md-selected-nav-item="currentNavItem"
+        		nav-bar-aria-label="navigation links"
+            class="navbar-right">
+        <md-list-item md-colors="{background: 'primary-700'}">
+            <label ng-if="loggedIn" class="navbar-brand" style="vertical-align: middle">Welcome to The Lounge {{userData.userName}}!</label>
             <label ng-if="!loggedIn" class="navbar-brand">Welcome to The Lounge at RIT!</label>
-    	</div>
-    	<ul class="nav navbar-nav navbar-right">
-            <li ng-if="loggedIn">
-                <a ui-sref='dashboard'>Dashboard</a>
-            </li>
-            <li ng-if="loggedIn">
-                <a ui-sref='posting.new'>Create Post</a>
-            </li>
-            <li>
-                <a ui-sref='home'>Home Page</a>
-            </li>
-            <li>
-                <a ui-sref='categories'>Categories</a>
-            </li>
-    		<li>
-                <!--This contains other links to home and newposting for ease of development only -->
-		      	<a ng-if="!loggedIn" ui-sref="login">Login</a>
-		      	<a ng-if="loggedIn" ng-click="logout()" ui-sref="login">Logout</a>
-    		</li>
-      	</ul>
-    </div>
+        </md-list-item>
+        <span flex></span>
+            <md-nav-item md-nav-click="profile()" ng-if="loggedIn">
+							<div md-colors="{background: 'primary-700'}">
+                User Profile
+							</div>
+            </md-nav-item>
+            <!-- needs to have md-nav-click function otherwise will not display -->
+            <md-nav-item md-nav-click="dashboard()" ng-if="loggedIn">
+							<div md-colors="{background: 'primary-700'}">
+                Dashboard
+							</div>
+            </md-nav-item>
+            <!-- needs to have md-nav-click function otherwise will not display -->
+            <md-nav-item md-nav-click="createPost()" ng-if="loggedIn">
+							<div md-colors="{background: 'primary-700'}">
+                Create Post
+							</div>
+            </md-nav-item>
+            <!-- needs to have md-nav-click function otherwise will not display -->
+            <md-nav-item md-nav-click="homepage()">
+							<div md-colors="{background: 'primary-700'}">
+                Home Page
+							</div>
+            </md-nav-item>
+            <!-- needs to have md-nav-click function otherwise will not display -->
+            <md-nav-item md-nav-click="categories()">
+							<div md-colors="{background: 'primary-700'}">
+                Categories
+							</div>
+            </md-nav-item>
+            <md-nav-item ng-if="!loggedIn" md-nav-click="login()">
+							<div md-colors="{background: 'primary-700'}">
+                Login
+							</div>
+            </md-nav-item>
+            <md-nav-item ng-if="loggedIn" md-nav-click="logout()">
+							<div md-colors="{background: 'primary-700'}">
+                Logout
+							</div>
+            </md-nav-item>
+    </md-nav-bar>
+  </div>
 </nav>

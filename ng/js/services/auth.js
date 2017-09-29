@@ -57,7 +57,6 @@ require('angular').module('ays')
           .catch(function (error) {
             return error;
           });
-        SessionService.destroy();// reset saved user info in front-end no matter what
         return promise;
       },
       initStateGuard: function () {
@@ -71,10 +70,11 @@ require('angular').module('ays')
                 event.preventDefault();
                 HttpPendingRequestsService.cancelAll(); // prevent all http requests
                 // if user isnt authenticated and attempts to view a protected state,
-                // redirect to login and store the desired view to redirect them back after
+                // redirect to login and pass the desired state/stateparams to it
                 $state.go('login', {toState: toState.name, toParams: toParams});
               }
             } else if (response.status === 200) {
+              SessionService.create(response.data);
               // if user is authenticated, dont make them log in again
               if (toState.url === '/login') {
                 event.preventDefault();
@@ -96,8 +96,6 @@ require('angular').module('ays')
               SessionService.user = null;
             } else if (response.status === 200) {
               SessionService.user = response.data;
-              // console.log($localStorage.get('to_state_name'))
-              // console.log($localStorage.get('from_state_name'))
               $state.go($localStorage.get('to_state_name'));
             }
           });

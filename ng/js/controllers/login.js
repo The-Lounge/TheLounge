@@ -2,14 +2,26 @@
  * Author: Tyler Russell
  */
 require('angular').module('ays')
-  .controller('LoginController', 
-    ['AUTH_EVENTS', '$sails', '$scope', '$state', 'AuthService', '$rootScope', 
+  .controller('LoginController',
+    ['AUTH_EVENTS', '$sails', '$scope', '$state', 'AuthService', '$rootScope',
     function (AUTH_EVENTS, $sails, $scope, $state, AuthService, $rootScope) {
       $scope.loginErrorMessage = '';
       $scope.credentials = {
         userName: '',
         password: '',
       };
+
+      // $scope.authenticateByKey = function ($event) {
+      //   console.log(response);
+      //   var keyCode = $event.which || $event.keyCode;
+      //   switch(keyCode) {
+      //     case 13:
+      //       console.log('here');
+      //       break;
+      //     default:
+      //
+      //   };
+      // }
 
       // Scope variable linked to the actual login button. Checks for validity via
       // the HTTP response codes from the AuthService methods, which in turn gets them from
@@ -47,4 +59,18 @@ require('angular').module('ays')
             console.log('An error occurred trying to log in.');
           });
       };
-    }]);
+    }])
+
+    .directive('ngEnter', function () {
+        return function (scope, element, attrs) {
+            element.bind('keydown keypress', function (event) {
+                if (event.which === 13) {
+                    scope.$apply(function () {
+                        scope.$eval(attrs.ngEnter, {event: event});
+                    });
+
+                    event.preventDefault();
+                }
+            });
+        };
+    });

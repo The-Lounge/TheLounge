@@ -1,0 +1,75 @@
+<sessionheader></sessionheader>
+<div layout="column" layout-align="center center" layout-margin layout-wrap>
+  <md-card class="profile-data-card" layout-sm="column">
+    <md-card-title class="profile-primary-gradient-image" layout-align="center center">
+      <img src="images/profile.jpg"  class="profile-image"></img>
+    </md-card-title>
+    <md-card-content><br>
+      <div layout="column">
+        <span md-colors="{color: 'primary-700'}" class="md-headline text-important" layout-padding>{{userData.name.firstName}} {{userData.name.lastName}}</span>
+        <span class="md-headline text-regular" layout-padding>Rochester Institute of Technology</span>
+        <span class="md-headline text-regular" layout-padding>{{userData.email}}</span>
+      </div>
+    </md-card-content>
+  </md-card>
+  <md-card class="profile-posting-header">
+    <md-card-content md-colors="{background: 'primary-700'}">
+      <div layout="row">
+        <div layout="column" layout-align="center start" flex="95">
+          <span class="md-headline">My Postings</span>
+        </div>
+        <div layout="column" layout-align="center center" flex="5">
+          <a ui-sref="posting.new">
+            <div layout="column" layout-align="center center">
+              <img class="new-post-image" src="images/create-post.png">
+            </div>
+          </a>
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+  <md-card ng-if="usersPostings.length !== 0" ng-repeat="posting in usersPostings" class="profile-data-card">
+    <div layout="row" layout-sm="column">
+      <div layout="column" layout-align="center center" flex="15" layout-padding>
+        <img src="/images/nailsSquare.jpg" layout-margin class="profile-posting-image">
+      </div>
+      <div layout="column" flex="30" layout-padding>
+        <div layout="row" layout-sm="column" layout-align="start start">
+          <h4 style="text-align:left">{{ posting.title }}</h4>
+        </div>
+
+        <!-- Once ratings are implemented, use the below for displaying it -->
+        <div layout="row" layout-sm="column" layout-align="start center">
+          <!-- <img class="profile-ratings-star-image" src="images/filled-star.png"></img>
+          <img class="profile-ratings-star-image" src="images/filled-star.png"></img>
+          <img class="profile-ratings-star-image" src="images/filled-star.png"></img>
+          <img class="profile-ratings-star-image" src="images/empty-star.png"></img>
+          <img class="profile-ratings-star-image" src="images/empty-star.png"></img> -->
+        </div>
+
+        <div layout="row" layout-sm="column" layout-align="start end">
+          <h4 ng-if="posting.price.minimum">${{posting.price.minimum}}</h4>
+          <h4 ng-if="posting.price.minimum && posting.price.maximum">&nbsp;-&nbsp;</h4>
+          <h4 ng-if="posting.price.maximum">${{posting.price.maximum}}</h4>
+        </div>
+      </div>
+      <div layout="column" flex="50" layout-align="start start" layout-padding>
+        <div layout="row" layout-sm="column">
+          <h4 style="text-align:left">{{ posting.description }}</h4>
+        </div>
+      </div>
+      <div layout="column" flex="10" layout-align="center center" layout-margin>
+        <a target="_blank" ui-sref="posting.view"><img class="profile-edit-posting-image" src="images/edit-posting.png"></a>
+      </div>
+    </div>
+  </md-card>
+  <md-card ng-if="usersPostings.length === 0">
+    <md-card-content class="profile-primary-gradient-image">
+      <div layout="row">
+        <div layout="column" layout-align="center start">
+          <span class="md-subhead">There's nothing here</span>
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+</div>

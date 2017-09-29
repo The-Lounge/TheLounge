@@ -1,0 +1,71 @@
+.text-important {
+  font-size: 2.8vw;
+  font-size: 2.8vh;
+}
+.text-regular {
+  font-size: 1.9vw;
+  font-size: 1.9vh;
+}
+.profile-primary-gradient-image {
+  background: -webkit-linear-gradient(to bottom, #FFEBEE, #F57C00);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #FFEBEE, #F57C00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+/* Left to right color wave repeated once*/
+.profile-primary-gradient-ltr {
+  background: -webkit-linear-gradient(to right, #F57C00, #FFEBEE, #F57C00);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #F57C00, #FFEBEE, #F57C00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.profile-background {
+  background: url(../images/profile-background.jpeg) no-repeat center center fixed;
+  background-size: 100%;
+  -webkit-background-size: cover; /* For WebKit*/
+  -moz-background-size: cover;    /* Mozilla*/
+  -o-background-size: cover;      /* Opera*/
+  background-size: cover;         /* Generic*/
+  width: 100vw;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  overflow: auto;
+}
+.profile-data-card {
+  position: relative;
+  text-align: center;
+  width: 55%;
+  height: 55%;
+  overflow-y: scroll;
+  border-radius: 6px;
+}
+.profile-image {
+  top: 15%;
+  width: 35%;
+  height: 90%;
+}
+
+.profile-posting-header {
+  font-size: 3vw;
+  width: 55%;
+  height: 55%;
+  border-radius: 6px;
+}
+
+.new-post-image {
+  width: 80%;
+  height: 80%;
+}
+
+.profile-posting-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+.profile-ratings-star-image {
+  width: 9%;
+  height: 9%;
+}
+
+.profile-edit-posting-image {
+  width: 40%;
+  height: 40%;
+}

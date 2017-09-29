@@ -8,12 +8,6 @@
     padding: 1%;
 }
 
-nav{
-  background-color: #F36E21;
-  text-align: center;
-  color: #513127;
-}
-
 .headerImage{
   background-image: url("../images/nails.jpg");
   background-size: cover;

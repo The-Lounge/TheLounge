@@ -1,14 +1,14 @@
 require('angular').module('ays')
-  .controller('CreatePostingController', 
+  .controller('CreatePostingController',
     ['$window', '$scope', '$sails', '$timeout', '$state', 'SessionService',
     function ($window, $scope, $sails, $timeout, $state, SessionService) {
       $scope.postingCategories = [];
+      $scope.selectedCategoryDescription = '';
       $scope.categoryDescription = '';
       $scope.titleErrorMessages = [];
       $scope.priceErrorMessages = [];
       $scope.descriptionErrorMessages = [];
       $scope.categoryErrorMessages = [];
-
       $scope.allInputValidated = false;
       $scope.titleValidated = false;
       $scope.pricesValidated = false;
@@ -56,12 +56,12 @@ require('angular').module('ays')
       // Submit the form. Only gets called after validation occurs.
       $scope.submitForm = function () {
         $scope.validateForm();
-        parseCategoriesForCreation($scope.categoryDescription.description);
+        parseCategoriesForCreation($scope.categoryDescription);
         $scope.isSubmitting = true;
         // Since we know these prices are validated in string form already, convert directly to floats
         $scope.newPosting.price.minimum = parseFloat($scope.newPosting.price.minimum);
         $scope.newPosting.price.maximum = parseFloat($scope.newPosting.price.maximum);
-        
+
         if (isNaN($scope.newPosting.price.minimum)) {
           $scope.newPosting.price.minimum = null;
         } else if (isNaN($scope.newPosting.price.maximum)) {
@@ -75,12 +75,12 @@ require('angular').module('ays')
             $scope.isSubmitting = false;
             $state.go('posting.view', {id: resp.data.id});
           })
-          .catch(function () {
-            console.log('error occured creating the posting');
+          .catch(function (err) {
+            console.log(err);
           });
       };
       $scope.validateForm = function () {
-        if ($scope.pricesValidated && 
+        if ($scope.pricesValidated &&
            $scope.titleValidated &&
            $scope.descriptionValidated &&
            $scope.categoryValidated) {
@@ -92,7 +92,7 @@ require('angular').module('ays')
         $scope.categoryValidated = true;
         if ($scope.categoryDescription === '') {
           $scope.categoryValidated = false;
-          $scope.categoryErrorMessages.push('You must select a category that your post belongs to');
+          $scope.categoryErrorMessages.push('You must select a category that your post most closely belongs to.');
         }
       };
 
@@ -103,6 +103,9 @@ require('angular').module('ays')
         if (text.length < 1) {
           $scope.descriptionValidated = false;
           $scope.descriptionErrorMessages.push('A description of your post is required');
+        } else if (text.length > 200) {
+          $scope.descriptionValidated = false;
+          $scope.descriptionErrorMessages.push('The description must be at most 200 characters.');
         }
       };
       // Ensure title is between 3-60 characters and is alphanumeric.
@@ -136,7 +139,7 @@ require('angular').module('ays')
         var highPrice = $scope.newPosting.price.maximum;
         var fLow = parseFloat(lowPrice.replace(/,/g, ''));
         var fHigh = parseFloat(highPrice.replace(/,/g, ''));
-        var msg1 = 'Either the minimum or maximum price (or both if posting a price range) is required';
+        var msg1 = 'Either the minimum or maximum price (or both for a range) is required';
         var msg2 = 'Minimum price is invalid';
         var msg3 = 'Maximum price is invalid';
         var regex = /^([1-9]\d{0,2}(,\d{3})*|([1-9]\d*))(\.\d{2})?$/;
@@ -178,7 +181,7 @@ require('angular').module('ays')
         // Min is equal to or greater than max price
         if (fLow >= fHigh) {
           $scope.pricesValidated = false;
-          // Don't want to include redundant error messages. 
+          // Don't want to include redundant error messages.
           // If its not already saying its invalid, then include this message
           // IE11 retardant
           var counter;

@@ -78,5 +78,21 @@
         "tags" : [],
         "skills" : "Calculus I",
         "active" : true
-	}
+	},
+  {
+    "sellerId": "-12",
+    "id" : "-6",
+    "title" : "Calculus II",
+    "categoryId" : "3",
+    "image" : null,
+    "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ipsum nisl",
+    "price" : {
+        "minimum" : 1,
+        "maximum" : 20
+    },
+    "date" : "7/5/16",
+    "tags" : [],
+    "skills" : "Calculus I",
+    "active" : true
+  }
 ]

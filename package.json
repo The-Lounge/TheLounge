@@ -85,7 +85,7 @@
     "grunt-sync": "0.2.4",
     "grunt-wait": "^0.1.0",
     "include-all": "^3.0.1",
-    "jquery": "^2.2.4",
+    "jquery": "^3.0.0",
     "lodash": "^4.17.4",
     "mocha": "^3.2.0",
     "nodetree": "0.0.3",

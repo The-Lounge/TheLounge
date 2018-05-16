@@ -42,12 +42,12 @@ const testData = {
 const expected = {
   user: {
     name: {
-      firstName: 'Gregory',
-      lastName: 'Rozmarynowycz',
+      firstName: 'Tyler',
+      lastName: 'Russell',
     },
-    userName: 'gjr8050',
-    id: '-3',
-    email: 'gjr8050@g.rit.edu',
+    userName: 'tlr3552',
+    id: '-12',
+    email: 'tlr3552@g.rit.edu',
     status: 'active',
   },
 };

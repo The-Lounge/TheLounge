@@ -11,7 +11,7 @@ chai.use(require('chai-as-promised'));
 const expect = chai.expect;
 const util = require('./util');
 
-const Q = require('q');
+// const Q = require('q');
 
 const endpoint = {
   ME: 'me',
@@ -29,29 +29,29 @@ const logoutOptions = {
   url: url.resolve(config.API_PATH, config.endpoint.LOGOUT),
 };
 
-const testData = {
-  invalidLogin_pw: {
-    userName: 'tlr3552',
-    password: 'notMyPassword',
-  },
-  invalidLogin_un: {
-    userName: 'DNE',
-    password: 'testPw',
-  },
-};
+// const testData = {
+//   invalidLogin_pw: {
+//     userName: 'tlr3552',
+//     password: 'notMyPassword',
+//   },
+//   invalidLogin_un: {
+//     userName: 'DNE',
+//     password: 'testPw',
+//   },
+// };
 
-const expected = {
-  user: {
-    name: {
-      firstName: 'Tyler',
-      lastName: 'Russell',
-    },
-    userName: 'tlr3552',
-    id: '-12',
-    email: 'tlr3552@g.rit.edu',
-    status: 'active',
-  },
-};
+// const expected = {
+//   user: {
+//     name: {
+//       firstName: 'Tyler',
+//       lastName: 'Russell',
+//     },
+//     userName: 'tlr3552',
+//     id: '-12',
+//     email: 'tlr3552@g.rit.edu',
+//     status: 'active',
+//   },
+// };
 
 describe('ClientController', () => {
   describe('/login', () => {

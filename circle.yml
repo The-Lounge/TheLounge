@@ -6,6 +6,7 @@ dependencies:
     - /opt/circleci/nodejs/v7.4.0/bin
     - /opt/circleci/nodejs/v7.4.0/lib/node_modules
   pre:
+    - sudo apt-get update  
     - sudo apt-get install python-dev
     - pip install awsebcli
     - sh ./scripts/global_modules.sh

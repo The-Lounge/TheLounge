@@ -37,6 +37,7 @@ require('angular').module('ays')
                 $rootScope.$broadcast(AUTH_EVENTS.loginFailed);// broadcast isn't being caught for now
                 $scope.loginErrorMessage = res.data.message;
               } else if (res.status === 200) {
+                  console.log("wtf" + res);
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);// broadcast isn't being caught for now
                 $state.go($state.params.toState, $state.params.toParams);
               }

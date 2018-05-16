@@ -43,8 +43,7 @@ require('angular').module('ays')
         //       minimum: 1,
         //       maximum: 10
         //     },
-        //     description: "Something descriptive something descriptive something
-        // descriptive something descriptive something descriptive something descriptiveasdfasdfasdf",
+        //     description: "Something descriptive something descriptive something  descriptive something descriptive something descriptive something descriptiveasdfasdfasdf",
         //     title: "Something brief",
         //     id: 102938491924
         //   }

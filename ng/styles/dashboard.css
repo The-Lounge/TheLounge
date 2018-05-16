@@ -12,6 +12,43 @@
   overflow: auto;
 }
 
+#dashboard-content-area {
+  height: 70%;
+}
+
+.dashboard-button-vertical-padding {
+  padding: 1.7vh 0;
+}
+
+.column-title {
+  margin: 10vh 0;
+  text-align: center;
+}
+
+.dashboard-search-field {
+  background-color: inherit;
+}
+
+.empty-search-results {
+  text-decoration: none;
+}
+
+.search-field {
+  width: 17vw;
+}
+
+.search-image {
+  width:  30%;
+  height: 30%;
+  backface-visibility: hidden;
+  transform: translateZ(0) scale(1.0, 1.0);
+}
+
+.md-search-button-override {
+  min-width: 3.2vw;
+  margin: .5vh 0;
+}
+
 @font-face{
     font-family: circleFont;
     src: url(fonts/Comfortaa.ttf)
